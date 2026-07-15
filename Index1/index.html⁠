@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cofre Divino - Tu Medicina Espiritual</title>
+  
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --color-miedo: #3b82f6;
+      --color-tristeza: #38bdf8;
+      --color-ira: #ef4444;
+      --color-culpa: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container { max-width: 600px; width: 100%; text-align: center; }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      background: linear-gradient(to right, #38bdf8, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle { color: var(--text-muted); margin-bottom: 30px; font-size: 1rem; }
+
+    .emociones-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 35px; }
+
+    .btn-emocion {
+      background-color: var(--card-bg);
+      border: 2px solid transparent;
+      color: var(--text-main);
+      padding: 15px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .pantalla-receta {
+      display: none;
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      padding: 30px;
+      margin-top: 20px;
+      border: 1px solid #334155;
+    }
+
+    .cita-titulo { font-size: 1.4rem; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; }
+    .verso-texto { font-size: 1.25rem; line-height: 1.6; font-style: italic; margin-bottom: 25px; }
+    .divider { height: 1px; background-color: #334155; margin: 20px 0; }
+    .cable-tierra { font-size: 1.1rem; color: #fca5a5; font-weight: 500; }
+  </style>
+</head>
+<body>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
+    if (!sessionId) { window.location.href = "../index.html"; }
+  </script>
+
+  <div class="container">
+    <h1>El Cofre Divino</h1>
+    <p class="subtitle">Selecciona lo que sientes hoy y recibe tu dosis de realidad espiritual.</p>
+
+    <div class="emociones-grid">
+      <button class="btn-emocion" onclick="abrirCofre('miedo')">😨 Miedo</button>
+      <button class="btn-emocion" onclick="abrirCofre('tristeza')">😢 Tristeza</button>
+      <button class="btn-emocion" onclick="abrirCofre('ira')">😡 Ira</button>
+      <button class="btn-emocion" onclick="abrirCofre('culpa')">😔 Culpa</button>
+    </div>
+
+    <div class="pantalla-receta" id="pantalla">
+      <div class="cita-titulo" id="receta-cita"></div>
+      <p class="verso-texto" id="receta-verso"></p>
+      <div class="divider"></div>
+      <p class="cable-tierra" id="receta-cable"></p>
+    </div>
+  </div>
+
+  <script>
+    const CofreDivino = {
+      miedo: [
+        { cita: "Filipenses 4:6", verso: "No se preocupen por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan y denle gracias.", cableTierra: "Deja de hacer de guionista de tu propio drama. Deja el micrófono y respira; la película de mañana ya tiene director." },
+        { cita: "Salmo 56:3", verso: "En el día que temo, yo en ti confío.", cableTierra: "Sentir miedo es de humanos, pero sobrepensar hasta el Apocalipsis es un deporte extremo que no te pidieron jugar hoy." },
+        { cita: "Josué 1:9", verso: "¡Sé fuerte y valiente! No tengas miedo ni te desanimes, porque el Señor tu Dios estará contigo.", cableTierra: "No es una sugerencia amistosa, ¡es una orden de arriba! Si el Creador va contigo, el miedo debería estar preocupado." },
+        { cita: "Isaías 41:10", verso: "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudaré.", cableTierra: "Si el dueño del universo te dice 'yo te sostengo', ¿quién eres tú para dudar de Su fuerza? Deja de cargar el peso del mundo." }
+      ],
+      tristeza: [
+        { cita: "Salmo 34:18", verso: "Cercano está el Señor a los quebrantados de corazón, y salva a los abatidos de espíritu.", cableTierra: "Dios no huye de tus lágrimas, se sienta al lado tuyo en el suelo a acompañarte. Está bien no estar bien hoy. ❤️" },
+        { cita: "Salmo 30:5", verso: "El llanto puede durar toda la noche, pero a la mañana vendrá el grito de alegría.", cableTierra: "La noche siempre se siente eterna justo antes del amanecer. Aguanta un poco más, el sol ya viene en camino." }
+      ],
+      ira: [
+        { cita: "Efesios 4:26", verso: "Si se enojan, no pequen. No dejen que el sol se ponga estando aún enojados.", cableTierra: "Aléjate del teléfono, bloquea la pantalla y no mandes ese mensaje. El enojo pasa, el 'enviar' es eterno." },
+        { cita: "Proverbios 15:1", verso: "La blanda respuesta quita la ira; mas la palabra áspera hace subir el furor.", cableTierra: "No tienes que ganar todas las discusiones. A veces ganar es quedarse callado y dejar que el otro hable solo." }
+      ],
+      culpa: [
+        { cita: "Romanos 8:1", verso: "Ahora, pues, ninguna condenación hay para los que están en Cristo Jesús.", cableTierra: "Si el Juez del universo ya firmó tu absolución, ¿por qué sigues en el banquillo de los acusados? ¡Caso cerrado! ✨" },
+        { cita: "1 Juan 1:9", verso: "Si confesamos nuestros pecados, él es fiel y justo para perdonar y limpiarnos de toda maldad.", cableTierra: "La gracia es para los sinceros, no para los perfectos. Admite el error, recibe el perdón y sigue adelante." }
+      ]
+    };
+
+    function abrirCofre(emocion) {
+      const recetas = CofreDivino[emocion];
+      const seleccionada = recetas[Math.floor(Math.random() * recetas.length)];
+      const pantalla = document.getElementById("pantalla");
+      const cita = document.getElementById("receta-cita");
+      
+      pantalla.style.display = "block";
+      cita.style.color = `var(--color-${emocion})`;
+      cita.innerText = seleccionada.cita;
+      document.getElementById("receta-verso").innerText = `"${seleccionada.verso}"`;
+      document.getElementById("receta-cable").innerText = seleccionada.cableTierra;
+      pantalla.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
