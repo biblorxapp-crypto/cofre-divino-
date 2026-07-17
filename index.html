@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>🩺 Botiquín Emocional</title>
@@ -12,7 +13,9 @@
 
 <link rel="manifest" href="manifest.json">
 
+
 <script src="https://cdn.tailwindcss.com"></script>
+
 
 <style>
 
@@ -20,263 +23,522 @@ body{
     font-family: Arial, sans-serif;
 }
 
+
 .card{
+
     transition:.3s;
+
 }
+
 
 .card:hover{
-    transform:translateY(-4px);
+
+    transform:translateY(-5px);
+
 }
+
 
 .fade{
-    animation:fade .4s ease;
+
+    animation:fade .5s ease;
+
 }
 
+
+
 @keyframes fade{
-    from{
-        opacity:0;
-        transform:translateY(15px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+
+from{
+
+opacity:0;
+transform:translateY(20px);
+
 }
+
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
 
 </style>
 
+
 </head>
+
 
 
 <body class="bg-slate-950 text-white min-h-screen">
 
 
-<header class="p-5 text-center">
+
+<header class="p-6 text-center">
+
 
 <h1 class="text-4xl font-bold text-emerald-400">
+
 🩺 Botiquín Emocional
+
 </h1>
 
+
 <p class="text-slate-400 mt-3">
+
 Primeros auxilios para el alma en momentos difíciles.
+
 </p>
 
+
 </header>
+
 
 
 
 <main class="max-w-xl mx-auto p-5">
 
 
-<section>
+
+<!-- BIENVENIDA -->
+
+
+<section id="bienvenida"
+class="mb-8">
+
+
+<div class="bg-gradient-to-br from-emerald-900/50 to-slate-900 border border-emerald-500/30 rounded-3xl p-8 text-center shadow-xl">
+
+
+<div class="text-5xl mb-4">
+
+🩺
+
+</div>
+
+
+
+<h2 class="text-2xl font-bold mb-3">
+
+Bienvenido al Botiquín Emocional
+
+</h2>
+
+
+
+<p class="text-slate-400 leading-relaxed mb-6">
+
+No tienes que resolver toda tu vida hoy.
+
+<br><br>
+
+Solo identifica qué está pesando en tu corazón.
+
+</p>
+
+
+
+<button
+
+onclick="comenzarBotiquin()"
+
+class="bg-emerald-500 text-black font-bold px-8 py-3 rounded-xl hover:scale-105 transition">
+
+Comenzar mi camino →
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+
+<!-- EMOCIONES -->
+
+
+<section id="zona-emociones">
+
 
 <h2 class="text-xl font-bold mb-4">
+
 ¿Cómo te sientes hoy?
+
 </h2>
+
 
 
 <div class="grid grid-cols-2 gap-4">
 
 
+
 <button onclick="mostrarEmocion('ansiedad')"
-class="card bg-slate-900 border border-slate-800 rounded-2xl p-5">
+
+class="card bg-slate-900 border border-slate-800 rounded-2xl p-5 text-left">
+
 
 <div class="text-3xl">
+
 🌀
+
 </div>
 
+
 <h3 class="font-bold mt-2">
+
 Ansiedad
+
 </h3>
 
+
 <p class="text-xs text-slate-400">
+
 Mi mente no se detiene
+
 </p>
 
+
 </button>
+
+
 
 
 
 <button onclick="mostrarEmocion('tristeza')"
-class="card bg-slate-900 border border-slate-800 rounded-2xl p-5">
+
+class="card bg-slate-900 border border-slate-800 rounded-2xl p-5 text-left">
+
 
 <div class="text-3xl">
+
 😢
+
 </div>
 
+
 <h3 class="font-bold mt-2">
+
 Tristeza
+
 </h3>
 
+
 <p class="text-xs text-slate-400">
+
 Necesito consuelo
+
 </p>
 
+
 </button>
+
+
 
 
 
 <button onclick="mostrarEmocion('enojo')"
-class="card bg-slate-900 border border-slate-800 rounded-2xl p-5">
+
+class="card bg-slate-900 border border-slate-800 rounded-2xl p-5 text-left">
+
 
 <div class="text-3xl">
+
 🔥
+
 </div>
 
+
 <h3 class="font-bold mt-2">
+
 Enojo
+
 </h3>
 
+
 <p class="text-xs text-slate-400">
+
 No controlo mi reacción
+
 </p>
 
+
 </button>
+
+
 
 
 
 <button onclick="mostrarEmocion('soledad')"
-class="card bg-slate-900 border border-slate-800 rounded-2xl p-5">
+
+class="card bg-slate-900 border border-slate-800 rounded-2xl p-5 text-left">
+
 
 <div class="text-3xl">
+
 🌙
+
 </div>
 
+
 <h3 class="font-bold mt-2">
+
 Soledad
+
 </h3>
 
+
 <p class="text-xs text-slate-400">
+
 Necesito compañía
+
 </p>
+
 
 </button>
 
 
+
 </div>
+
 
 </section>
 
 
 
+<!-- RESULTADO DE LA REFLEXIÓN -->
+
+
 <section id="resultado"
+
 class="mt-8 hidden">
+
+
 
 <div class="fade bg-white text-slate-900 rounded-3xl p-6 shadow-xl">
 
 
+
 <h2 id="titulo"
+
 class="text-2xl font-bold text-emerald-700">
+
 </h2>
 
 
+
+
 <p id="mensaje"
+
 class="mt-4 text-lg leading-relaxed">
+
 </p>
 
 
-<div class="mt-5 p-4 bg-emerald-50 rounded-xl">
 
-<p class="font-bold">
+
+
+<div class="mt-6 p-4 bg-emerald-50 rounded-xl">
+
+
+<p class="font-bold text-emerald-700">
+
 🌱 Pequeña acción:
+
 </p>
 
-<p id="accion">
+
+
+<p id="accion"
+
+class="mt-2">
+
 </p>
+
+
 
 </div>
 
 
+
+
+
 <button onclick="nuevaReceta()"
-class="mt-6 w-full bg-emerald-500 text-black font-bold py-3 rounded-xl">
+
+class="mt-6 w-full bg-emerald-500 text-black font-bold py-3 rounded-xl hover:bg-emerald-400 transition">
+
 
 Otra reflexión
+
 
 </button>
 
 
+
 </div>
 
+
+
 </section>
+
+
+
 
 
 </main>
 
 
 
+
+
 <footer class="text-center text-xs text-slate-600 p-8">
+
 
 Creado para acompañar momentos difíciles ❤️
 
+<br>
+
+Botiquín Emocional © 2026
+
+
 </footer>
+
 
 <script>
 
 
 const recetas = {
 
-ansiedad: [
+
+ansiedad:[
+
 
 {
+
 titulo:"Cuando tu mente corre demasiado 🌀",
+
 mensaje:"No todo pensamiento merece una respuesta. A veces la mente crea tormentas donde solo existe una nube. Hoy no tienes que resolver toda tu vida, solo este momento.",
+
 accion:"Respira profundo 5 veces y pregúntate: ¿Qué puedo controlar ahora?"
+
 },
 
+
 {
-titulo:"El silencio también es medicina",
+
+titulo:"El silencio también es medicina 🌿",
+
 mensaje:"Tu valor no depende de tener todo bajo control. Hay batallas que se ganan descansando y confiando.",
+
 accion:"Apaga las notificaciones durante 10 minutos y regálate tranquilidad."
+
 }
 
+
 ],
+
+
 
 
 tristeza:[
 
+
 {
+
 titulo:"Tus lágrimas también hablan ❤️",
+
 mensaje:"La tristeza no significa debilidad. A veces el corazón necesita detenerse para sanar.",
+
 accion:"Escribe una cosa por la que todavía puedes agradecer hoy."
+
 },
 
+
 {
-titulo:"Después de la noche llega la mañana",
-mensaje:"Los momentos difíciles no escriben toda tu historia. Son solamente una página.",
+
+titulo:"Después de la noche llega la mañana 🌅",
+
+mensaje:"Los momentos difíciles no escriben toda tu historia. Son solamente una página de un libro mucho más grande.",
+
 accion:"Busca una pequeña cosa que te dé esperanza hoy."
+
 }
 
+
 ],
+
+
+
 
 
 enojo:[
 
-{
-titulo:"No entregues tu paz al enojo 🔥",
-mensaje:"Una reacción de segundos puede crear heridas que tardan años en sanar. Tu fuerza está en elegir cómo responder.",
-accion:"Antes de responder, espera 10 segundos y respira."
-},
 
 {
-titulo:"La calma es poder",
+
+titulo:"No entregues tu paz al enojo 🔥",
+
+mensaje:"Una reacción de segundos puede crear heridas que tardan años en sanar. Tu fuerza está en elegir cómo responder.",
+
+accion:"Antes de responder, espera 10 segundos y respira."
+
+},
+
+
+{
+
+titulo:"La calma también es poder",
+
 mensaje:"Controlar tus emociones no significa ignorarlas; significa que ellas no controlan tu destino.",
+
 accion:"Aléjate unos minutos antes de tomar una decisión."
+
 }
+
 
 ],
 
 
+
+
+
 soledad:[
 
+
 {
+
 titulo:"Nunca estás completamente solo 🌙",
+
 mensaje:"Hay temporadas donde el silencio pesa, pero incluso esos momentos pueden convertirse en espacios para encontrarte contigo mismo.",
+
 accion:"Envía un mensaje a alguien que aprecias o busca una conversación sincera."
+
+},
+
+
+{
+
+titulo:"Tu presencia tiene valor",
+
+mensaje:"Aunque hoy sientas distancia de otros, tu vida sigue teniendo propósito y significado.",
+
+accion:"Haz algo pequeño que cuide de ti hoy."
+
 }
+
 
 ]
 
+
 };
+
+
+
 
 
 
@@ -284,34 +546,81 @@ let emocionActual = "";
 
 
 
+
+
+function comenzarBotiquin(){
+
+
+const bienvenida = document.getElementById("bienvenida");
+
+
+bienvenida.style.transition="all .5s ease";
+
+
+bienvenida.style.opacity="0";
+
+
+bienvenida.style.transform="translateY(-20px)";
+
+
+
+setTimeout(()=>{
+
+
+bienvenida.style.display="none";
+
+
+},500);
+
+
+
+}
+
+
+
+
+
 function mostrarEmocion(tipo){
+
 
 
 emocionActual = tipo;
 
 
+
 const lista = recetas[tipo];
 
 
+
 const receta = lista[
+
 Math.floor(Math.random()*lista.length)
+
 ];
 
 
-document.getElementById("resultado")
-.classList.remove("hidden");
 
 
-document.getElementById("titulo")
-.innerHTML = receta.titulo;
+
+const resultado = document.getElementById("resultado");
 
 
-document.getElementById("mensaje")
-.innerHTML = receta.mensaje;
+
+resultado.classList.remove("hidden");
 
 
-document.getElementById("accion")
-.innerHTML = receta.accion;
+
+document.getElementById("titulo").innerHTML = receta.titulo;
+
+
+
+document.getElementById("mensaje").innerHTML = receta.mensaje;
+
+
+
+document.getElementById("accion").innerHTML = receta.accion;
+
+
 
 
 window.scrollTo({
@@ -323,17 +632,26 @@ behavior:"smooth"
 });
 
 
+
 }
+
+
+
 
 
 
 function nuevaReceta(){
 
+
+
 if(emocionActual){
+
 
 mostrarEmocion(emocionActual);
 
+
 }
+
 
 }
 
@@ -342,15 +660,19 @@ mostrarEmocion(emocionActual);
 </script>
 
 
-<!-- SISTEMA PREMIUM Y CONFIGURACIÓN -->
-
 <script>
+
+
+// =============================
+// SISTEMA PREMIUM
+// =============================
 
 
 const LIMITE_GRATIS = 10;
 
+
 let consultas = 
-localStorage.getItem("consultas_botiquin") || 0;
+parseInt(localStorage.getItem("consultas_botiquin")) || 0;
 
 
 let premium =
@@ -358,25 +680,30 @@ localStorage.getItem("botiquin_premium") === "true";
 
 
 
-function verificarAcceso(){
 
 
-if(premium){
-
-return true;
-
-}
+const funcionMostrarOriginal = mostrarEmocion;
 
 
-if(consultas >= LIMITE_GRATIS){
+
+
+mostrarEmocion = function(tipo){
+
+
+
+if(!premium && consultas >= LIMITE_GRATIS){
 
 
 mostrarPremium();
 
-return false;
+return;
 
 
 }
+
+
+
+if(!premium){
 
 
 consultas++;
@@ -388,9 +715,17 @@ consultas
 );
 
 
-return true;
-
 }
+
+
+
+funcionMostrarOriginal(tipo);
+
+
+
+};
+
+
 
 
 
@@ -398,34 +733,47 @@ return true;
 function mostrarPremium(){
 
 
-document.getElementById("resultado")
-.classList.remove("hidden");
+
+const resultado =
+document.getElementById("resultado");
 
 
-document.getElementById("titulo")
-.innerHTML =
-"🌟 Desbloquea tu Botiquín Premium";
+
+resultado.classList.remove("hidden");
 
 
-document.getElementById("mensaje")
-.innerHTML =
-"Has utilizado tus reflexiones gratuitas. Desbloquea acceso ilimitado para continuar recibiendo acompañamiento diario.";
+
+document.getElementById("titulo").innerHTML =
+
+"🌟 Botiquín Premium";
 
 
-document.getElementById("accion")
-.innerHTML =
+
+document.getElementById("mensaje").innerHTML =
+
+"Has utilizado tus reflexiones gratuitas. Desbloquea acceso ilimitado para seguir recibiendo acompañamiento emocional diario.";
+
+
+
+document.getElementById("accion").innerHTML =
 
 `
-<a href="#" 
-onclick="activarPremium()"
-class="block text-center bg-emerald-500 text-black font-bold p-3 rounded-xl">
+
+<button onclick="activarPremium()"
+
+class="block w-full bg-emerald-500 text-black font-bold p-3 rounded-xl">
 
 Desbloquear Premium
 
-</a>
+</button>
+
 `;
 
+
+
 }
+
+
 
 
 
@@ -433,48 +781,28 @@ Desbloquear Premium
 function activarPremium(){
 
 
-/*
-Aquí después conectaremos Stripe.
-Por ahora activa modo prueba.
-*/
-
 
 localStorage.setItem(
+
 "botiquin_premium",
+
 "true"
+
 );
+
 
 
 premium=true;
 
 
+
 alert(
-"Premium activado"
+
+"🌟 Premium activado"
+
 );
 
 
-}
-
-
-
-
-// MODIFICAMOS LA FUNCIÓN PRINCIPAL
-
-const funcionOriginal = mostrarEmocion;
-
-
-mostrarEmocion = function(tipo){
-
-
-if(!verificarAcceso()){
-
-return;
-
-}
-
-
-funcionOriginal(tipo);
-
 
 }
 
@@ -482,48 +810,39 @@ funcionOriginal(tipo);
 
 
 
-</script>
 
 
+// =============================
+// IDIOMAS
+// =============================
 
-<!-- SELECTOR DE IDIOMA -->
-
-<div class="fixed top-4 right-4">
-
-<select
-class="bg-slate-900 border border-slate-700 rounded-xl p-2 text-sm"
-onchange="cambiarIdioma(this.value)">
-
-<option value="es">
-🇪🇸 Español
-</option>
-
-<option value="en">
-🇺🇸 English
-</option>
-
-</select>
-
-</div>
-
-
-
-
-<script>
 
 
 function cambiarIdioma(idioma){
 
 
+
+const titulo =
+document.querySelector("header h1");
+
+
+const subtitulo =
+document.querySelector("header p");
+
+
+
 if(idioma==="en"){
 
 
-document.querySelector("h1").innerHTML =
+
+titulo.innerHTML =
 "🩺 Emotional First Aid";
 
 
-document.querySelector("header p").innerHTML =
+
+subtitulo.innerHTML =
 "Emotional support for difficult moments.";
+
 
 
 }
@@ -531,68 +850,145 @@ document.querySelector("header p").innerHTML =
 else{
 
 
-document.querySelector("h1").innerHTML =
+
+titulo.innerHTML =
 "🩺 Botiquín Emocional";
 
 
-document.querySelector("header p").innerHTML =
+
+subtitulo.innerHTML =
 "Primeros auxilios para el alma en momentos difíciles.";
 
-}
 
 
 }
+
+
+
+}
+
 
 
 </script>
+
+
+
+
+
+
+<!-- SELECTOR DE IDIOMA -->
+
+
+<div class="fixed top-4 right-4">
+
+
+<select
+
+class="bg-slate-900 border border-slate-700 rounded-xl p-2 text-sm"
+
+onchange="cambiarIdioma(this.value)">
+
+
+<option value="es">
+
+🇪🇸 Español
+
+</option>
+
+
+
+<option value="en">
+
+🇺🇸 English
+
+</option>
+
+
+
+</select>
+
+
+</div>
+
+
+
+
+
 
 
 <script>
 
 
-// REGISTRO DEL SERVICE WORKER
+// =============================
+// SERVICE WORKER PWA
+// =============================
+
+
 
 if("serviceWorker" in navigator){
 
 
+
 window.addEventListener(
+
 "load",
+
 ()=>{
 
 
 navigator.serviceWorker
+
 .register("/sw.js")
+
 .then(()=>{
 
+
 console.log(
+
 "Botiquín Emocional funcionando offline"
+
 );
+
+
 
 })
 
 .catch(error=>{
 
+
 console.log(
+
 "Error Service Worker:",
+
 error
+
 );
+
+
 
 });
 
 
+
 }
+
 
 );
 
 
-}
 
+}
 
 
 
 </script>
 
 
+
+
+
 </body>
 
+
 </html>
+
