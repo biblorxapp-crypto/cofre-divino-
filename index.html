@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🩺 Botiquín Emocional / Emotional First Aid</title>
-
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#10b981">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -12,7 +11,6 @@
     <meta name="apple-mobile-web-app-title" content="Botiquín">
     <link rel="apple-touch-icon" href="/icon-192.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,44 +18,18 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-serif { font-family: 'Playfair Display', Georgia, serif; }
-        .carousel {
-            display: flex;
-            gap: 14px;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            padding: 10px 20px 18px 20px;
-            scroll-behavior: smooth;
-        }
+        .carousel { display: flex; gap: 14px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 10px 20px 18px 20px; scroll-behavior: smooth; }
         .carousel::-webkit-scrollbar { display: none; }
-        .carousel-item {
-            scroll-snap-align: center;
-            flex: 0 0 76%;
-            max-width: 300px;
-            min-width: 168px;
-        }
+        .carousel-item { scroll-snap-align: center; flex: 0 0 76%; max-width: 300px; min-width: 168px; }
         @media(min-width: 400px){ .carousel-item{ flex: 0 0 46%; } }
         .dot { width:6px; height:6px; border-radius:20px; background:#e7e5e4; transition: all 0.3s ease; }
         .dot.active { width:22px; background:#10b981; }
-
-        /* FIX LEGIBILIDAD TARJETAS ACTIVAS */
-        .emocion-btn.ring-2 {
-            position: relative;
-            overflow: hidden;
-            border-color: rgba(0,0,0,0.08) !important;
-        }
-        .emocion-btn.ring-2 h3 {
-            letter-spacing: -0.2px;
-            font-weight: 700;
-        }
-        .emocion-btn.ring-2 {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-        }
+        .emocion-btn.ring-2 { position: relative; overflow: hidden; border-color: rgba(0,0,0,0.08) !important; }
+        .emocion-btn.ring-2 h3 { letter-spacing: -0.2px; font-weight: 700; }
+        .emocion-btn.ring-2 { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
     </style>
 </head>
 <body class="bg-[#FFFBF5] text-stone-700 min-h-screen flex flex-col justify-between">
-
     <div class="fixed top-4 left-4 right-4 z-50 flex justify-between items-center pointer-events-none">
         <div class="pointer-events-auto bg-white/90 backdrop-blur border border-stone-200 shadow-sm p-2 rounded-2xl shadow-xl flex items-center gap-2">
             <span class="text-sm pl-1">🌐</span>
@@ -78,62 +50,33 @@
             <audio id="audio-fondo" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3"></audio>
         </div>
     </div>
-
     <main class="flex-grow flex flex-col items-center p-4 sm:p-6 md:p-8 max-w-2xl mx-auto w-full mt-16">
         <div class="text-center mb-6">
             <h1 id="main-title" class="text-4xl sm:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-emerald-700 mb-3">🩺 Botiquín Emocional</h1>
             <p id="main-subtitle" class="text-stone-500 text-sm sm:text-base max-w-md mx-auto leading-relaxed">Primeros auxilios espirituales para cuando sientes que todo se sale de control.</p>
         </div>
-
         <div class="w-full relative">
             <div id="emociones-carousel" class="carousel">
-                <button onclick="recetar('miedo')" id="btn-miedo" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700">
-                    <div class="flex justify-between items-start w-full"><span id="label-miedo-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🌀</span> Ansiedad</span><span class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286Zm0 13.036h.008v.008H12v-.008Z" /></svg></span></div>
-                    <div><h3 id="label-miedo-title" class="font-bold text-lg leading-snug">Miedo / Ansiedad</h3><p id="label-miedo-desc" class="text-xs mt-1 text-slate-400 leading-normal">¡Auxilio, mi cabeza no se calla!</p></div>
-                </button>
-                <button onclick="recetar('tristeza')" id="btn-tristeza" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700">
-                    <div class="flex justify-between items-start w-full"><span id="label-tristeza-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">😢</span> Tristeza</span><span class="text-sky-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg></span></div>
-                    <div><h3 id="label-tristeza-title" class="font-bold text-lg leading-snug">Tristeza</h3><p id="label-tristeza-desc" class="text-xs mt-1 text-slate-400 leading-normal">Traigan pañuelos y helado...</p></div>
-                </button>
-                <button onclick="recetar('ira')" id="btn-ira" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700">
-                    <div class="flex justify-between items-start w-full"><span id="label-ira-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🤬</span> Ira</span><span class="text-red-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 0 0 0 3 2.48Z" /></svg></span></div>
-                    <div><h3 id="label-ira-title" class="font-bold text-lg leading-snug">Ira / Enojo</h3><p id="label-ira-desc" class="text-xs mt-1 text-slate-400 leading-normal">¡Voy a romper algo!</p></div>
-                </button>
-                <button onclick="recetar('culpa')" id="btn-culpa" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700">
-                    <div class="flex justify-between items-start w-full"><span id="label-culpa-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🫣</span> Culpa</span><span class="text-purple-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21l5.435-2.21a11.96 11.96 0 005.15-5.15l2.21-5.435L15.9 9.813M9.813 15.904L4.378 18.115l-2.21-5.435a11.96 0 015.15-5.15l5.435-2.21m-2.94 10.584a3 3 0 11-4.244-4.244 3 3 0 014.244 4.244z" /></svg></span></div>
-                    <div><h3 id="label-culpa-title" class="font-bold text-lg leading-snug">Vergüenza / Culpa</h3><p id="label-culpa-desc" class="text-xs mt-1 text-slate-400 leading-normal">Tierra, trágame...</p></div>
-                </button>
-                <button onclick="recetar('soledad')" id="btn-soledad" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700">
-                    <div class="flex justify-between items-start w-full"><span id="label-soledad-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🌙</span> Soledad</span><span class="text-slate-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg></span></div>
-                    <div><h3 id="label-soledad-title" class="font-bold text-lg leading-snug">Soledad</h3><p id="label-soledad-desc" class="text-xs mt-1 text-slate-400 leading-normal">¿Alguien me escucha?</p></div>
-                </button>
-                <button onclick="recetar('agotamiento')" id="btn-agotamiento" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700">
-                    <div class="flex justify-between items-start w-full"><span id="label-agotamiento-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🪫</span> Cansancio</span><span class="text-emerald-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"/></svg></span></div>
-                    <div><h3 id="label-agotamiento-title" class="font-bold text-lg leading-snug">Agotamiento</h3><p id="label-agotamiento-desc" class="text-xs mt-1 text-slate-400 leading-normal">Ya no puedo más...</p></div>
-                </button>
-                <button onclick="recetar('confusion')" id="btn-confusion" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700">
-                    <div class="flex justify-between items-start w-full"><span id="label-confusion-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🌫️</span> Confusión</span><span class="text-pink-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg></span></div>
-                    <div><h3 id="label-confusion-title" class="font-bold text-lg leading-snug">Confusión</h3><p id="label-confusion-desc" class="text-xs mt-1 text-slate-400 leading-normal">No sé qué hacer...</p></div>
-                </button>
-                <button onclick="recetar('desanimo')" id="btn-desanimo" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700">
-                    <div class="flex justify-between items-start w-full"><span id="label-desanimo-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🍂</span> Desánimo</span><span class="text-amber-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span></div>
-                    <div><h3 id="label-desanimo-title" class="font-bold text-lg leading-snug">Desánimo</h3><p id="label-desanimo-desc" class="text-xs mt-1 text-slate-400 leading-normal">Todo me pesa...</p></div>
-                </button>
+                <button onclick="recetar('miedo')" id="btn-miedo" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700"><div class="flex justify-between items-start w-full"><span id="label-miedo-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🌀</span> Ansiedad</span><span class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286Zm0 13.036h.008v.008H12v-.008Z" /></svg></span></div><div><h3 id="label-miedo-title" class="font-bold text-lg leading-snug">Miedo / Ansiedad</h3><p id="label-miedo-desc" class="text-xs mt-1 text-slate-400 leading-normal">¡Auxilio, mi cabeza no se calla!</p></div></button>
+                <button onclick="recetar('tristeza')" id="btn-tristeza" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700"><div class="flex justify-between items-start w-full"><span id="label-tristeza-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">😢</span> Tristeza</span><span class="text-sky-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg></span></div><div><h3 id="label-tristeza-title" class="font-bold text-lg leading-snug">Tristeza</h3><p id="label-tristeza-desc" class="text-xs mt-1 text-slate-400 leading-normal">Traigan pañuelos y helado...</p></div></button>
+                <button onclick="recetar('ira')" id="btn-ira" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700"><div class="flex justify-between items-start w-full"><span id="label-ira-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🤬</span> Ira</span><span class="text-red-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 0 0 0 3 2.48Z" /></svg></span></div><div><h3 id="label-ira-title" class="font-bold text-lg leading-snug">Ira / Enojo</h3><p id="label-ira-desc" class="text-xs mt-1 text-slate-400 leading-normal">¡Voy a romper algo!</p></div></button>
+                <button onclick="recetar('culpa')" id="btn-culpa" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700"><div class="flex justify-between items-start w-full"><span id="label-culpa-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🫣</span> Culpa</span><span class="text-purple-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21l5.435-2.21a11.96 11.96 0 005.15-5.15l2.21-5.435L15.9 9.813M9.813 15.904L4.378 18.115l-2.21-5.435a11.96 0 015.15-5.15l5.435-2.21m-2.94 10.584a3 3 0 11-4.244-4.244 3 3 0 014.244 4.244z" /></svg></span></div><div><h3 id="label-culpa-title" class="font-bold text-lg leading-snug">Vergüenza / Culpa</h3><p id="label-culpa-desc" class="text-xs mt-1 text-slate-400 leading-normal">Tierra, trágame...</p></div></button>
+                <button onclick="recetar('soledad')" id="btn-soledad" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700"><div class="flex justify-between items-start w-full"><span id="label-soledad-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🌙</span> Soledad</span><span class="text-slate-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg></span></div><div><h3 id="label-soledad-title" class="font-bold text-lg leading-snug">Soledad</h3><p id="label-soledad-desc" class="text-xs mt-1 text-slate-400 leading-normal">¿Alguien me escucha?</p></div></button>
+                <button onclick="recetar('agotamiento')" id="btn-agotamiento" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700"><div class="flex justify-between items-start w-full"><span id="label-agotamiento-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🪫</span> Cansancio</span><span class="text-emerald-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"/></svg></span></div><div><h3 id="label-agotamiento-title" class="font-bold text-lg leading-snug">Agotamiento</h3><p id="label-agotamiento-desc" class="text-xs mt-1 text-slate-400 leading-normal">Ya no puedo más...</p></div></button>
+                <button onclick="recetar('confusion')" id="btn-confusion" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700"><div class="flex justify-between items-start w-full"><span id="label-confusion-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🌫️</span> Confusión</span><span class="text-pink-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg></span></div><div><h3 id="label-confusion-title" class="font-bold text-lg leading-snug">Confusión</h3><p id="label-confusion-desc" class="text-xs mt-1 text-slate-400 leading-normal">No sé qué hacer...</p></div></button>
+                <button onclick="recetar('desanimo')" id="btn-desanimo" class="emocion-btn carousel-item p-5 rounded-2xl border border-stone-200 bg-white hover:border-stone-300 hover:shadow-md text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-sm shrink-0 text-stone-700"><div class="flex justify-between items-start w-full"><span id="label-desanimo-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🍂</span> Desánimo</span><span class="text-amber-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span></div><div><h3 id="label-desanimo-title" class="font-bold text-lg leading-snug">Desánimo</h3><p id="label-desanimo-desc" class="text-xs mt-1 text-slate-400 leading-normal">Todo me pesa...</p></div></button>
             </div>
             <div class="flex flex-col items-center gap-2 mb-6"><div id="carousel-dots" class="flex gap-1.5"></div><p class="text-[11px] text-stone-400 tracking-widest uppercase flex items-center gap-1"><span>‹</span> desliza <span>›</span></p></div>
         </div>
-
         <div class="w-full min-h-[380px]" id="pantalla-receta">
             <div class="border border-dashed border-slate-800 rounded-3xl p-8 text-center text-slate-500 flex flex-col items-center justify-center h-[300px] bg-slate-900/20">
                 <span class="text-4xl mb-3 animate-bounce">👇</span>
-                <p id="placeholder-text" class="text-base font-medium text-slate-300">¿Cómo te sientes en este momento?</p>
-                <p id="placeholder-sub" class="text-xs text-slate-500 mt-1">Desliza y presiona una emoción para recibir tu prescripción espiritual al instante.</p>
+                <p id="placeholder-text" class="text-base font-medium text-slate-300">Quédate quieta, y reconoce que yo soy Dios.</p>
+                <p id="placeholder-sub" class="text-xs text-slate-500 mt-1">Preparando tu primera medicina...</p>
             </div>
         </div>
     </main>
-
     <footer class="py-6 text-center text-xs text-stone-400">Hecho con ❤️ para momentos difíciles • Botiquín Emocional © 2026</footer>
-
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('pago_exitoso') === 'true') {
@@ -147,7 +90,6 @@
         let esPremium = localStorage.getItem('botiquin_premium') === 'true';
         if (localStorage.getItem('contador_consultas') === null) localStorage.setItem('contador_consultas', '0');
         let contadorConsultas = parseInt(localStorage.getItem('contador_consultas'));
-
         function actualizarContadorUI(){
             const el = document.getElementById('contador-restante');
             if(!el) return;
@@ -157,15 +99,13 @@
             else el.innerText = "LÍMITE";
         }
         actualizarContadorUI();
-
         const INTERFAZ_TRADUCCIONES = {
-            es: { tituloApp: "🩺 Botiquín Emocional", subtituloApp: "Primeros auxilios espirituales para cuando sientes que todo se sale de control.", miedoTag: "🌀 Ansiedad", miedoTitle: "Miedo / Ansiedad", miedoDesc: "¡Auxilio, mi cabeza no se calla!", tristezaTag: "😢 Tristeza", tristezaTitle: "Tristeza", tristezaDesc: "Traigan pañuelos y helado...", iraTag: "🤬 Ira", iraTitle: "Ira / Enojo", iraDesc: "¡Voy a romper algo!", culpaTag: "🫣 Culpa", culpaTitle: "Vergüenza / Culpa", culpaDesc: "Tierra, trágame...", soledadTag: "🌙 Soledad", soledadTitle: "Soledad", soledadDesc: "¿Alguien me escucha?", agotamientoTag: "🪫 Cansancio", agotamientoTitle: "Agotamiento", agotamientoDesc: "Ya no puedo más...", confusionTag: "🌫️ Confusión", confusionTitle: "Confusión", confusionDesc: "No sé qué hacer...", desanimoTag: "🍂 Desánimo", desanimoTitle: "Desánimo", desanimoDesc: "Todo me pesa...", placeholder: "¿Cómo te sientes en este momento?", placeholderSub: "Desliza y presiona una emoción para recibir tu prescripción espiritual al instante.", cargando: "Preparando tu medicina espiritual...", medicinaPara: "Medicina para", cableTierra: "Cable a tierra", paywallTitulo: "¡Ya probaste el poder del Botiquín! 🌟", paywallDesc: "Usaste tus 10 recetas gratuitas. La mayoría desbloquea el acceso ilimitado aquí porque lo usa todos los días. Un solo pago, para siempre tuyo.", paywallBoton: "Desbloquear Acceso Ilimitado ($4.99)", paywallSub: "Pago único seguro vía Stripe. Sin suscripciones. Acceso de por vida." },
+            es: { tituloApp: "🩺 Botiquín Emocional", subtituloApp: "Primeros auxilios espirituales para cuando sientes que todo se sale de control.", miedoTag: "🌀 Ansiedad", miedoTitle: "Miedo / Ansiedad", miedoDesc: "¡Auxilio, mi cabeza no se calla!", tristezaTag: "😢 Tristeza", tristezaTitle: "Tristeza", tristezaDesc: "Traigan pañuelos y helado...", iraTag: "🤬 Ira", iraTitle: "Ira / Enojo", iraDesc: "¡Voy a romper algo!", culpaTag: "🫣 Culpa", culpaTitle: "Vergüenza / Culpa", culpaDesc: "Tierra, trágame...", soledadTag: "🌙 Soledad", soledadTitle: "Soledad", soledadDesc: "¿Alguien me escucha?", agotamientoTag: "🪫 Cansancio", agotamientoTitle: "Agotamiento", agotamientoDesc: "Ya no puedo más...", confusionTag: "🌫️ Confusión", confusionTitle: "Confusión", confusionDesc: "No sé qué hacer...", desanimoTag: "🍂 Desánimo", desanimoTitle: "Desánimo", desanimoDesc: "Todo me pesa...", placeholder: "Quédate quieta, y reconoce que yo soy Dios.", placeholderSub: "Preparando tu primera medicina...", cargando: "Preparando tu medicina espiritual...", medicinaPara: "Medicina para", cableTierra: "Cable a tierra", paywallTitulo: "¡Ya probaste el poder del Botiquín! 🌟", paywallDesc: "Usaste tus 10 recetas gratuitas. La mayoría desbloquea el acceso ilimitado aquí porque lo usa todos los días. Un solo pago, para siempre tuyo.", paywallBoton: "Desbloquear Acceso Ilimitado ($4.99)", paywallSub: "Pago único seguro vía Stripe. Sin suscripciones. Acceso de por vida." },
             en: { tituloApp: "🩺 Emotional First Aid Kit", subtituloApp: "Spiritual first aid for when you feel everything is spinning out of control.", miedoTag: "🌀 Anxiety", miedoTitle: "Fear / Anxiety", miedoDesc: "Help, my head won't shut up!", tristezaTag: "😢 Sadness", tristezaTitle: "Sadness", tristezaDesc: "Bring tissues and ice cream...", iraTag: "🤬 Anger", iraTitle: "Anger / Rage", iraDesc: "I'm going to break something!", culpaTag: "🫣 Guilt", culpaTitle: "Shame / Guilt", culpaDesc: "I want to disappear...", soledadTag: "🌙 Loneliness", soledadTitle: "Loneliness", soledadDesc: "Does anyone hear me?", agotamientoTag: "🪫 Burnout", agotamientoTitle: "Burnout", agotamientoDesc: "I can't go on...", confusionTag: "🌫️ Confusion", confusionTitle: "Confusion", confusionDesc: "I don't know what to do...", desanimoTag: "🍂 Discouragement", desanimoTitle: "Discouragement", desanimoDesc: "Everything feels heavy...", placeholder: "How are you feeling right now?", placeholderSub: "Swipe and press an emotion to receive your spiritual prescription instantly.", cargando: "Preparing your spiritual medicine...", medicinaPara: "Medicine for", cableTierra: "Reality check", paywallTitulo: "You've felt the power! 🌟", paywallDesc: "You used your 10 free recipes. Most people unlock unlimited here because they use it daily. One payment, yours forever.", paywallBoton: "Unlock Unlimited Access ($4.99)", paywallSub: "One-time secure payment via Stripe. No subscriptions. Lifetime access." },
             pt: { tituloApp: "🩺 Kit de Primeiros Socorros Emocional", subtituloApp: "Primeiros socorros espirituais para quando você sente que tudo está fora de controle.", miedoTag: "🌀 Ansiedade", miedoTitle: "Medo / Ansiedade", miedoDesc: "Socorro, minha cabeça não para!", tristezaTag: "😢 Tristeza", tristezaTitle: "Tristeza", tristezaDesc: "Traga lenços e sorvete...", iraTag: "🤬 Ira", iraTitle: "Ira / Raiva", iraDesc: "Eu vou quebrar alguma coisa!", culpaTag: "🫣 Culpa", culpaTitle: "Vergonha / Culpa", culpaDesc: "Quero sumir do mapa...", soledadTag: "🌙 Solidão", soledadTitle: "Solidão", soledadDesc: "Alguém me ouve?", agotamientoTag: "🪫 Esgotamento", agotamientoTitle: "Esgotamento", agotamientoDesc: "Não aguento mais...", confusionTag: "🌫️ Confusão", confusionTitle: "Confusão", confusionDesc: "Não sei o que fazer...", desanimoTag: "🍂 Desânimo", desanimoTitle: "Desânimo", desanimoDesc: "Tudo pesa...", placeholder: "Como você está se sentindo agora?", placeholderSub: "Deslize e pressione uma emoção para receber sua prescrição espiritual instantânea.", cargando: "Preparando seu remédio espiritual...", medicinaPara: "Remédio para", cableTierra: "Pé no chão", paywallTitulo: "Você sentiu o poder! 🌟", paywallDesc: "Você usou suas 10 receitas gratuitas. A maioria desbloqueia o acesso ilimitado aqui porque usa todos os dias. Um pagamento único, seu para sempre.", paywallBoton: "Desbloquear Acesso Ilimitado ($4.99)", paywallSub: "Pagamento único seguro via Stripe. Sem assinaturas. Acesso vitalício." },
             fr: { tituloApp: "🩺 Trousse de Secours Émotionnelle", subtituloApp: "Premiers secours spirituels pour quand vous sentez que tout devient incontrôlable.", miedoTag: "🌀 Anxiété", miedoTitle: "Peur / Anxiété", miedoDesc: "Au secours, ma tête ne s'arrête pas!", tristezaTag: "😢 Tristesse", tristezaTitle: "Tristesse", tristezaDesc: "Apportez des mouchoirs et de la glace...", iraTag: "🤬 Colère", iraTitle: "Colère / Rage", iraDesc: "Je vais casser quelque chose!", culpaTag: "🫣 Culpabilité", culpaTitle: "Honte / Culpabilité", culpaDesc: "Je veux disparaître sous terre...", soledadTag: "🌙 Solitude", soledadTitle: "Solitude", soledadDesc: "Quelqu'un m'entend?", agotamientoTag: "🪫 Épuisement", agotamientoTitle: "Épuisement", agotamientoDesc: "Je n'en peux plus...", confusionTag: "🌫️ Confusion", confusionTitle: "Confusion", confusionDesc: "Je ne sais pas quoi faire...", desanimoTag: "🍂 Découragement", desanimoTitle: "Découragement", desanimoDesc: "Tout me pèse...", placeholder: "Comment vous sentez-vous en ce moment?", placeholderSub: "Faites glisser et appuyez sur une émotion pour recevoir votre ordonnance spirituelle instantanée.", cargando: "Préparation de votre remède spirituel...", medicinaPara: "Remède pour", cableTierra: "Retour à la réalité", paywallTitulo: "Vous avez ressenti le pouvoir! 🌟", paywallDesc: "Vous avez utilisé vos 10 recettes gratuites. La plupart débloquent l'accès illimité ici car ils l'utilisent quotidiennement. Un paiement unique, à vous pour toujours.", paywallBoton: "Débloquer l'accès illimité ($4.99)", paywallSub: "Paiement unique sécurisé via Stripe. Sans abonnement. Accès à vie." },
             it: { tituloApp: "🩺 Kit di Pronto Soccorso Emotivo", subtituloApp: "Primo soccorso spirituale per quando senti che tutto sta sfuggendo di mano.", miedoTag: "🌀 Ansia", miedoTitle: "Paura / Ansia", miedoDesc: "Aiuto, la mia testa non si ferma!", tristezaTag: "😢 Tristezza", tristezaTitle: "Tristezza", tristezaDesc: "Portate fazzoletti e gelato...", iraTag: "🤬 Rabbia", iraTitle: "Rabbia / Ira", iraDesc: "Sto per spaccare qualcosa!", culpaTag: "🫣 Colpa", culpaTitle: "Vergogna / Colpa", culpaDesc: "Voglio sprofondare...", soledadTag: "🌙 Solitudine", soledadTitle: "Solitudine", soledadDesc: "Qualcuno mi ascolta?", agotamientoTag: "🪫 Esaurimento", agotamientoTitle: "Esaurimento", agotamientoDesc: "Non ce la faccio più...", confusionTag: "🌫️ Confusione", confusionTitle: "Confusione", confusionDesc: "Non so cosa fare...", desanimoTag: "🍂 Scoraggiamento", desanimoTitle: "Scoraggiamento", desanimoDesc: "Tutto mi pesa...", placeholder: "Come ti senti in questo momento?", placeholderSub: "Scorri e premi un'emozione per ricevere istantaneamente la tua prescrizione spirituale.", cargando: "Preparazione della tua medicina spirituale...", medicinaPara: "Medicina per", cableTierra: "Ritorno alla realtà", paywallTitulo: "Hai sentito il potere! 🌟", paywallDesc: "Hai usato le tue 10 ricette gratuite. La maggior parte sblocca l'accesso illimitato qui perché lo usa ogni giorno. Un pagamento unico, tuo per sempre.", paywallBoton: "Sblocca l'accesso illimitato ($4.99)", paywallSub: "Pagamento unico sicuro tramite Stripe. Nessun abbonamento. Accesso a vita." }
         };
-
         const EMOCIONES_DB = {
             miedo: { titulo: "Miedo / Ansiedad", colorBg: "bg-blue-50", colorBorde: "border-blue-200", colorTexto: "text-blue-700", colorGradiente: "bg-gradient-to-br from-[#D6E4F0] to-[#B8C9DE]", items: [{ verso: "No se preocupen por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan y denle gracias por todo lo que él ha hecho.", cita: "Filipenses 4:6", comentario: "Deja de hacer de guionista de tu propio drama. Deja el micrófono y respira; la película de mañana ya tiene director y no eres tú. 😉" }, { verso: "En el día que temo, yo en ti confío.", cita: "Salmo 56:3", comentario: "Sentir miedo es de humanos, pero sobrepensar hasta el Apocalipsis es un deporte extremo que no te pidieron jugar hoy." }, { verso: "Ya te lo he ordenado: ¡Sé fuerte y valiente! No tengas miedo ni te desanimes, porque el Señor tu Dios estará contigo dondequiera que vayas.", cita: "Josué 1:9", comentario: "No es una sugerencia amistosa, ¡es una orden de arriba!" }, { verso: "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo.", cita: "Isaías 41:10", comentario: "Si el dueño del universo te dice 'yo te sostengo', ¿quién eres tú para dudar de Su fuerza?" }] },
             tristeza: { titulo: "Tristeza", colorBg: "bg-sky-50", colorBorde: "border-sky-200", colorTexto: "text-sky-700", colorGradiente: "bg-gradient-to-br from-[#D5E8E6] to-[#B9D4D0]", items: [{ verso: "Cercano está el Señor a los quebrantados de corazón, y salva a los abatidos de espíritu.", cita: "Salmo 34:18", comentario: "Dios no huye de tus lágrimas, se sienta al lado tuyo en el suelo a acompañarte. Está perfectamente bien no estar bien hoy. ❤️" }, { verso: "El llanto puede durar toda la noche, pero a la mañana vendrá el grito de alegría.", cita: "Salmo 30:5", comentario: "La noche siempre se siente eterna justo antes del amanecer. Aguanta un poco más." }] },
@@ -176,7 +116,6 @@
             confusion: { titulo: "Confusión", colorBg: "bg-pink-50", colorBorde: "border-pink-200", colorTexto: "text-pink-700", colorGradiente: "bg-gradient-to-br from-[#E8D5DB] to-[#D9B8C4]", items: [{ verso: "Si a alguno de vosotros le falta sabiduría, pídala a Dios.", cita: "Santiago 1:5", comentario: "Reduce opciones a 2. Ora 5 min sin pedir respuesta, solo presencia." }, { verso: "Fíate de Jehová de todo tu corazón, y no te apoyes en tu propia prudencia.", cita: "Proverbios 3:5", comentario: "Tu mente parece grupo de WhatsApp con 300 mensajes sin leer. Siléncialo." }] },
             desanimo: { titulo: "Desánimo", colorBg: "bg-amber-50", colorBorde: "border-amber-200", colorTexto: "text-amber-700", colorGradiente: "bg-gradient-to-br from-[#E9E0C8] to-[#D9CCAA]", items: [{ verso: "Esforzaos y cobrad ánimo; no temáis, porque Jehová tu Dios es el que va contigo.", cita: "Deuteronomio 31:6", comentario: "No eres superhéroe, pero vas con Uno que nunca te deja en visto." }, { verso: "Los que sembraron con lágrimas, con regocijo segarán.", cita: "Salmo 126:5", comentario: "Estás sembrando en llanto, pero tu cosecha será en baile." }] }
         };
-
         let emocionActualKey = null;
         let indiceActual = 0;
         const carousel = document.getElementById('emociones-carousel');
@@ -189,7 +128,6 @@
         carousel.addEventListener('mouseleave', ()=>{isDown=false; carousel.classList.remove('cursor-grabbing')});
         carousel.addEventListener('mouseup', ()=>{isDown=false; carousel.classList.remove('cursor-grabbing')});
         carousel.addEventListener('mousemove', (e)=>{ if(!isDown) return; e.preventDefault(); const x=e.pageX - carousel.offsetLeft; const walk=(x-startX)*1.5; carousel.scrollLeft=scrollLeft-walk});
-
         async function traducirTexto(texto, origen, destino) {
             if (origen === destino) return texto;
             try {
@@ -199,7 +137,6 @@
                 return data[0].map(item => item[0]).join('');
             } catch (error) { return texto; }
         }
-
         function cambiarIdioma(nuevoIdioma) {
             idiomaDestino = nuevoIdioma;
             const textos = INTERFAZ_TRADUCCIONES[nuevoIdioma];
@@ -221,7 +158,6 @@
                 renderizarRecetaConTraduccion(emocion, emocion.items[indiceActual]);
             }
         }
-
         async function recetar(emocionKey) {
             if (!esPremium && contadorConsultas >= LIMITE_CONSULTAS_GRATIS) { mostrarPaywall(); return; }
             if (!esPremium) { contadorConsultas++; localStorage.setItem('contador_consultas', contadorConsultas.toString()); actualizarContadorUI(); }
@@ -237,7 +173,6 @@
             document.getElementById('pantalla-receta').innerHTML = `<div class="border border-dashed border-emerald-500/30 rounded-3xl p-8 text-center text-stone-500 flex flex-col items-center justify-center h-[300px] bg-white"><div class="w-10 h-10 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin mb-4"></div><p class="text-sm font-semibold">${textos.cargando}</p></div>`;
             await renderizarRecetaConTraduccion(emocion, item);
         }
-
         async function rotarReceta() {
             if (!esPremium && contadorConsultas >= LIMITE_CONSULTAS_GRATIS) { mostrarPaywall(); return; }
             if (!esPremium) { contadorConsultas++; localStorage.setItem('contador_consultas', contadorConsultas.toString()); actualizarContadorUI(); }
@@ -246,7 +181,6 @@
             indiceActual = Math.floor(Math.random() * emocion.items.length);
             await renderizarRecetaConTraduccion(emocion, emocion.items[indiceActual]);
         }
-
         async function renderizarRecetaConTraduccion(emocion, item) {
             const textos = INTERFAZ_TRADUCCIONES[idiomaDestino];
             const versoTraducido = await traducirTexto(item.verso, 'es', idiomaDestino);
@@ -254,12 +188,26 @@
             const tituloEmocionTraducido = textos[`${emocionActualKey}Title`] || emocion.titulo;
             document.getElementById('pantalla-receta').innerHTML = `<div id="tarjeta-contenido" class="w-full p-6 sm:p-8 rounded-3xl border transition-all duration-500 ${emocion.colorBg} ${emocion.colorBorde} shadow-2xl"><div class="flex justify-between items-center mb-6"><span class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white shadow-sm ${emocion.colorTexto}">${textos.medicinaPara}: ${tituloEmocionTraducido}</span><button onclick="rotarReceta()" class="p-2.5 rounded-xl bg-white hover:bg-slate-100 transition-colors shadow-sm ${emocion.colorTexto}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" /></svg></button></div><div class="mb-6 relative pl-4 border-l-4 border-slate-300"><p class="text-xl sm:text-2xl font-serif italic text-slate-800 leading-relaxed">"${versoTraducido}"</p><p class="text-right font-bold mt-3 text-xs sm:text-sm flex items-center justify-end gap-1.5 ${emocion.colorTexto}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" /></svg>${item.cita}</p></div><hr class="border-slate-300/60 my-4" /><div class="flex gap-3 items-start bg-white/75 p-4 rounded-2xl border border-white/40 shadow-sm"><div class="mt-0.5 flex-shrink-0 ${emocion.colorTexto}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" /></svg></div><div><span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-0.5">${textos.cableTierra}</span><p class="text-slate-700 text-sm sm:text-base leading-relaxed font-semibold">${comentarioTraducido}</p></div></div></div>`;
         }
-
          function mostrarPaywall() {
             const textos = INTERFAZ_TRADUCCIONES[idiomaDestino];
             document.getElementById('pantalla-receta').innerHTML = `<div class="w-full p-8 rounded-3xl border border-emerald-500/30 bg-gradient-to-b from-slate-900 to-slate-950 text-center shadow-2xl flex flex-col items-center justify-center min-h-[380px]"><span class="text-5xl mb-4">🌟</span><h3 class="text-2xl font-bold text-white mb-2">${textos.paywallTitulo}</h3><p class="text-stone-500 text-sm max-w-sm mx-auto mb-6 leading-relaxed">${textos.paywallDesc}</p><a href="${ENLACE_STRIPE}" class="w-full max-w-xs py-4 px-6 rounded-2xl bg-gradient-to-r from-teal-400 to-emerald-500 text-slate-950 font-bold hover:brightness-110 active:scale-95 transition-all text-center shadow-lg block">${textos.paywallBoton}</a><p class="text-[10px] text-stone-400 mt-4">${textos.paywallSub}</p><button onclick="localStorage.setItem('contador_consultas','0');location.reload();" class="mt-6 text-xs text-slate-500 underline">Reiniciar contador (solo para pruebas)</button></div>`;
         }
-
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (!emocionActualKey) {
+                    const claves = Object.keys(EMOCIONES_DB);
+                    const clavesBienvenida = ['tristeza', 'miedo', 'soledad', 'ansiedad'];
+                    const disponible = clavesBienvenida.filter(k => EMOCIONES_DB[k]);
+                    const keyInicial = disponible[Math.floor(Math.random() * disponible.length)] || claves[Math.floor(Math.random()*claves.length)];
+                    recetar(keyInicial);
+                    if (!esPremium && contadorConsultas > 0) {
+                        contadorConsultas = Math.max(0, contadorConsultas - 1);
+                        localStorage.setItem('contador_consultas', contadorConsultas.toString());
+                        actualizarContadorUI();
+                    }
+                }
+            }, 400);
+        });
         const audio = document.getElementById('audio-fondo');
         const btnMusica = document.getElementById('btn-musica');
         const iconoPlay = document.getElementById('icono-play');
@@ -269,7 +217,6 @@
             else { audio.pause(); iconoPlay.classList.remove('hidden'); iconoPause.classList.add('hidden'); }
         });
     </script>
-
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
@@ -279,6 +226,5 @@
         });
       }
     </script>
-
 </body>
 </html>
