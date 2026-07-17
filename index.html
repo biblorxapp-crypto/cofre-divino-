@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🩺 Botiquín Emocional / Emotional First Aid</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#10b981">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Botiquín">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-       .font-serif { font-family: 'Playfair Display', Georgia, serif; }
-       .carousel {
+        .font-serif { font-family: 'Playfair Display', Georgia, serif; }
+        .carousel {
             display: flex;
             gap: 14px;
             overflow-x: auto;
@@ -21,23 +30,24 @@
             padding: 10px 20px 18px 20px;
             scroll-behavior: smooth;
         }
-       .carousel::-webkit-scrollbar { display: none; }
-       .carousel-item {
+        .carousel::-webkit-scrollbar { display: none; }
+        .carousel-item {
             scroll-snap-align: center;
             flex: 0 0 76%;
             max-width: 300px;
             min-width: 168px;
         }
-        @media(min-width: 400px){.carousel-item{ flex: 0 0 46%; } }
-       .dot { width:6px; height:6px; border-radius:20px; background:#1e293b; transition: all 0.3s ease; }
-       .dot.active { width:22px; background:#2dd4bf; }
+        @media(min-width: 400px){ .carousel-item{ flex: 0 0 46%; } }
+        .dot { width:6px; height:6px; border-radius:20px; background:#1e293b; transition: all 0.3s ease; }
+        .dot.active { width:22px; background:#2dd4bf; }
 
         /* FIX LEGIBILIDAD TARJETAS ACTIVAS */
-       .emocion-btn.ring-4 {
+        .emocion-btn.ring-4 {
             position: relative;
             overflow: hidden;
         }
-       .emocion-btn.ring-4::after {
+        /* Capa oscura sutil para contraste */
+        .emocion-btn.ring-4::after {
             content: '';
             position: absolute;
             inset: 0;
@@ -45,22 +55,23 @@
             pointer-events: none;
             border-radius: inherit;
         }
-       .emocion-btn.ring-4 > * {
+        .emocion-btn.ring-4 > * {
             position: relative;
             z-index: 1;
         }
-       .emocion-btn.ring-4 h3 {
+        .emocion-btn.ring-4 h3 {
             text-shadow: 0 1px 0 rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.45);
             -webkit-text-stroke: 0.2px rgba(0,0,0,0.15);
             letter-spacing: -0.3px;
         }
-       .emocion-btn.ring-4 p,.emocion-btn.ring-4 span {
+        .emocion-btn.ring-4 p, .emocion-btn.ring-4 span {
             text-shadow: 0 1px 6px rgba(0,0,0,0.5), 0 1px 1px rgba(0,0,0,0.4);
         }
-       .emocion-btn.ring-4 svg {
+        /* Iconos pasan a blanco con sombra cuando está activa */
+        .emocion-btn.ring-4 svg {
             filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(0,0,0,0.4));
         }
-       .emocion-btn.ring-4.emoji-icon {
+        .emocion-btn.ring-4 .emoji-icon {
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
         }
     </style>
@@ -97,7 +108,7 @@
         <div class="w-full relative">
             <div id="emociones-carousel" class="carousel">
                 <button onclick="recetar('miedo')" id="btn-miedo" class="emocion-btn carousel-item p-5 rounded-2xl border border-slate-800 bg-slate-900 hover:border-slate-700 text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-lg shrink-0 text-slate-200">
-                    <div class="flex justify-between items-start w-full"><span id="label-miedo-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🌀</span> Ansiedad</span><span class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286Zm0 13.036h.008v.008H12v-.008Z" /></svg></span></div>
+                    <div class="flex justify-between items-start w-full"><span id="label-miedo-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🌀</span> Ansiedad</span><span class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286Zm0 13.036h.008v.008H12v-.008Z" /></svg></span></div>
                     <div><h3 id="label-miedo-title" class="font-bold text-lg leading-snug">Miedo / Ansiedad</h3><p id="label-miedo-desc" class="text-xs mt-1 text-slate-400 leading-normal">¡Auxilio, mi cabeza no se calla!</p></div>
                 </button>
                 <button onclick="recetar('tristeza')" id="btn-tristeza" class="emocion-btn carousel-item p-5 rounded-2xl border border-slate-800 bg-slate-900 hover:border-slate-700 text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-lg shrink-0 text-slate-200">
@@ -105,7 +116,7 @@
                     <div><h3 id="label-tristeza-title" class="font-bold text-lg leading-snug">Tristeza</h3><p id="label-tristeza-desc" class="text-xs mt-1 text-slate-400 leading-normal">Traigan pañuelos y helado...</p></div>
                 </button>
                 <button onclick="recetar('ira')" id="btn-ira" class="emocion-btn carousel-item p-5 rounded-2xl border border-slate-800 bg-slate-900 hover:border-slate-700 text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-lg shrink-0 text-slate-200">
-                    <div class="flex justify-between items-start w-full"><span id="label-ira-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🤬</span> Ira</span><span class="text-red-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 0 0 1 6.038 7.047 8.287 0 0 0 9 9.601a8.983 0 0 1 3.361-6.867 8.21 0 0 0 3 2.48Z" /></svg></span></div>
+                    <div class="flex justify-between items-start w-full"><span id="label-ira-tag" class="text-xs font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-1.5"><span class="emoji-icon">🤬</span> Ira</span><span class="text-red-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 0 0 0 3 2.48Z" /></svg></span></div>
                     <div><h3 id="label-ira-title" class="font-bold text-lg leading-snug">Ira / Enojo</h3><p id="label-ira-desc" class="text-xs mt-1 text-slate-400 leading-normal">¡Voy a romper algo!</p></div>
                 </button>
                 <button onclick="recetar('culpa')" id="btn-culpa" class="emocion-btn carousel-item p-5 rounded-2xl border border-slate-800 bg-slate-900 hover:border-slate-700 text-left transition-all duration-300 transform active:scale-95 flex flex-col justify-between h-40 shadow-lg shrink-0 text-slate-200">
@@ -151,7 +162,7 @@
             window.location.href = window.location.pathname;
         }
         const ENLACE_STRIPE = "https://buy.stripe.com/14A28s2nzbxU9Qeazs7Vm0e";
-        const LIMITE_CONSULTAS_GRATIS = 10;
+        const LIMITE_CONSULTAS_GRATIS = 10; // AUMENTADO DE 3 A 10 PARA MENOS FRICCIÓN
         let idiomaDestino = "es";
         let esPremium = localStorage.getItem('botiquin_premium') === 'true';
         if (localStorage.getItem('contador_consultas') === null) localStorage.setItem('contador_consultas', '0');
@@ -176,7 +187,7 @@
         };
 
         const EMOCIONES_DB = {
-            miedo: { titulo: "Miedo / Ansiedad", colorBg: "bg-blue-50", colorBorde: "border-blue-200", colorTexto: "text-blue-700", colorGradiente: "bg-gradient-to-br from-blue-600 to-indigo-700", items: [{ verso: "No se preocupen por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan y denle gracias por todo lo que él ha hecho.", cita: "Filipenses 4:6", comentario: "Deja de hacer de guionista de tu propio drama. Deja el micrófono y respira; la película de mañana ya tiene director y no eres tú. 😉" }, { verso: "En el día que temo, yo en ti confío.", cita: "Salmo 56:3", comentario: "Sentir miedo es de humanos, pero sobrepensar hasta el Apocalipsis es un deporte extremo que no te pidieron jugar hoy." }] },
+            miedo: { titulo: "Miedo / Ansiedad", colorBg: "bg-blue-50", colorBorde: "border-blue-200", colorTexto: "text-blue-700", colorGradiente: "bg-gradient-to-br from-blue-600 to-indigo-700", items: [{ verso: "No se preocupen por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan y denle gracias por todo lo que él ha hecho.", cita: "Filipenses 4:6", comentario: "Deja de hacer de guionista de tu propio drama. Deja el micrófono y respira; la película de mañana ya tiene director y no eres tú. 😉" }, { verso: "En el día que temo, yo en ti confío.", cita: "Salmo 56:3", comentario: "Sentir miedo es de humanos, pero sobrepensar hasta el Apocalipsis es un deporte extremo que no te pidieron jugar hoy." }, { verso: "Ya te lo he ordenado: ¡Sé fuerte y valiente! No tengas miedo ni te desanimes, porque el Señor tu Dios estará contigo dondequiera que vayas.", cita: "Josué 1:9", comentario: "No es una sugerencia amistosa, ¡es una orden de arriba!" }, { verso: "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo.", cita: "Isaías 41:10", comentario: "Si el dueño del universo te dice 'yo te sostengo', ¿quién eres tú para dudar de Su fuerza?" }] },
             tristeza: { titulo: "Tristeza", colorBg: "bg-sky-50", colorBorde: "border-sky-200", colorTexto: "text-sky-700", colorGradiente: "bg-gradient-to-br from-sky-600 to-blue-700", items: [{ verso: "Cercano está el Señor a los quebrantados de corazón, y salva a los abatidos de espíritu.", cita: "Salmo 34:18", comentario: "Dios no huye de tus lágrimas, se sienta al lado tuyo en el suelo a acompañarte. Está perfectamente bien no estar bien hoy. ❤️" }, { verso: "El llanto puede durar toda la noche, pero a la mañana vendrá el grito de alegría.", cita: "Salmo 30:5", comentario: "La noche siempre se siente eterna justo antes del amanecer. Aguanta un poco más." }] },
             ira: { titulo: "Ira / Enojo", colorBg: "bg-red-50", colorBorde: "border-red-200", colorTexto: "text-red-700", colorGradiente: "bg-gradient-to-br from-red-600 to-orange-700", items: [{ verso: "Si se enojan, no pequen. No dejen que el sol se ponga estando aún enojados.", cita: "Efesios 4:26", comentario: "Aléjate del teléfono, bloquea la pantalla y no envíes ese mensaje. El enojo pasa, pero el botón de 'enviar' es para siempre. 🛑" }, { verso: "La blanda respuesta quita la ira; mas la palabra áspera hace subir el furor.", cita: "Proverbios 15:1", comentario: "No tienes que ganar todas las discusiones en la tierra. A veces ganar significa quedarse callado." }] },
             culpa: { titulo: "Vergüenza / Culpa", colorBg: "bg-purple-50", colorBorde: "border-purple-200", colorTexto: "text-purple-700", colorGradiente: "bg-gradient-to-br from-purple-600 to-fuchsia-700", items: [{ verso: "Ahora, pues, ninguna condenación hay para los que están en Cristo Jesús.", cita: "Romanos 8:1", comentario: "Si el Juez del universo ya firmó tu absolución, ¿por qué sigues tú mismo en el banquillo de los acusados? ¡Caso cerrado! ✨" }, { verso: "Si confesamos nuestros pecados, él es fiel y justo para perdonar.", cita: "1 Juan 1:9", comentario: "La gracia no es para los perfectos, es para los sinceros. Ya admitiste el error, ahora recibe el perdón." }] },
@@ -278,5 +289,16 @@
             else { audio.pause(); iconoPlay.classList.remove('hidden'); iconoPause.classList.add('hidden'); }
         });
     </script>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').then(reg => {
+            console.log('SW registrado', reg.scope);
+          }).catch(err => console.log('SW error', err));
+        });
+      }
+    </script>
+
 </body>
 </html>
