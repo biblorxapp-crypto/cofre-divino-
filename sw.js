@@ -1,4 +1,4 @@
-const CACHE_NAME = 'botiquin-v4';
+const CACHE_NAME = 'botiquin-v5';
 
 const ASSETS = [
 '/',
