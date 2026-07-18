@@ -39,12 +39,12 @@ transform:translateY(-6px);
 
 .fade{
 
-animation:fade .5s ease;
+animation:entrada .5s ease;
 
 }
 
 
-@keyframes fade{
+@keyframes entrada{
 
 from{
 
@@ -52,7 +52,6 @@ opacity:0;
 transform:translateY(20px);
 
 }
-
 
 to{
 
@@ -64,14 +63,32 @@ transform:translateY(0);
 }
 
 
-</style>
+.favorito{
 
+animation:pulso .4s ease;
+
+}
+
+
+@keyframes pulso{
+
+50%{
+
+transform:scale(1.15);
+
+}
+
+}
+
+
+</style>
 
 </head>
 
 
 
 <body class="bg-slate-950 text-white min-h-screen">
+
 
 
 <header class="p-6 text-center">
@@ -96,11 +113,15 @@ Primeros auxilios para el alma en momentos difíciles.
 
 
 
+
 <main class="max-w-xl mx-auto p-5">
 
 
 
+
+
 <section id="bienvenida"
+
 class="mb-8">
 
 
@@ -114,11 +135,13 @@ class="mb-8">
 </div>
 
 
+
 <h2 class="text-2xl font-bold mb-3">
 
 Bienvenido al Botiquín Emocional
 
 </h2>
+
 
 
 <p class="text-slate-400 leading-relaxed mb-6">
@@ -130,6 +153,7 @@ No tienes que resolver toda tu vida hoy.
 Solo identifica qué está pesando en tu corazón.
 
 </p>
+
 
 
 <button
@@ -152,6 +176,7 @@ Comenzar mi camino →
 
 
 
+
 <section id="zona-emociones">
 
 
@@ -162,12 +187,12 @@ Comenzar mi camino →
 </h2>
 
 
-
 <div id="contador-uso"
 
 class="mb-4 text-center text-sm text-emerald-400 font-bold">
 
 </div>
+
 
 
 
@@ -182,7 +207,9 @@ class="card bg-gradient-to-br from-blue-900 to-slate-900 border border-blue-700 
 
 
 <div class="text-4xl">
+
 🌀
+
 </div>
 
 
@@ -212,7 +239,9 @@ class="card bg-gradient-to-br from-sky-900 to-slate-900 border border-sky-700 ro
 
 
 <div class="text-4xl">
+
 😢
+
 </div>
 
 
@@ -242,7 +271,9 @@ class="card bg-gradient-to-br from-red-900 to-slate-900 border border-red-700 ro
 
 
 <div class="text-4xl">
+
 🔥
+
 </div>
 
 
@@ -272,7 +303,9 @@ class="card bg-gradient-to-br from-purple-900 to-slate-900 border border-purple-
 
 
 <div class="text-4xl">
+
 🌙
+
 </div>
 
 
@@ -294,14 +327,15 @@ Necesito sentir compañía
 
 
 
-
 <button onclick="mostrarEmocion('agotamiento')"
 
 class="card bg-gradient-to-br from-emerald-900 to-slate-900 border border-emerald-700 rounded-3xl p-5 text-left shadow-xl">
 
 
 <div class="text-4xl">
+
 🪫
+
 </div>
 
 
@@ -324,13 +358,16 @@ Ya no puedo más
 
 
 
+
 <button onclick="mostrarEmocion('desanimo')"
 
 class="card bg-gradient-to-br from-amber-900 to-slate-900 border border-amber-700 rounded-3xl p-5 text-left shadow-xl">
 
 
 <div class="text-4xl">
+
 🍂
+
 </div>
 
 
@@ -361,12 +398,17 @@ Necesito volver a levantarme
 
 
 
+
+
 <section id="resultado"
 
 class="mt-8 hidden">
 
 
-<div class="fade bg-white text-slate-900 rounded-3xl p-6 shadow-xl">
+<div id="tarjeta-reflexion"
+
+class="fade bg-white text-slate-900 rounded-3xl p-6 shadow-xl">
+
 
 
 <h2 id="titulo"
@@ -409,9 +451,46 @@ class="mt-2">
 
 
 
+
+<div class="grid grid-cols-2 gap-3 mt-6">
+
+
+
+<button onclick="guardarFavorita()"
+
+class="bg-slate-900 text-white font-bold py-3 rounded-xl">
+
+
+❤️ Guardar
+
+
+</button>
+
+
+
+
+
+<button onclick="compartirReflexion()"
+
+class="bg-emerald-500 text-black font-bold py-3 rounded-xl">
+
+
+📤 Compartir
+
+
+</button>
+
+
+
+</div>
+
+
+
+
+
 <button onclick="nuevaReceta()"
 
-class="mt-6 w-full bg-emerald-500 text-black font-bold py-3 rounded-xl hover:bg-emerald-400 transition">
+class="mt-4 w-full bg-emerald-500 text-black font-bold py-3 rounded-xl hover:bg-emerald-400 transition">
 
 
 Otra reflexión
@@ -430,7 +509,10 @@ Otra reflexión
 
 
 
+
 </main>
+
+
 
 
 
@@ -440,7 +522,9 @@ Otra reflexión
 
 Creado para acompañar momentos difíciles ❤️
 
+
 <br>
+
 
 Botiquín Emocional © 2026
 
@@ -451,7 +535,10 @@ Botiquín Emocional © 2026
 
 
 
+
+
 <script>
+
 
 
 const recetas = {
@@ -481,9 +568,7 @@ accion:"Apaga las notificaciones durante 10 minutos y regálate tranquilidad."
 
 }
 
-
 ],
-
 
 
 
@@ -515,10 +600,7 @@ accion:"Busca una pequeña cosa que te dé esperanza hoy."
 ],
 
 
-
-
 enojo:[
-
 
 {
 
@@ -541,14 +623,12 @@ accion:"Aléjate unos minutos antes de tomar una decisión."
 
 }
 
-
 ],
 
 
 
 
 soledad:[
-
 
 {
 
@@ -571,8 +651,8 @@ accion:"Haz algo pequeño que cuide de ti hoy."
 
 }
 
-
 ],
+
 
 
 
@@ -584,7 +664,7 @@ titulo:"Tu cansancio también merece descanso 🪫",
 
 mensaje:"No naciste para cargar el mundo entero sobre tus hombros. A veces la verdadera fuerza está en detenerse, respirar y recuperar energía.",
 
-accion:"Toma unos minutos de silencio, respira profundo y permite que tu mente descanse."
+accion:"Toma unos minutos de silencio y permite que tu mente descanse."
 
 },
 
@@ -593,7 +673,7 @@ accion:"Toma unos minutos de silencio, respira profundo y permite que tu mente d
 
 titulo:"No tienes que ser fuerte todo el tiempo",
 
-mensaje:"Incluso los árboles necesitan estaciones donde parecen detenerse. Tu vida también tiene momentos para recuperar fuerzas.",
+mensaje:"Incluso los árboles necesitan estaciones donde parecen detenerse. Tu vida también necesita momentos para recuperar fuerzas.",
 
 accion:"Haz una cosa pequeña hoy solo para cuidar de ti."
 
@@ -612,7 +692,7 @@ titulo:"Este momento no define tu historia 🍂",
 
 mensaje:"Un día difícil no significa una vida perdida. A veces las etapas más oscuras preparan cambios que todavía no puedes ver.",
 
-accion:"Escribe una pequeña victoria que hayas logrado, aunque parezca sencilla."
+accion:"Escribe una pequeña victoria que hayas logrado."
 
 },
 
@@ -630,14 +710,16 @@ accion:"Da un pequeño paso hoy, aunque sea solamente uno."
 ]
 
 
-
 };
 
 
 
 
 
+
 let emocionActual = "";
+
+let reflexionActual = "";
 
 
 
@@ -646,7 +728,8 @@ let emocionActual = "";
 function comenzarBotiquin(){
 
 
-const bienvenida = document.getElementById("bienvenida");
+const bienvenida =
+document.getElementById("bienvenida");
 
 
 bienvenida.style.opacity="0";
@@ -659,6 +742,7 @@ bienvenida.style.display="none";
 
 
 },500);
+
 
 
 }
@@ -687,9 +771,28 @@ Math.floor(Math.random()*lista.length)
 
 
 
+reflexionActual = receta;
+
+
+
 document.getElementById("resultado")
 
 .classList.remove("hidden");
+
+
+
+document.getElementById("tarjeta-reflexion")
+
+.classList.remove("fade");
+
+
+void document.getElementById("tarjeta-reflexion").offsetWidth;
+
+
+document.getElementById("tarjeta-reflexion")
+
+.classList.add("fade");
+
 
 
 
@@ -711,7 +814,6 @@ receta.accion;
 
 
 
-
 window.scrollTo({
 
 top:document.body.scrollHeight,
@@ -719,6 +821,7 @@ top:document.body.scrollHeight,
 behavior:"smooth"
 
 });
+
 
 
 }
@@ -739,6 +842,115 @@ mostrarEmocion(emocionActual);
 }
 
 
+
+}
+
+
+
+
+
+function guardarFavorita(){
+
+
+
+if(!reflexionActual) return;
+
+
+
+localStorage.setItem(
+
+"reflexion_favorita",
+
+JSON.stringify(reflexionActual)
+
+);
+
+
+
+const boton =
+event.target;
+
+
+
+boton.classList.add("favorito");
+
+
+setTimeout(()=>{
+
+boton.classList.remove("favorito");
+
+},400);
+
+
+
+alert(
+
+"❤️ Reflexión guardada"
+
+);
+
+
+
+}
+
+
+
+
+
+function compartirReflexion(){
+
+
+
+if(!reflexionActual) return;
+
+
+
+const texto =
+
+`${reflexionActual.titulo}
+
+
+${reflexionActual.mensaje}
+
+
+🌱 ${reflexionActual.accion}`;
+
+
+
+
+if(navigator.share){
+
+
+
+navigator.share({
+
+title:"Botiquín Emocional",
+
+text:texto
+
+});
+
+
+
+}
+
+else{
+
+
+navigator.clipboard.writeText(texto);
+
+
+alert(
+
+"📋 Reflexión copiada para compartir"
+
+);
+
+
+}
+
+
+
 }
 
 
@@ -750,7 +962,7 @@ mostrarEmocion(emocionActual);
 const LIMITE_GRATIS = 10;
 
 
-let consultas = 
+let consultas =
 parseInt(localStorage.getItem("consultas_botiquin")) || 0;
 
 
@@ -769,7 +981,6 @@ const caja =
 document.getElementById("contador-uso");
 
 
-
 if(!caja) return;
 
 
@@ -778,7 +989,7 @@ if(premium){
 
 
 caja.innerHTML =
-"🌟 Usuario Premium - Acceso ilimitado";
+"🌟 Usuario Premium - Reflexiones ilimitadas";
 
 
 return;
@@ -833,8 +1044,11 @@ consultas++;
 
 
 localStorage.setItem(
+
 "consultas_botiquin",
+
 consultas
+
 );
 
 
@@ -857,8 +1071,8 @@ actualizarContador();
 
 
 
-function mostrarPremium(){
 
+function mostrarPremium(){
 
 
 document.getElementById("resultado")
@@ -875,11 +1089,12 @@ document.getElementById("titulo").innerHTML =
 
 document.getElementById("mensaje").innerHTML =
 
-"Has utilizado tus 10 reflexiones gratuitas. Desbloquea acceso ilimitado para seguir recibiendo acompañamiento diario.";
+"Has usado tus 10 reflexiones gratuitas. Desbloquea acceso ilimitado para continuar recibiendo acompañamiento diario.";
 
 
 
 document.getElementById("accion").innerHTML =
+
 
 `
 
@@ -889,7 +1104,9 @@ onclick="activarPremium()"
 
 class="w-full bg-emerald-500 text-black font-bold py-3 rounded-xl">
 
+
 Desbloquear Premium
+
 
 </button>
 
@@ -904,7 +1121,6 @@ Desbloquear Premium
 
 
 function activarPremium(){
-
 
 
 localStorage.setItem(
@@ -939,6 +1155,7 @@ alert(
 
 
 
+
 // =============================
 // IDIOMA
 // =============================
@@ -956,7 +1173,6 @@ document.querySelector("header h1");
 
 const subtitulo =
 document.querySelector("header p");
-
 
 
 
@@ -979,35 +1195,29 @@ subtitulo.innerHTML =
 else{
 
 
-
 titulo.innerHTML =
 "🩺 Botiquín Emocional";
-
 
 
 subtitulo.innerHTML =
 "Primeros auxilios para el alma en momentos difíciles.";
 
 
-
 }
 
 
 
 }
 
-
-
-
-
-// =============================
-// SELECTOR DE IDIOMA
-// =============================
 
 
 </script>
 
 
+
+
+
+<!-- SELECTOR DE IDIOMA -->
 
 
 <div class="fixed top-4 right-4">
@@ -1018,7 +1228,6 @@ subtitulo.innerHTML =
 class="bg-slate-900 border border-slate-700 rounded-xl p-2 text-sm"
 
 onchange="cambiarIdioma(this.value)">
-
 
 
 <option value="es">
@@ -1034,7 +1243,6 @@ onchange="cambiarIdioma(this.value)">
 🇺🇸 English
 
 </option>
-
 
 
 </select>
@@ -1055,10 +1263,10 @@ actualizarContador();
 
 
 
+// =============================
+// SERVICE WORKER PWA
+// =============================
 
-// =============================
-// SERVICE WORKER
-// =============================
 
 
 if("serviceWorker" in navigator){
@@ -1077,7 +1285,6 @@ navigator.serviceWorker
 
 .register("/sw.js")
 
-
 .then(()=>{
 
 
@@ -1086,6 +1293,7 @@ console.log(
 "Botiquín Emocional funcionando offline"
 
 );
+
 
 
 })
@@ -1097,13 +1305,14 @@ console.log(
 console.log(
 
 "Error Service Worker:",
+
 error
 
 );
 
 
-});
 
+});
 
 
 }
