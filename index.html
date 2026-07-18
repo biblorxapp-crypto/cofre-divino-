@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>🩺 Botiquín Emocional</title>
+<title>🩺 Botiquín Emocional V3</title>
 
 <meta name="theme-color" content="#10b981">
 
@@ -22,13 +22,16 @@ body{
 font-family:Arial,sans-serif;
 }
 
+
 .card{
 transition:.3s;
 }
 
+
 .card:hover{
 transform:translateY(-5px);
 }
+
 
 .fade{
 animation:fade .5s ease;
@@ -55,10 +58,13 @@ transform:translateY(0);
 </head>
 
 
+
 <body class="bg-slate-950 text-white min-h-screen">
 
 
+
 <header class="p-6 text-center">
+
 
 <h1 class="text-4xl font-bold text-emerald-400">
 
@@ -75,6 +81,7 @@ Primeros auxilios para el alma en momentos difíciles.
 
 
 </header>
+
 
 
 
@@ -113,7 +120,6 @@ Solo identifica qué está pesando en tu corazón.
 </p>
 
 
-
 <button onclick="comenzarBotiquin()"
 
 class="bg-emerald-500 text-black font-bold px-8 py-3 rounded-xl">
@@ -127,6 +133,7 @@ Comenzar mi camino →
 
 
 </section>
+
 
 
 
@@ -151,11 +158,7 @@ Comenzar mi camino →
 class="card bg-gradient-to-br from-blue-900 to-slate-900 border border-blue-700 rounded-3xl p-5 text-left">
 
 
-<div class="text-4xl">
-
-🌀
-
-</div>
+<div class="text-4xl">🌀</div>
 
 
 <h3 class="font-bold mt-3">
@@ -183,11 +186,7 @@ Mi mente no se detiene
 class="card bg-gradient-to-br from-sky-900 to-slate-900 border border-sky-700 rounded-3xl p-5 text-left">
 
 
-<div class="text-4xl">
-
-😢
-
-</div>
+<div class="text-4xl">😢</div>
 
 
 <h3 class="font-bold mt-3">
@@ -215,11 +214,7 @@ Necesito consuelo
 class="card bg-gradient-to-br from-red-900 to-slate-900 border border-red-700 rounded-3xl p-5 text-left">
 
 
-<div class="text-4xl">
-
-🔥
-
-</div>
+<div class="text-4xl">🔥</div>
 
 
 <h3 class="font-bold mt-3">
@@ -247,11 +242,7 @@ Quiero recuperar mi calma
 class="card bg-gradient-to-br from-purple-900 to-slate-900 border border-purple-700 rounded-3xl p-5 text-left">
 
 
-<div class="text-4xl">
-
-🌙
-
-</div>
+<div class="text-4xl">🌙</div>
 
 
 <h3 class="font-bold mt-3">
@@ -277,11 +268,7 @@ Necesito compañía
 class="card bg-gradient-to-br from-emerald-900 to-slate-900 border border-emerald-700 rounded-3xl p-5 text-left">
 
 
-<div class="text-4xl">
-
-🪫
-
-</div>
+<div class="text-4xl">🪫</div>
 
 
 <h3 class="font-bold mt-3">
@@ -303,16 +290,13 @@ Ya no puedo más
 
 
 
+
 <button onclick="mostrarEmocion('desanimo')"
 
 class="card bg-gradient-to-br from-amber-900 to-slate-900 border border-amber-700 rounded-3xl p-5 text-left">
 
 
-<div class="text-4xl">
-
-🍂
-
-</div>
+<div class="text-4xl">🍂</div>
 
 
 <h3 class="font-bold mt-3">
@@ -333,10 +317,123 @@ Necesito volver a levantarme
 
 
 
+
+
+<button onclick="mostrarEmocion('miedo')"
+
+class="card bg-gradient-to-br from-indigo-900 to-slate-900 border border-indigo-700 rounded-3xl p-5 text-left">
+
+
+<div class="text-4xl">😨</div>
+
+
+<h3 class="font-bold mt-3">
+
+Miedo
+
+</h3>
+
+
+<p class="text-xs text-slate-300">
+
+No sé qué va a pasar
+
+</p>
+
+
+</button>
+
+
+
+
+
+<button onclick="mostrarEmocion('culpa')"
+
+class="card bg-gradient-to-br from-rose-900 to-slate-900 border border-rose-700 rounded-3xl p-5 text-left">
+
+
+<div class="text-4xl">💔</div>
+
+
+<h3 class="font-bold mt-3">
+
+Culpa
+
+</h3>
+
+
+<p class="text-xs text-slate-300">
+
+No puedo soltar el pasado
+
+</p>
+
+
+</button>
+
+
+
+
+
+<button onclick="mostrarEmocion('frustracion')"
+
+class="card bg-gradient-to-br from-orange-900 to-slate-900 border border-orange-700 rounded-3xl p-5 text-left">
+
+
+<div class="text-4xl">😤</div>
+
+
+<h3 class="font-bold mt-3">
+
+Frustración
+
+</h3>
+
+
+<p class="text-xs text-slate-300">
+
+Siento que nada avanza
+
+</p>
+
+
+</button>
+
+
+
+
+
+<button onclick="mostrarEmocion('esperanza')"
+
+class="card bg-gradient-to-br from-green-900 to-slate-900 border border-green-700 rounded-3xl p-5 text-left">
+
+
+<div class="text-4xl">🌱</div>
+
+
+<h3 class="font-bold mt-3">
+
+Esperanza
+
+</h3>
+
+
+<p class="text-xs text-slate-300">
+
+Necesito volver a creer
+
+</p>
+
+
+</button>
+
+
+
 </div>
 
 
 </section>
+
 
 
 
@@ -349,7 +446,6 @@ class="mt-8 hidden">
 <div class="fade bg-white text-slate-900 rounded-3xl p-6 shadow-xl">
 
 
-
 <h2 id="titulo"
 
 class="text-2xl font-bold text-emerald-700">
@@ -357,15 +453,11 @@ class="text-2xl font-bold text-emerald-700">
 </h2>
 
 
-
-
 <p id="mensaje"
 
 class="mt-4 text-lg leading-relaxed">
 
 </p>
-
-
 
 
 <div class="mt-6 p-4 bg-emerald-50 rounded-xl">
@@ -388,8 +480,6 @@ class="mt-2">
 </div>
 
 
-
-
 <button onclick="nuevaReceta()"
 
 class="mt-6 w-full bg-emerald-500 text-black font-bold py-3 rounded-xl">
@@ -399,7 +489,6 @@ Otra reflexión
 </button>
 
 
-
 </div>
 
 
@@ -407,7 +496,9 @@ Otra reflexión
 
 
 
+
 </main>
+
 
 
 
@@ -424,170 +515,185 @@ Botiquín Emocional © 2026
 
 
 
-
 <script>
 
 
 const recetas = {
 
 
+
+
 ansiedad:[
 
 {
-
 titulo:"Cuando tu mente corre demasiado 🌀",
-
-mensaje:"No todo pensamiento merece una respuesta. A veces la mente crea tormentas donde solo existe una nube. Hoy no tienes que resolver toda tu vida, solo este momento.",
-
+mensaje:"No todo pensamiento merece una respuesta. A veces la mente crea tormentas donde solo existe una nube. Hoy solo necesitas vivir este momento.",
 accion:"Respira profundo 5 veces y pregúntate: ¿Qué puedo controlar ahora?"
-
 },
 
 {
-
 titulo:"El silencio también es medicina 🌿",
-
-mensaje:"Tu valor no depende de tener todo bajo control. Hay batallas que se ganan descansando y confiando.",
-
+mensaje:"Tu valor no depende de tener todo bajo control. Algunas batallas se ganan descansando.",
 accion:"Apaga las notificaciones durante 10 minutos y regálate tranquilidad."
-
 }
 
 ],
-
 
 
 tristeza:[
 
 {
-
 titulo:"Tus lágrimas también hablan ❤️",
-
 mensaje:"La tristeza no significa debilidad. A veces el corazón necesita detenerse para sanar.",
-
 accion:"Escribe una cosa por la que todavía puedes agradecer hoy."
-
 },
 
 {
-
 titulo:"Después de la noche llega la mañana 🌅",
-
 mensaje:"Los momentos difíciles no escriben toda tu historia. Son solamente una página de un libro mucho más grande.",
-
 accion:"Busca una pequeña cosa que te dé esperanza hoy."
-
 }
 
 ],
-
 
 
 enojo:[
 
 {
-
 titulo:"No entregues tu paz al enojo 🔥",
-
 mensaje:"Una reacción de segundos puede crear heridas que tardan años en sanar. Tu fuerza está en elegir cómo responder.",
-
 accion:"Antes de responder, espera 10 segundos y respira."
-
 },
 
 {
-
 titulo:"La calma también es poder",
-
-mensaje:"Controlar tus emociones no significa ignorarlas; significa que ellas no controlan tu destino.",
-
+mensaje:"Controlar tus emociones significa que ellas no controlan tu destino.",
 accion:"Aléjate unos minutos antes de tomar una decisión."
-
 }
 
 ],
-
 
 
 soledad:[
 
 {
-
 titulo:"Nunca estás completamente solo 🌙",
-
-mensaje:"Hay temporadas donde el silencio pesa, pero incluso esos momentos pueden convertirse en espacios para encontrarte contigo mismo.",
-
-accion:"Envía un mensaje a alguien que aprecias o busca una conversación sincera."
-
+mensaje:"Hay temporadas donde el silencio pesa, pero también pueden convertirse en espacios para encontrarte contigo mismo.",
+accion:"Envía un mensaje a alguien que aprecias."
 },
 
 {
-
 titulo:"Tu presencia tiene valor",
-
-mensaje:"Aunque hoy sientas distancia de otros, tu vida sigue teniendo propósito y significado.",
-
-accion:"Haz algo pequeño que cuide de ti hoy."
-
+mensaje:"Aunque hoy sientas distancia, tu vida sigue teniendo propósito.",
+accion:"Haz algo pequeño que cuide de ti."
 }
 
 ],
-
 
 
 agotamiento:[
 
 {
-
 titulo:"Tu cansancio también merece descanso 🪫",
-
-mensaje:"No naciste para cargar el mundo entero sobre tus hombros. A veces la verdadera fuerza está en detenerse, respirar y reconocer que necesitas recuperar energía.",
-
-accion:"Toma unos minutos de silencio, respira profundo y permite que tu mente descanse."
-
+mensaje:"No naciste para cargar el mundo entero sobre tus hombros. A veces la fuerza está en detenerse.",
+accion:"Toma unos minutos de silencio y recupera energía."
 },
 
 {
-
 titulo:"No tienes que ser fuerte todo el tiempo",
-
-mensaje:"Incluso los árboles necesitan estaciones donde parecen detenerse. Tu vida también tiene momentos para recuperar fuerzas.",
-
-accion:"Haz una cosa pequeña hoy solo para cuidar de ti."
-
+mensaje:"Incluso la naturaleza tiene estaciones de descanso.",
+accion:"Haz una cosa pequeña solo para cuidar de ti."
 }
 
 ],
 
 
-
 desanimo:[
 
 {
-
 titulo:"Este momento no define tu historia 🍂",
-
-mensaje:"Un día difícil no significa una vida perdida. A veces las etapas más oscuras preparan cambios que todavía no puedes ver.",
-
-accion:"Escribe una pequeña victoria que hayas logrado, aunque parezca sencilla."
-
+mensaje:"Un día difícil no significa una vida perdida.",
+accion:"Escribe una pequeña victoria que hayas logrado."
 },
 
 {
-
 titulo:"Vuelve a empezar una vez más",
+mensaje:"Cada intento demuestra que todavía existe esperanza.",
+accion:"Da un pequeño paso hoy."
+}
 
-mensaje:"Caer no elimina tu camino recorrido. Cada intento demuestra que todavía existe esperanza dentro de ti.",
+],
 
-accion:"Da un pequeño paso hoy, aunque sea solamente uno."
 
+miedo:[
+
+{
+titulo:"No dejes que el miedo escriba tu futuro 😨",
+mensaje:"El miedo intenta protegerte, pero no debe convertirse en una prisión. Muchas puertas aparecen cuando decides avanzar.",
+accion:"Haz una pequeña acción hacia aquello que estás evitando."
+},
+
+{
+titulo:"Eres más grande que tus temores",
+mensaje:"Has superado momentos difíciles antes. Tu historia demuestra que tienes más fuerza de la que imaginas.",
+accion:"Recuerda tres dificultades que ya lograste superar."
+}
+
+],
+
+
+culpa:[
+
+{
+titulo:"Aprende, perdona y continúa 💔",
+mensaje:"La culpa puede enseñar, pero no debe convertirse en una cadena que te impida avanzar.",
+accion:"Escribe qué aprendiste y qué puedes hacer diferente."
+},
+
+{
+titulo:"También mereces perdón",
+mensaje:"Todos cometemos errores. La sabiduría está en transformarlos en crecimiento.",
+accion:"Háblate hoy con la misma compasión que tendrías con un amigo."
+}
+
+],
+
+
+frustracion:[
+
+{
+titulo:"Respira antes de rendirte 😤",
+mensaje:"No todo avance es visible. Algunas raíces crecen antes de que aparezcan los frutos.",
+accion:"Divide tu problema en un solo paso pequeño."
+},
+
+{
+titulo:"La paciencia también es fuerza",
+mensaje:"Los grandes cambios rara vez ocurren de un día para otro.",
+accion:"Concéntrate solamente en lo que puedes mejorar hoy."
+}
+
+],
+
+
+esperanza:[
+
+{
+titulo:"Siempre existe una nueva oportunidad 🌱",
+mensaje:"Mientras puedas dar un paso más, tu historia todavía está escribiéndose.",
+accion:"Piensa en algo bueno que quieres construir en tu futuro."
+},
+
+{
+titulo:"La luz vuelve después de la oscuridad",
+mensaje:"Los momentos difíciles no tienen la última palabra.",
+accion:"Comparte una palabra positiva con alguien hoy."
 }
 
 ]
 
 
 };
-
 
 
 
@@ -600,6 +706,7 @@ function comenzarBotiquin(){
 const bienvenida = document.getElementById("bienvenida");
 
 bienvenida.style.opacity="0";
+
 
 setTimeout(()=>{
 
@@ -626,26 +733,20 @@ Math.floor(Math.random()*lista.length)
 ];
 
 
-const resultado = document.getElementById("resultado");
-
-
-resultado.classList.remove("hidden");
-
+document.getElementById("resultado")
+.classList.remove("hidden");
 
 
 document.getElementById("titulo").innerHTML =
 receta.titulo;
 
 
-
 document.getElementById("mensaje").innerHTML =
 receta.mensaje;
 
 
-
 document.getElementById("accion").innerHTML =
 receta.accion;
-
 
 
 window.scrollTo({
@@ -658,8 +759,6 @@ behavior:"smooth"
 
 
 }
-
-
 
 
 
@@ -676,21 +775,14 @@ mostrarEmocion(emocionActual);
 }
 
 
-
 </script>
 
 
 
 
+<!-- SISTEMA PREMIUM -->
 
 <script>
-
-
-// ============================
-// SISTEMA PREMIUM
-// 10 REFLEXIONES GRATIS
-// ============================
-
 
 const LIMITE_GRATIS = 10;
 
@@ -699,10 +791,8 @@ let consultas =
 parseInt(localStorage.getItem("consultas_botiquin")) || 0;
 
 
-
-let premium = 
+let premium =
 localStorage.getItem("botiquin_premium") === "true";
-
 
 
 
@@ -713,22 +803,17 @@ const mostrarOriginal = mostrarEmocion;
 mostrarEmocion = function(tipo){
 
 
-
 if(!premium && consultas >= LIMITE_GRATIS){
-
 
 mostrarPremium();
 
-
 return;
-
 
 }
 
 
 
 if(!premium){
-
 
 consultas++;
 
@@ -737,7 +822,6 @@ localStorage.setItem(
 "consultas_botiquin",
 consultas
 );
-
 
 }
 
@@ -752,14 +836,11 @@ mostrarOriginal(tipo);
 
 
 
-
 function mostrarPremium(){
-
 
 
 const resultado =
 document.getElementById("resultado");
-
 
 
 resultado.classList.remove("hidden");
@@ -774,18 +855,18 @@ document.getElementById("titulo").innerHTML =
 
 document.getElementById("mensaje").innerHTML =
 
-"Has usado tus reflexiones gratuitas. Desbloquea el acceso ilimitado para continuar recibiendo acompañamiento diario.";
+"Has utilizado tus 10 reflexiones gratuitas. Desbloquea acceso ilimitado para seguir recibiendo acompañamiento diario.";
 
 
 
 document.getElementById("accion").innerHTML =
 
-
 `
 
-<button onclick="activarPremium()"
+<button 
+onclick="activarPremium()"
 
-class="w-full bg-emerald-500 text-black font-bold p-3 rounded-xl">
+class="w-full bg-emerald-500 text-black font-bold py-3 rounded-xl">
 
 Desbloquear Premium
 
@@ -799,33 +880,21 @@ Desbloquear Premium
 
 
 
-
-
-
 function activarPremium(){
 
 
-
 localStorage.setItem(
-
 "botiquin_premium",
-
 "true"
-
 );
-
 
 
 premium=true;
 
 
-
 alert(
-
 "🌟 Premium activado"
-
 );
-
 
 
 }
@@ -838,12 +907,38 @@ alert(
 
 
 
+<!-- SELECTOR DE IDIOMA -->
+
+<div class="fixed top-4 right-4">
+
+
+<select
+
+class="bg-slate-900 border border-slate-700 rounded-xl p-2 text-sm"
+
+onchange="cambiarIdioma(this.value)">
+
+
+<option value="es">
+🇪🇸 Español
+</option>
+
+
+<option value="en">
+🇺🇸 English
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
 <script>
-
-
-// ============================
-// IDIOMA
-// ============================
 
 
 function cambiarIdioma(idioma){
@@ -852,7 +947,6 @@ function cambiarIdioma(idioma){
 
 const titulo =
 document.querySelector("header h1");
-
 
 
 const subtitulo =
@@ -871,7 +965,6 @@ subtitulo.innerHTML =
 "Emotional support for difficult moments.";
 
 
-
 }
 
 else{
@@ -888,7 +981,6 @@ subtitulo.innerHTML =
 }
 
 
-
 }
 
 
@@ -897,49 +989,13 @@ subtitulo.innerHTML =
 
 
 
-<!-- SELECTOR DE IDIOMA -->
-
-<div class="fixed top-4 right-4">
-
-
-<select
-
-class="bg-slate-900 border border-slate-700 rounded-xl p-2 text-sm"
-
-onchange="cambiarIdioma(this.value)">
 
 
 
-<option value="es">
-
-🇪🇸 Español
-
-</option>
-
-
-
-<option value="en">
-
-🇺🇸 English
-
-</option>
-
-
-</select>
-
-
-</div>
-
-
-
+<!-- SERVICE WORKER PWA -->
 
 
 <script>
-
-
-// ============================
-// SERVICE WORKER PWA
-// ============================
 
 
 if("serviceWorker" in navigator){
@@ -956,35 +1012,32 @@ navigator.serviceWorker
 
 .register("/sw.js")
 
+
 .then(()=>{
 
 
 console.log(
-
-"Botiquín Emocional funcionando offline"
-
+"Botiquín funcionando offline"
 );
 
 
 })
 
+
 .catch(error=>{
 
 
 console.log(
-
 "Error Service Worker:",
-
 error
-
 );
 
 
 });
 
 
-
 }
+
 
 );
 
@@ -1000,5 +1053,3 @@ error
 </body>
 
 </html>
-
-
