@@ -1,46 +1,1156 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Botiquín Emocional – Pronto abriremos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <title>Botiquín Emocional · biblrx.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    :root {
+      --bg-main: #050505;
+      --accent-teal: #00e5c0;
+      --accent-pink-start: #ff2d6c;
+      --accent-pink-end: #c81e5e;
+      --panel-bg: #faf6f0;
+      --text-main: #f5f5f5;
+      --text-muted: #a0a0a0;
+      --green-pill: #35c46b;
+      --radius-lg: 22px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
+      --transition-med: 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif;
-      background-color: #FDFBF7; /* blanco marfil paleta 2 */
-      color: #1A1A1A;           /* gris grafito paleta 2 */
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1b1b1b 0%, #050505 55%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 480px;
+      height: 100vh;
+      background: linear-gradient(145deg, #050505 0%, #121212 40%, #050505 100%);
+      border-radius: 32px;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* STATUS BAR + HEADER FIJO */
+    .status-bar {
+      height: 26px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      opacity: 0.85;
+      flex-shrink: 0;
+    }
+
+    .status-left {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .status-right {
+      display: flex;
+      gap: 6px;
+    }
+
+    .status-icon {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      position: relative;
+    }
+
+    .status-icon::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: 3px;
+      background: linear-gradient(135deg, #00e5c0, #ffffff);
+      opacity: 0.7;
+    }
+
+    .battery {
+      width: 18px;
+    }
+
+    .battery::before {
+      content: "";
+      position: absolute;
+      right: -3px;
+      top: 4px;
+      width: 3px;
+      height: 6px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .header {
+      padding: 10px 16px 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .lang {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .lang-icon {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffffff 0%, #00e5c0 40%, #007b6f 100%);
+    }
+
+    .free-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(53, 196, 107, 0.12);
+      border: 1px solid var(--green-pill);
+      color: var(--green-pill);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .free-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green-pill);
+      box-shadow: 0 0 0 4px rgba(53, 196, 107, 0.25);
+    }
+
+    .hero {
+      padding: 10px 18px 12px;
+      flex-shrink: 0;
+    }
+
+    .hero-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .hero-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffffff 0%, #00e5c0 40%, #007b6f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #02110f;
+      font-size: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+    }
+
+    .hero-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      max-width: 320px;
+    }
+
+    /* CONTENIDO SCROLLEABLE CENTRAL */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      padding-bottom: 8px;
+    }
+
+    .carousel-wrapper {
+      padding: 8px 0 4px;
+    }
+
+    .carousel-label {
+      font-size: 11px;
+      text-align: center;
+      color: var(--text-muted);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .carousel-label span {
+      color: var(--accent-teal);
+    }
+
+    .carousel {
+      display: flex;
+      gap: 12px;
+      padding: 4px 18px 4px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .carousel::-webkit-scrollbar {
+      height: 0;
+    }
+
+    .card {
+      flex: 0 0 68%;
+      max-width: 280px;
+      scroll-snap-align: center;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, #2b2b2b 0%, #121212 40%, #050505 100%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+      padding: 14px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: transform var(--transition-med), opacity var(--transition-med),
+        border-color var(--transition-med), background var(--transition-med);
+    }
+
+    .card.active {
+      background: linear-gradient(135deg, var(--accent-pink-start), var(--accent-pink-end));
+      border-color: var(--green-pill);
+      transform: scale(1.02);
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ffe9f1;
+    }
+
+    .card-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffe9f1;
+      font-size: 14px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+    }
+
+    .card-sub {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.4;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+      gap: 6px;
+    }
+
+    .card-footer-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill {
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 0, 0, 0.18);
+      color: #ffe9f1;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .versos-btn {
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffe9f1;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .versos-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .card-level {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .panel {
+      margin-top: 10px;
+      margin-inline: 16px;
+      background: var(--panel-bg);
+      border-radius: 26px;
+      padding: 14px 16px 16px;
+      color: #2b1c16;
+      box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .panel-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #7b3b3b;
+    }
+
+    .panel-emotion {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #c81e5e;
+    }
+
+    .panel-pill {
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 229, 192, 0.08);
+      border: 1px solid rgba(0, 229, 192, 0.6);
+      color: #007b6f;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .panel-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #9b6a3a;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+
+    .panel-verse {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #3b2a1f;
+      margin-bottom: 4px;
+    }
+
+    .panel-ref {
+      font-size: 11px;
+      font-weight: 600;
+      color: #7b3b3b;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .panel-practice {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #3b2a1f;
+      margin-top: 4px;
+    }
+
+    .panel-highlight {
+      font-weight: 600;
+      color: #c81e5e;
+    }
+
+    /* BOTTOM NAV */
+    .bottom {
+      padding: 8px 12px 12px;
+      flex-shrink: 0;
+    }
+
+    .domain {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .domain-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-teal);
+    }
+
+    .nav {
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      border-radius: 18px;
+      background: rgba(10, 10, 10, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .nav-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nav-btn.primary {
+      background: radial-gradient(circle at 30% 20%, #ffffff 0%, #00e5c0 40%, #007b6f 100%);
+      color: #02110f;
+      border-color: rgba(0, 229, 192, 0.8);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
+    }
+
+    /* TOAST */
+    .toast {
+      position: absolute;
+      left: 50%;
+      bottom: 80px;
+      transform: translateX(-50%);
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 0, 0, 0.85);
+      color: var(--text-main);
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+      pointer-events: auto;
+    }
+
+    .toast-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffffff 0%, #00e5c0 40%, #007b6f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #02110f;
+    }
+
+    /* MODAL VERSOS */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-med);
+      z-index: 20;
+    }
+
+    .overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sheet {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(250, 246, 240, 0.98);
+      border-radius: 26px 26px 0 0;
+      box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.9);
+      padding: 12px 18px 16px;
+      transform: translateY(100%);
+      transition: transform var(--transition-med);
+      max-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .overlay.visible .sheet {
+      transform: translateY(0);
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 0, 0, 0.12);
+      margin: 0 auto 6px;
+    }
+
+    .sheet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sheet-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sheet-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #7b3b3b;
+      font-weight: 600;
+    }
+
+    .sheet-emotion {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #c81e5e;
+    }
+
+    .sheet-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffffff 0%, #00e5c0 40%, #007b6f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #02110f;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .sheet-list {
+      margin-top: 6px;
+      padding-right: 4px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .sheet-item {
+      margin-bottom: 8px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .sheet-text {
+      font-size: 12px;
+      color: #3b2a1f;
+      line-height: 1.4;
+    }
+
+    .sheet-ref {
+      font-size: 11px;
+      font-weight: 600;
+      color: #7b3b3b;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .sheet-footer {
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .sheet-close {
+      font-size: 11px;
+      padding: 6px 18px;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 0, 0, 0.85);
+      color: #faf6f0;
+      border: 1px solid rgba(0, 0, 0, 0.9);
+      cursor: pointer;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .sheet-close:hover {
+      background: #000;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        background: #000;
+      }
+      .app {
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .hero-subtitle {
+        max-width: 100%;
+      }
+      .card {
+        flex: 0 0 72%;
+      }
     }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center bg-[#FDFBF7]">
-
-  <div class="max-w-md mx-auto text-center px-6 py-10 rounded-3xl border border-[#E6E6E6] bg-white/70 backdrop-blur">
-    <p class="text-xs tracking-[0.25em] uppercase text-[#BEB7B0] mb-3">
-      Botiquín Emocional
-    </p>
-
-    <h1 class="text-3xl font-semibold text-[#1A1A1A] mb-4">
-      Estamos preparando algo para tu alma.
-    </h1>
-
-    <p class="text-sm text-[#A38F7B] mb-6 leading-relaxed">
-      Esta página está en construcción.  
-      Muy pronto podrás acceder a tu Botiquín Emocional:
-      primeros auxilios espirituales para cuando todo parece salirse de control.
-    </p>
-
-    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#EDE7DF] text-xs text-[#1A1A1A]">
-      <span class="w-2 h-2 rounded-full bg-[#A38F7B] animate-pulse"></span>
-      <span>En proceso de apertura</span>
+<body>
+  <div class="app">
+    <div class="status-bar">
+      <div class="status-left">4:41</div>
+      <div class="status-right">
+        <div class="status-icon"></div>
+        <div class="status-icon"></div>
+        <div class="status-icon battery"></div>
+      </div>
     </div>
 
-    <p class="mt-6 text-[11px] text-[#BEB7B0]">
-      Vuelve pronto.  
-      Cada cosa se abre en su tiempo perfecto.
-    </p>
-  </div>
+    <div class="header">
+      <button class="lang" id="langToggle">
+        <div class="lang-icon"></div>
+        <span id="langLabel">Español</span>
+      </button>
+      <div class="free-pill">
+        <div class="free-dot"></div>
+        <span id="freeLabel">4 GRATIS</span>
+      </div>
+    </div>
 
+    <div class="hero">
+      <div class="hero-row">
+        <div class="hero-icon">⚕</div>
+        <div class="hero-title">Botiquín Emocional</div>
+      </div>
+      <p class="hero-subtitle" id="heroSubtitle">
+        Primeros auxilios emocionales y espirituales en tu bolsillo. Elige lo que sientes y recibe medicina bíblica y práctica para el alma.
+      </p>
+    </div>
+
+    <div class="main">
+      <section class="carousel-wrapper">
+        <div class="carousel-label">
+          &lt; <span>Desliza</span> tus emociones &gt;
+        </div>
+        <div class="carousel" id="emotionCarousel"></div>
+      </section>
+
+      <section class="panel" id="contentPanel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Medicina para:</div>
+            <div class="panel-emotion" id="contentEmotion">CONFUSIÓN</div>
+          </div>
+          <div class="panel-pill" id="contentMode">Modo bíblico</div>
+        </div>
+
+        <div class="panel-label" id="verseLabel">Cita bíblica</div>
+        <p class="panel-verse" id="contentVerse">
+          “Si a alguno de ustedes le falta sabiduría, pídasela a Dios, y él se la dará.”
+        </p>
+        <div class="panel-ref" id="contentRef">Santiago 1:5</div>
+
+        <div class="panel-label" id="practiceLabel">Cable a tierra</div>
+        <p class="panel-practice" id="contentPractice">
+          Cierra los ojos y nombra en voz baja <span class="panel-highlight">la decisión que te confunde</span>. Luego di: “Señor, dame tu sabiduría para hoy”. Escribe tres opciones posibles y descarta la que nace del miedo.
+        </p>
+      </section>
+    </div>
+
+    <div class="bottom">
+      <div class="domain">
+        <div class="domain-dot"></div>
+        <span>biblrx.com · ©2026</span>
+      </div>
+      <div class="nav">
+        <button class="nav-btn" id="backBtn">←</button>
+        <button class="nav-btn" id="copyBtn">⧉</button>
+        <button class="nav-btn" id="urlBtn">🔗</button>
+        <button class="nav-btn primary" id="refreshBtn">⟳</button>
+        <button class="nav-btn" id="menuBtn">☰</button>
+      </div>
+    </div>
+
+    <div class="toast" id="toast">
+      <div class="toast-icon">✓</div>
+      <span id="toastMessage">Texto copiado al portapapeles.</span>
+    </div>
+
+    <div class="overlay" id="versesOverlay">
+      <div class="sheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header">
+          <div class="sheet-title-block">
+            <div class="sheet-label">Versos para:</div>
+            <div class="sheet-emotion" id="versesEmotionTitle">CONFUSIÓN</div>
+          </div>
+          <div class="sheet-icon">✚</div>
+        </div>
+        <div class="sheet-list" id="versesList"></div>
+        <div class="sheet-footer">
+          <button class="sheet-close" id="versesCloseBtn">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const emotions = [
+        {
+          id: "confusion",
+          label: "Confusión",
+          icon: "❓",
+          tag: "MENTE NUBLADA",
+          subtitle: "Cuando no sabes qué decidir y todo parece ruido.",
+          pill: "Sabiduría",
+          level: "Nivel 1 · Diario",
+          verse: "“Si a alguno de ustedes le falta sabiduría, pídasela a Dios, y él se la dará.”",
+          ref: "Santiago 1:5",
+          practice:
+            "Cierra los ojos y nombra en voz baja la decisión que te confunde. Luego di: “Señor, dame tu sabiduría para hoy”. Escribe tres opciones posibles y descarta la que nace del miedo.",
+          mode: "Modo bíblico",
+          versesList: [
+            { text: "Dios promete dar sabiduría sin reproche.", ref: "Santiago 1:5" },
+            { text: "Si lo reconoces, Él endereza tus caminos.", ref: "Proverbios 3:5-6" },
+            { text: "Su Palabra ilumina tu camino.", ref: "Salmos 119:105" },
+            { text: "Él guía por sendas de justicia.", ref: "Salmos 23:3" },
+            { text: "En Cristo hay tesoros de sabiduría.", ref: "Colosenses 2:3" }
+          ]
+        },
+        {
+          id: "ansiedad",
+          label: "Ansiedad",
+          icon: "🌪",
+          tag: "MENTE ACELERADA",
+          subtitle: "Cuando el futuro te pesa más que el presente.",
+          pill: "Respira",
+          level: "Nivel 2 · Crisis",
+          verse: "“No se inquieten por nada; presenten sus peticiones a Dios.”",
+          ref: "Filipenses 4:6",
+          practice:
+            "Inhala 4 segundos, retén 4, exhala 6. Repite: “Hoy no cargo el mañana”. Escribe una sola cosa que sí puedes hacer hoy.",
+          mode: "Modo bíblico",
+          versesList: [
+            { text: "La paz de Dios guarda tu corazón.", ref: "Filipenses 4:7" },
+            { text: "Echa tu ansiedad sobre Él.", ref: "1 Pedro 5:7" },
+            { text: "Jesús te invita a descansar.", ref: "Mateo 11:28" },
+            { text: "Él es tu refugio en el temor.", ref: "Salmos 91:2" },
+            { text: "No temas, Él está contigo.", ref: "Isaías 41:10" }
+          ]
+        },
+        {
+          id: "tristeza",
+          label: "Tristeza",
+          icon: "🌧",
+          tag: "ALMA PESADA",
+          subtitle: "Cuando el corazón se siente apagado.",
+          pill: "Consuelo",
+          level: "Nivel 1 · Acompañamiento",
+          verse: "“Cerca está el Señor de los quebrantados de corazón.”",
+          ref: "Salmos 34:18",
+          practice:
+            "Llora sin juicio unos minutos. Escribe una carta breve a Dios: “Aquí está mi dolor…”. Termina con: “No estoy sola, Tú estás aquí”.",
+          mode: "Modo bíblico",
+          versesList: [
+            { text: "Dios recoge tus lágrimas.", ref: "Salmos 56:8" },
+            { text: "Él sana corazones quebrantados.", ref: "Salmos 147:3" },
+            { text: "El gozo llega en la mañana.", ref: "Salmos 30:5" },
+            { text: "Jesús lloró con quienes sufrían.", ref: "Juan 11:35" },
+            { text: "Él consuela en toda tribulación.", ref: "2 Corintios 1:4" }
+          ]
+        },
+        {
+          id: "culpa",
+          label: "Culpa",
+          icon: "⚖",
+          tag: "PESO INTERIOR",
+          subtitle: "Cuando te juzgas más duro de lo que Dios lo hace.",
+          pill: "Perdón",
+          level: "Nivel 2 · Profundo",
+          verse: "“Si confesamos nuestros pecados, Él es fiel para perdonar.”",
+          ref: "1 Juan 1:9",
+          practice:
+            "Escribe lo que te pesa. Sobre cada línea escribe: “Perdonado en la cruz”. Rompe el papel. Haz una acción pequeña que refleje el cambio.",
+          mode: "Modo bíblico",
+          versesList: [
+            { text: "En Cristo no hay condenación.", ref: "Romanos 8:1" },
+            { text: "Tus pecados son borrados como nube.", ref: "Isaías 44:22" },
+            { text: "Él arroja tus faltas al mar.", ref: "Miqueas 7:19" },
+            { text: "Su sangre limpia la culpa.", ref: "Hebreos 9:14" },
+            { text: "Él perdona al que confiesa.", ref: "1 Juan 1:9" }
+          ]
+        },
+        {
+          id: "agobio",
+          label: "Agobio",
+          icon: "📦",
+          tag: "CARGA EXCESIVA",
+          subtitle: "Cuando todo se siente demasiado.",
+          pill: "Descanso",
+          level: "Nivel 2 · Sobrecarga",
+          verse: "“Vengan a mí los cansados y agobiados.”",
+          ref: "Mateo 11:28",
+          practice:
+            "Haz una lista de todo lo que te abruma. Marca solo lo que depende de ti hoy. Lo demás entrégalo a Dios.",
+          mode: "Modo bíblico",
+          versesList: [
+            { text: "Dios sostiene al cansado.", ref: "Isaías 40:29" },
+            { text: "Él da descanso al alma.", ref: "Mateo 11:28" },
+            { text: "El Señor es tu roca estable.", ref: "Salmos 18:2" },
+            { text: "Él carga lo que tú no puedes.", ref: "Salmos 55:22" },
+            { text: "Su paz supera tu entendimiento.", ref: "Filipenses 4:7" }
+          ]
+        },
+        {
+          id: "soledad",
+          label: "Soledad",
+          icon: "🕊",
+          tag: "CORAZÓN SOLO",
+          subtitle: "Cuando buscas compañía y no la encuentras.",
+          pill: "Presencia",
+          level: "Nivel 1 · Silencio",
+          verse: "“Nunca te dejaré ni te abandonaré.”",
+          ref: "Hebreos 13:5",
+          practice:
+            "Siéntate en silencio y di: “Aquí estoy, Señor”. Escribe cómo te sientes y cómo quisieras sentirte con Él.",
+          mode: "Modo bíblico",
+          versesList: [
+            { text: "Dios está cerca del quebrantado.", ref: "Salmos 34:18" },
+            { text: "Él nunca abandona.", ref: "Hebreos 13:5" },
+            { text: "Te llama por tu nombre.", ref: "Isaías 43:1" },
+            { text: "Camina contigo en el valle.", ref: "Salmos 23:4" },
+            { text: "Su amor permanece siempre.", ref: "Jeremías 31:3" }
+          ]
+        },
+        {
+          id: "ira",
+          label: "Ira",
+          icon: "🔥",
+          tag: "FUEGO INTERIOR",
+          subtitle: "Cuando la emoción sube más rápido que la razón.",
+          pill: "Calma",
+          level: "Nivel 2 · Explosiva",
+          verse: "“El paciente muestra prudencia; el agresivo necedad.”",
+          ref: "Proverbios 14:29",
+          practice:
+            "Respira tres veces. Escribe lo que quisieras decir sin enviarlo. Subraya solo lo que es verdad sin herir.",
+          mode: "Modo bíblico",
+          versesList: [
+            { text: "La respuesta suave calma la ira.", ref: "Proverbios 15:1" },
+            { text: "Dominarse es mejor que ser fuerte.", ref: "Proverbios 16:32" },
+            { text: "No dejes que el enojo gobierne.", ref: "Efesios 4:26" },
+            { text: "Sé lento para la ira.", ref: "Santiago 1:19" },
+            { text: "La paz de Cristo gobierna.", ref: "Colosenses 3:15" }
+          ]
+        },
+        {
+          id: "desanimo",
+          label: "Desánimo",
+          icon: "🌙",
+          tag: "LUZ BAJA",
+          subtitle: "Cuando las fuerzas internas se apagan.",
+          pill: "Ánimo",
+          level: "Nivel 1 · Cansancio",
+          verse: "“Los que confían en el Señor renovarán sus fuerzas.”",
+          ref: "Isaías 40:31",
+          practice:
+            "Escribe: “Aquí me siento apagada”. Pide ánimo específico. Haz una acción mínima como símbolo de seguir adelante.",
+          mode: "Modo bíblico",
+          versesList: [
+            { text: "Dios fortalece manos débiles.", ref: "Isaías 35:3" },
+            { text: "Él es tu luz en la oscuridad.", ref: "Salmos 27:1" },
+            { text: "El gozo del Señor es fuerza.", ref: "Nehemías 8:10" },
+            { text: "Renueva tu ánimo como águila.", ref: "Isaías 40:31" },
+            { text: "Su misericordia es nueva cada día.", ref: "Lamentaciones 3:23" }
+          ]
+        },
+        {
+          id: "inseguridad",
+          label: "Inseguridad",
+          icon: "🔒",
+          tag: "DUDAS DE VALOR",
+          subtitle: "Cuando dudas de tu valor y propósito.",
+          pill: "Identidad",
+          level: "Nivel 2 · Profunda",
+          verse: "“Soy una creación admirable.”",
+          ref: "Salmos 139:14",
+          practice:
+            "Escribe tres críticas hacia ti. Luego escribe una verdad de Dios sobre tu identidad. Repite: “En Cristo, esto es lo que soy”.",
+          mode: "Modo bíblico",
+          versesList: [
+            { text: "Eres obra maravillosa.", ref: "Salmos 139:14" },
+            { text: "Dios te escogió con propósito.", ref: "Efesios 1:4" },
+            { text: "Tu valor no depende del miedo.", ref: "Isaías 41:10" },
+            { text: "Cristo te hace suficiente.", ref: "2 Corintios 12:9" },
+            { text: "El Señor es tu confianza firme.", ref: "Proverbios 3:26" }
+          ]
+        }
+      ];
+
+      const carousel = document.getElementById("emotionCarousel");
+      const contentEmotion = document.getElementById("contentEmotion");
+      const contentVerse = document.getElementById("contentVerse");
+      const contentRef = document.getElementById("contentRef");
+      const contentPractice = document.getElementById("contentPractice");
+      const contentMode = document.getElementById("contentMode");
+      const heroSubtitle = document.getElementById("heroSubtitle");
+      const langToggle = document.getElementById("langToggle");
+      const langLabel = document.getElementById("langLabel");
+      const freeLabel = document.getElementById("freeLabel");
+      const toast = document.getElementById("toast");
+      const toastMessage = document.getElementById("toastMessage");
+      const copyBtn = document.getElementById("copyBtn");
+      const refreshBtn = document.getElementById("refreshBtn");
+      const urlBtn = document.getElementById("urlBtn");
+      const backBtn = document.getElementById("backBtn");
+      const menuBtn = document.getElementById("menuBtn");
+      const versesOverlay = document.getElementById("versesOverlay");
+      const versesEmotionTitle = document.getElementById("versesEmotionTitle");
+      const versesList = document.getElementById("versesList");
+      const versesCloseBtn = document.getElementById("versesCloseBtn");
+
+      let currentEmotionId = "confusion";
+      let currentLang = "es";
+      let freeCount = 4;
+
+      function renderCarousel() {
+        carousel.innerHTML = "";
+        emotions.forEach((emotion) => {
+          const card = document.createElement("div");
+          card.className = "card" + (emotion.id === currentEmotionId ? " active" : "");
+          card.dataset.id = emotion.id;
+          card.innerHTML = `
+            <div class="card-header">
+              <div class="card-tag">${emotion.tag}</div>
+              <div class="card-icon">${emotion.icon}</div>
+            </div>
+            <div class="card-title">${emotion.label.toUpperCase()}</div>
+            <div class="card-sub">${emotion.subtitle}</div>
+            <div class="card-footer">
+              <div class="card-footer-left">
+                <div class="pill">${emotion.pill}</div>
+                <button class="versos-btn" data-id="${emotion.id}">Versos</button>
+              </div>
+              <div class="card-level">${emotion.level}</div>
+            </div>
+          `;
+          card.addEventListener("click", (e) => {
+            if (e.target.classList.contains("versos-btn")) return;
+            setEmotion(emotion.id);
+          });
+          const btn = card.querySelector(".versos-btn");
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            openVersesModal(emotion.id);
+          });
+          carousel.appendChild(card);
+        });
+      }
+
+      function setEmotion(id) {
+        currentEmotionId = id;
+        const emotion = emotions.find((e) => e.id === id);
+        document.querySelectorAll(".card").forEach((c) => c.classList.remove("active"));
+        const active = Array.from(document.querySelectorAll(".card")).find(
+          (c) => c.dataset.id === id
+        );
+        if (active) {
+          active.classList.add("active");
+          active.scrollIntoView({ behavior: "smooth", inline: "center" });
+        }
+        contentEmotion.textContent = emotion.label.toUpperCase();
+        contentVerse.textContent = emotion.verse;
+        contentRef.textContent = emotion.ref;
+        contentPractice.textContent = emotion.practice;
+        contentMode.textContent = emotion.mode;
+      }
+
+      function openVersesModal(id) {
+        const emotion = emotions.find((e) => e.id === id);
+        versesEmotionTitle.textContent = emotion.label.toUpperCase();
+        versesList.innerHTML = "";
+        emotion.versesList.forEach((v) => {
+          const item = document.createElement("div");
+          item.className = "sheet-item";
+          item.innerHTML = `
+            <div class="sheet-text">${v.text}</div>
+            <div class="sheet-ref">${v.ref}</div>
+          `;
+          versesList.appendChild(item);
+        });
+        versesOverlay.classList.add("visible");
+      }
+
+      function closeVersesModal() {
+        versesOverlay.classList.remove("visible");
+      }
+
+      versesOverlay.addEventListener("click", (e) => {
+        if (e.target === versesOverlay) closeVersesModal();
+      });
+
+      versesCloseBtn.addEventListener("click", closeVersesModal);
+
+      function showToast(message) {
+        toastMessage.textContent = message;
+        toast.classList.add("visible");
+        setTimeout(() => toast.classList.remove("visible"), 2200);
+      }
+
+      copyBtn.addEventListener("click", async () => {
+        const emotion = emotions.find((e) => e.id === currentEmotionId);
+        const text = `MEDICINA PARA: ${emotion.label.toUpperCase()}\n\n${emotion.verse}\n${emotion.ref}\n\nCABLE A TIERRA:\n${emotion.practice}`;
+        try {
+          await navigator.clipboard.writeText(text);
+          showToast("Texto copiado al portapapeles.");
+        } catch {
+          showToast("No se pudo copiar.");
+        }
+      });
+
+      refreshBtn.addEventListener("click", () => {
+        const index = emotions.findIndex((e) => e.id === currentEmotionId);
+        const next = (index + 1) % emotions.length;
+        setEmotion(emotions[next].id);
+        showToast("Emoción actualizada.");
+        if (freeCount > 0) {
+          freeCount--;
+          freeLabel.textContent = `${freeCount} GRATIS`;
+        }
+      });
+
+      urlBtn.addEventListener("click", () => {
+        showToast("Dominio: biblrx.com · Botiquín Emocional.");
+      });
+
+      backBtn.addEventListener("click", () => {
+        showToast("Acción de atrás simulada.");
+      });
+
+      menuBtn.addEventListener("click", () => {
+        showToast("Menú próximamente disponible.");
+      });
+
+      langToggle.addEventListener("click", () => {
+        currentLang = currentLang === "es" ? "en" : "es";
+        if (currentLang === "en") {
+          langLabel.textContent = "English";
+          heroSubtitle.textContent =
+            "Emotional and spiritual first aid in your pocket. Choose what you feel and receive biblical and practical medicine for the soul.";
+          document.getElementById("verseLabel").textContent = "Bible verse";
+          document.getElementById("practiceLabel").textContent = "Grounding cable";
+          contentMode.textContent = "Scripture mode";
+          showToast("Language switched to English.");
+        } else {
+          langLabel.textContent = "Español";
+          heroSubtitle.textContent =
+            "Primeros auxilios emocionales y espirituales en tu bolsillo. Elige lo que sientes y recibe medicina bíblica y práctica para el alma.";
+          document.getElementById("verseLabel").textContent = "Cita bíblica";
+          document.getElementById("practiceLabel").textContent = "Cable a tierra";
+          const emotion = emotions.find((e) => e.id === currentEmotionId);
+          if (emotion) contentMode.textContent = emotion.mode;
+          showToast("Idioma cambiado a Español.");
+        }
+      });
+
+      renderCarousel();
+      setEmotion(currentEmotionId);
+    </script>
+  </div>
 </body>
 </html>
