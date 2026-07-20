@@ -1,46 +1,1141 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Botiquín Emocional – Pronto abriremos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif;
-      background-color: #FDFBF7; /* blanco marfil paleta 2 */
-      color: #1A1A1A;           /* gris grafito paleta 2 */
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>Botiquín Emocional</title>
+<meta name="theme-color" content="#059669">
+<meta name="description" content="Primeros auxilios para el alma: reflexiones, respiración guiada y acompañamiento emocional.">
+<link rel="manifest" href="manifest.json">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: { extend: { fontFamily: { sans:['Inter','system-ui','sans-serif'], serif:['Fraunces','Georgia','serif'] } } }
+  };
+</script>
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; }
+  body {
+    background: #020617;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: env(safe-area-inset-bottom);
+    overflow-x: hidden;
+  }
+  ::-webkit-scrollbar { width: 0; height: 0; }
+
+  /* Fondo ambiental */
+  .aurora {
+    position: fixed; inset: -20% -10% auto -10%; height: 60vh; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(40% 50% at 20% 20%, rgba(16,185,129,.22), transparent 70%),
+      radial-gradient(45% 55% at 80% 10%, rgba(56,189,248,.16), transparent 70%),
+      radial-gradient(40% 50% at 60% 50%, rgba(20,184,166,.14), transparent 70%);
+    filter: blur(30px);
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes drift { from { transform: translate3d(-4%,-2%,0) scale(1); } to { transform: translate3d(4%,3%,0) scale(1.1); } }
+
+  .card { transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease, border-color .25s ease; cursor: pointer; min-height: 44px; }
+  .card:hover { transform: translateY(-4px); }
+  .card:active { transform: scale(.97); }
+
+  .fade { animation: entrada .5s cubic-bezier(.2,.7,.2,1); }
+  @keyframes entrada { from { opacity:0; transform:translateY(18px);} to { opacity:1; transform:translateY(0);} }
+
+  .pop { animation: pop .5s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes pop { 0% { opacity:0; transform:translateY(22px) scale(.97);} 100% { opacity:1; transform:translateY(0) scale(1);} }
+
+  .favorito { animation: pulso .45s ease; }
+  @keyframes pulso { 50% { transform: scale(1.18);} }
+
+  .toast-in { animation: toastIn .35s cubic-bezier(.2,.7,.2,1); }
+  @keyframes toastIn { from { opacity:0; transform:translateY(20px);} to { opacity:1; transform:translateY(0);} }
+
+  .overlay-in { animation: fadeIn .25s ease; }
+  @keyframes fadeIn { from { opacity:0;} to { opacity:1;} }
+  .sheet-in { animation: sheetIn .4s cubic-bezier(.2,.7,.2,1); }
+  @keyframes sheetIn { from { transform:translateY(40px); opacity:0;} to { transform:translateY(0); opacity:1;} }
+
+  .breathe { animation: breathe 8s ease-in-out infinite; }
+  @keyframes breathe { 0%,100% { transform:scale(.72);} 50% { transform:scale(1);} }
+  .breathe-ring { animation: breatheRing 8s ease-in-out infinite; }
+  @keyframes breatheRing { 0%,100% { opacity:.2;} 50% { opacity:.55;} }
+
+  .glow { box-shadow: 0 0 0 1px rgba(16,185,129,.25), 0 12px 40px -12px rgba(16,185,129,.4); }
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  /* ===== Tarjeta de apoyo / agradecimiento ===== */
+  .apoyo-sheet { animation: apoyoIn .55s cubic-bezier(.2,.8,.2,1); }
+  @keyframes apoyoIn {
+    0% { opacity:0; transform:translateY(60px) scale(.94); }
+    60% { opacity:1; transform:translateY(-6px) scale(1.01); }
+    100% { opacity:1; transform:translateY(0) scale(1); }
+  }
+  .apoyo-out { animation: apoyoOut .35s cubic-bezier(.4,0,.2,1) forwards; }
+  @keyframes apoyoOut { to { opacity:0; transform:translateY(40px) scale(.96); } }
+  .apoyo-heart {
+    display:inline-grid; place-items:center;
+    animation: latido 1.8s ease-in-out infinite;
+  }
+  @keyframes latido { 0%,100% { transform:scale(1);} 15% { transform:scale(1.18);} 30% { transform:scale(1);} 45% { transform:scale(1.12);} }
+  .apoyo-shine { position:absolute; inset:0; overflow:hidden; border-radius:inherit; pointer-events:none; }
+  .apoyo-shine::after {
+    content:""; position:absolute; top:-60%; left:-30%; width:60%; height:220%;
+    background: linear-gradient(115deg, transparent, rgba(255,255,255,.14), transparent);
+    transform: rotate(8deg); animation: brillo 5.5s ease-in-out infinite;
+  }
+  @keyframes brillo { 0%,100% { left:-40%; } 55% { left:130%; } }
+</style>
 </head>
-<body class="min-h-screen flex items-center justify-center bg-[#FDFBF7]">
 
-  <div class="max-w-md mx-auto text-center px-6 py-10 rounded-3xl border border-[#E6E6E6] bg-white/70 backdrop-blur">
-    <p class="text-xs tracking-[0.25em] uppercase text-[#BEB7B0] mb-3">
-      Botiquín Emocional
-    </p>
+<body class="bg-slate-950 text-white min-h-screen font-sans selection:bg-emerald-500/30">
 
-    <h1 class="text-3xl font-semibold text-[#1A1A1A] mb-4">
-      Estamos preparando algo para tu alma.
-    </h1>
+<div class="aurora"></div>
 
-    <p class="text-sm text-[#A38F7B] mb-6 leading-relaxed">
-      Esta página está en construcción.  
-      Muy pronto podrás acceder a tu Botiquín Emocional:
-      primeros auxilios espirituales para cuando todo parece salirse de control.
-    </p>
-
-    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#EDE7DF] text-xs text-[#1A1A1A]">
-      <span class="w-2 h-2 rounded-full bg-[#A38F7B] animate-pulse"></span>
-      <span>En proceso de apertura</span>
+<!-- ===================== BARRA SUPERIOR ===================== -->
+<div class="sticky top-0 z-30 backdrop-blur-xl bg-slate-950/70 border-b border-white/5">
+  <div class="max-w-xl mx-auto px-5 py-3 flex items-center justify-between gap-3">
+    <div class="flex items-center gap-2.5 min-w-0">
+      <div class="w-9 h-9 rounded-xl bg-emerald-500 grid place-items-center shrink-0">
+        <svg viewBox="0 0 24 24" class="w-5 h-5 fill-slate-950"><path d="M12 21s-6.7-4.35-9.2-8.28C1.06 10.06 1.97 6.5 5.2 5.7c1.98-.49 3.87.45 4.8 2.02.93-1.57 2.82-2.51 4.8-2.02 3.23.8 4.14 4.36 2.39 7.02C18.7 16.65 12 21 12 21z"/></svg>
+      </div>
+      <div class="min-w-0">
+        <p class="text-sm font-semibold leading-tight truncate" id="saludo-usuario">Botiquín Emocional</p>
+        <p class="text-[11px] text-slate-400 leading-tight" id="estado-plan">Primeros auxilios para el alma</p>
+      </div>
     </div>
-
-    <p class="mt-6 text-[11px] text-[#BEB7B0]">
-      Vuelve pronto.  
-      Cada cosa se abre en su tiempo perfecto.
-    </p>
+    <div class="flex items-center gap-2 shrink-0">
+      <button id="btn-musica" onclick="toggleMusica()" aria-label="Música de fondo" aria-pressed="false" class="w-10 h-10 grid place-items-center rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition">
+        <svg id="icono-musica-off" viewBox="0 0 24 24" class="w-5 h-5 stroke-slate-300 fill-none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><path d="M3 3l18 18"/></svg>
+        <svg id="icono-musica-on" viewBox="0 0 24 24" class="w-5 h-5 stroke-emerald-300 fill-none hidden" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </button>
+      <button onclick="abrirApoyo('manual')" aria-label="Apoyar el proyecto" class="w-10 h-10 grid place-items-center rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/25 transition">
+        <svg viewBox="0 0 24 24" class="w-5 h-5 stroke-emerald-300 fill-none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.7-4.35-9.2-8.28C1.06 10.06 1.97 6.5 5.2 5.7c1.98-.49 3.87.45 4.8 2.02.93-1.57 2.82-2.51 4.8-2.02 3.23.8 4.14 4.36 2.39 7.02C18.7 16.65 12 21 12 21z"/></svg>
+      </button>
+      <button onclick="abrirHistorial()" aria-label="Historial y progreso" class="w-10 h-10 grid place-items-center rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition">
+        <svg viewBox="0 0 24 24" class="w-5 h-5 stroke-slate-200 fill-none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+      </button>
+      <button onclick="abrirFavoritos()" aria-label="Favoritos" class="w-10 h-10 grid place-items-center rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition">
+        <svg viewBox="0 0 24 24" class="w-5 h-5 stroke-emerald-300 fill-none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.7-4.35-9.2-8.28C1.06 10.06 1.97 6.5 5.2 5.7c1.98-.49 3.87.45 4.8 2.02.93-1.57 2.82-2.51 4.8-2.02 3.23.8 4.14 4.36 2.39 7.02C18.7 16.65 12 21 12 21z"/></svg>
+      </button>
+    </div>
   </div>
+</div>
 
-</body>
-</html>
+<header class="relative z-10 px-5 pt-8 pb-2 text-center max-w-xl mx-auto">
+  <h1 class="font-serif text-3xl sm:text-4xl font-semibold tracking-tight" id="titulo-app">Botiquín Emocional</h1>
+  <p class="text-slate-400 mt-3 leading-relaxed text-sm" id="subtitulo-app">Primeros auxilios para el alma en momentos difíciles.</p>
+</header>
+
+<main class="relative z-10 max-w-xl mx-auto px-5 pb-16">
+
+  <!-- FRASE DEL DÍA -->
+  <section class="mt-6">
+    <div class="relative overflow-hidden rounded-3xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900/60 p-6">
+      <div class="flex items-center gap-2 text-[11px] uppercase tracking-widest text-emerald-300/80 font-semibold">
+        <svg viewBox="0 0 24 24" class="w-4 h-4 fill-emerald-300/80"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.8 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg>
+        Inspiración de hoy
+      </div>
+      <p id="frase-dia" class="font-serif italic text-lg leading-relaxed mt-3 text-slate-100"></p>
+      <button onclick="compartirFrase()" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-300 hover:text-emerald-200 transition">
+        <svg viewBox="0 0 24 24" class="w-4 h-4 fill-none stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>
+        Compartir frase
+      </button>
+    </div>
+  </section>
+
+  <!-- RESUMEN / RACHA -->
+  <section class="mt-4 grid grid-cols-3 gap-3">
+    <div class="rounded-2xl bg-white/5 border border-white/10 p-4 text-center">
+      <p id="stat-racha" class="text-2xl font-bold tabular text-emerald-300">0</p>
+      <p class="text-[11px] text-slate-400 mt-1">Días de racha</p>
+    </div>
+    <div class="rounded-2xl bg-white/5 border border-white/10 p-4 text-center">
+      <p id="stat-total" class="text-2xl font-bold tabular text-sky-300">0</p>
+      <p class="text-[11px] text-slate-400 mt-1">Reflexiones</p>
+    </div>
+    <div class="rounded-2xl bg-white/5 border border-white/10 p-4 text-center">
+      <p id="stat-favs" class="text-2xl font-bold tabular text-amber-300">0</p>
+      <p class="text-[11px] text-slate-400 mt-1">Guardadas</p>
+    </div>
+  </section>
+
+  <!-- CHECK-IN + CALENDARIO DE ÁNIMO -->
+  <section id="zona-animo" class="mt-6">
+    <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+      <div class="flex items-center justify-between gap-3 mb-4">
+        <div class="min-w-0">
+          <h2 class="text-base font-semibold">Tu ánimo del mes</h2>
+          <p class="text-[12px] text-slate-400 mt-0.5" id="animo-motiva">Registra cómo te sientes cada día.</p>
+        </div>
+        <button id="btn-checkin" onclick="abrirCheckin()" class="shrink-0 min-h-[44px] px-4 rounded-2xl bg-emerald-500 text-slate-950 font-semibold text-sm hover:bg-emerald-400 transition">Check-in de hoy</button>
+      </div>
+
+      <!-- Progreso hacia la próxima recompensa -->
+      <div id="animo-progreso" class="mb-4"></div>
+
+      <!-- Calendario -->
+      <div class="flex items-center justify-between mb-2">
+        <button onclick="cambiarMes(-1)" aria-label="Mes anterior" class="w-8 h-8 grid place-items-center rounded-lg bg-white/5 hover:bg-white/10 transition">
+          <svg viewBox="0 0 24 24" class="w-4 h-4 stroke-slate-300 fill-none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <p id="calendario-mes" class="text-sm font-semibold"></p>
+        <button onclick="cambiarMes(1)" aria-label="Mes siguiente" class="w-8 h-8 grid place-items-center rounded-lg bg-white/5 hover:bg-white/10 transition">
+          <svg viewBox="0 0 24 24" class="w-4 h-4 stroke-slate-300 fill-none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div id="calendario-dias-semana" class="grid grid-cols-7 gap-1 mb-1 text-center text-[10px] text-slate-500 font-medium"></div>
+      <div id="calendario-grid" class="grid grid-cols-7 gap-1"></div>
+
+      <!-- Recompensas / fondos -->
+      <div id="zona-fondos" class="mt-5"></div>
+    </div>
+  </section>
+
+  <!-- CARTA A TU YO DE MAÑANA -->
+  <section id="zona-carta" class="mt-4">
+    <div class="relative overflow-hidden rounded-3xl border border-sky-500/20 bg-gradient-to-br from-sky-900/30 to-slate-900/60 p-5">
+      <div class="flex items-center gap-2 text-[11px] uppercase tracking-widest text-sky-300/80 font-semibold mb-3">
+        <svg viewBox="0 0 24 24" class="w-4 h-4 fill-none stroke-sky-300/80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        Carta a tu yo de mañana
+      </div>
+      <div id="carta-contenido"></div>
+    </div>
+  </section>
+
+  <!-- ZONA EMOCIONES -->
+  <section id="zona-emociones" class="mt-8">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-base font-semibold" id="zona-titulo">¿Cómo te sientes hoy?</h2>
+      <span id="contador-uso" class="text-[11px] font-medium text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-3 py-1"></span>
+    </div>
+    <div id="grid-emociones" class="grid grid-cols-2 gap-3.5"></div>
+  </section>
+
+  <!-- RESULTADO -->
+  <section id="resultado" class="mt-8 hidden scroll-mt-24">
+    <div id="tarjeta-reflexion" class="fade relative overflow-hidden bg-gradient-to-b from-white to-slate-50 text-slate-900 rounded-[28px] p-6 shadow-2xl">
+      <div class="absolute top-0 inset-x-0 h-1.5" id="acento-barra"></div>
+      <div class="flex items-center gap-2 mb-4">
+        <span id="emoji-emocion" class="text-2xl"></span>
+        <span id="etiqueta-emocion" class="text-[11px] uppercase tracking-widest font-semibold text-slate-400"></span>
+      </div>
+      <h2 id="titulo" class="font-serif text-2xl font-semibold text-slate-900 leading-snug"></h2>
+      <p id="mensaje" class="mt-3 text-[15px] leading-relaxed text-slate-600"></p>
+
+      <div class="mt-5 p-4 rounded-2xl bg-emerald-50 border border-emerald-100">
+        <p class="font-semibold text-emerald-700 text-sm flex items-center gap-1.5">
+          <svg viewBox="0 0 24 24" class="w-4 h-4 fill-none stroke-emerald-600" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg>
+          Pequeña acción
+        </p>
+        <p id="accion" class="mt-2 text-sm leading-relaxed text-emerald-900/80"></p>
+      </div>
+
+      <!-- MANTRA -->
+      <div class="mt-4 p-4 rounded-2xl bg-slate-900 text-center">
+        <p class="text-[11px] uppercase tracking-widest text-emerald-300/70 font-semibold mb-1.5">Repite en voz baja</p>
+        <p id="mantra" class="font-serif italic text-lg text-white leading-snug"></p>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mt-5">
+        <button onclick="abrirRespiracion()" class="flex-1 min-w-[120px] min-h-[48px] flex items-center justify-center gap-2 bg-slate-100 text-slate-800 font-semibold py-3 rounded-2xl hover:bg-slate-200 transition">
+          <svg viewBox="0 0 24 24" class="w-4 h-4 fill-none stroke-current" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/></svg>
+          Respirar
+        </button>
+        <button onclick="abrirDiario()" class="flex-1 min-w-[120px] min-h-[48px] flex items-center justify-center gap-2 bg-slate-100 text-slate-800 font-semibold py-3 rounded-2xl hover:bg-slate-200 transition">
+          <svg viewBox="0 0 24 24" class="w-4 h-4 fill-none stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+          Escribir
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 mt-3">
+        <button onclick="guardarFavorita()" class="min-h-[48px] flex items-center justify-center gap-2 bg-slate-900 text-white font-semibold py-3 rounded-2xl hover:bg-slate-800 transition">
+          <svg viewBox="0 0 24 24" class="w-4 h-4 fill-none stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.7-4.35-9.2-8.28C1.06 10.06 1.97 6.5 5.2 5.7c1.98-.49 3.87.45 4.8 2.02.93-1.57 2.82-2.51 4.8-2.02 3.23.8 4.14 4.36 2.39 7.02C18.7 16.65 12 21 12 21z"/></svg>
+          Guardar
+        </button>
+        <button onclick="compartirReflexion()" class="min-h-[48px] flex items-center justify-center gap-2 bg-emerald-500 text-slate-950 font-semibold py-3 rounded-2xl hover:bg-emerald-400 transition">
+          <svg viewBox="0 0 24 24" class="w-4 h-4 fill-none stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>
+          Compartir
+        </button>
+      </div>
+      <button onclick="nuevaReceta()" class="mt-3 w-full min-h-[48px] flex items-center justify-center gap-2 bg-white border-2 border-emerald-500 text-emerald-700 font-semibold py-3 rounded-2xl hover:bg-emerald-50 transition">
+        <svg viewBox="0 0 24 24" class="w-4 h-4 fill-none stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+        Otra reflexión
+      </button>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="mt-14 pt-6 border-t border-white/5 text-center">
+    <p id="footer-derechos" class="text-[11px] text-slate-500 leading-relaxed">Derechos reservados © 2026 · BibloRX.com</p>
+    <p id="footer-lema" class="text-[11px] text-slate-600 mt-1">Hecho con cariño para acompañarte.</p>
+  </footer>
+</main>
+
+<!-- SELECTOR IDIOMA -->
+<div class="fixed bottom-5 right-5 z-30">
+  <select onchange="cambiarIdioma(this.value)" aria-label="Idioma"
+    class="bg-slate-900/90 backdrop-blur border border-white/10 rounded-xl px-3 py-2 text-sm font-medium shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+    <option value="es">ES · Español</option>
+    <option value="en">EN · English</option>
+    <option value="pt">PT · Português</option>
+    <option value="fr">FR · Français</option>
+    <option value="it">IT · Italiano</option>
+  </select>
+</div>
+
+<!-- TOAST -->
+<div id="toast-zona" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex flex-col items-center gap-2 pointer-events-none"></div>
+
+<!-- ===================== MODAL APOYO / AGRADECIMIENTO ===================== -->
+<div id="modal-apoyo" class="fixed inset-0 z-[55] hidden">
+  <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md overlay-in" onclick="cerrarApoyo()"></div>
+  <div class="relative min-h-full flex items-end sm:items-center justify-center p-4">
+    <div id="apoyo-caja" class="apoyo-sheet relative w-full max-w-md bg-gradient-to-b from-emerald-950/95 to-slate-900 border border-emerald-500/30 rounded-3xl p-7 shadow-2xl glow overflow-hidden">
+      <div class="apoyo-shine"></div>
+      <button onclick="cerrarApoyo()" aria-label="Cerrar" class="absolute top-4 right-4 w-9 h-9 grid place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition z-10">
+        <svg viewBox="0 0 24 24" class="w-5 h-5 stroke-slate-300 fill-none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+
+      <div class="relative">
+        <div class="apoyo-heart w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 mx-auto mb-5 shadow-lg">
+          <svg viewBox="0 0 24 24" class="w-8 h-8 fill-slate-950"><path d="M12 21s-6.7-4.35-9.2-8.28C1.06 10.06 1.97 6.5 5.2 5.7c1.98-.49 3.87.45 4.8 2.02.93-1.57 2.82-2.51 4.8-2.02 3.23.8 4.14 4.36 2.39 7.02C18.7 16.65 12 21 12 21z"/></svg>
+        </div>
+
+        <p id="apoyo-eyebrow" class="text-[11px] uppercase tracking-widest text-emerald-300/80 font-semibold text-center"></p>
+        <h2 id="apoyo-titulo" class="font-serif text-2xl font-semibold text-center mt-1.5 leading-snug text-balance"></h2>
+        <p id="apoyo-mensaje" class="text-slate-300/90 text-sm text-center mt-3 leading-relaxed text-pretty"></p>
+
+        <!-- Montos sugeridos -->
+        <div class="grid grid-cols-3 gap-2.5 mt-6">
+          <button onclick="seleccionarMonto(this,3)"  class="apoyo-monto min-h-[52px] rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 font-semibold transition">$3</button>
+          <button onclick="seleccionarMonto(this,5)"  class="apoyo-monto min-h-[52px] rounded-2xl border border-emerald-400/60 bg-emerald-500/15 text-emerald-200 font-semibold transition">$5</button>
+          <button onclick="seleccionarMonto(this,10)" class="apoyo-monto min-h-[52px] rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 font-semibold transition">$10</button>
+        </div>
+
+        <button onclick="aportar()" class="mt-5 w-full min-h-[54px] flex items-center justify-center gap-2 bg-emerald-500 text-slate-950 font-bold py-3.5 rounded-2xl hover:bg-emerald-400 transition">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 fill-none stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.7-4.35-9.2-8.28C1.06 10.06 1.97 6.5 5.2 5.7c1.98-.49 3.87.45 4.8 2.02.93-1.57 2.82-2.51 4.8-2.02 3.23.8 4.14 4.36 2.39 7.02C18.7 16.65 12 21 12 21z"/></svg>
+          <span id="apoyo-cta">Aportar con cariño</span>
+        </button>
+
+        <button onclick="apoyoHoyNo()" class="mt-2 w-full text-sm text-slate-500 hover:text-slate-300 py-2 transition">Hoy no, gracias</button>
+        <p class="text-[11px] text-slate-500 text-center mt-1 flex items-center justify-center gap-1.5">
+          <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-none stroke-slate-500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Pago seguro procesado por Stripe
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL CHECK-IN DIARIO ===================== -->
+<div id="modal-checkin" class="fixed inset-0 z-[52] hidden">
+  <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md overlay-in" onclick="cerrarCheckin()"></div>
+  <div class="relative min-h-full flex items-end sm:items-center justify-center p-4">
+    <div class="sheet-in relative w-full max-w-md bg-slate-900 border border-emerald-500/30 rounded-3xl p-7 shadow-2xl glow">
+      <button onclick="cerrarCheckin()" aria-label="Cerrar" class="absolute top-4 right-4 w-9 h-9 grid place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition">
+        <svg viewBox="0 0 24 24" class="w-5 h-5 stroke-slate-300 fill-none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 grid place-items-center mx-auto mb-5">
+        <svg viewBox="0 0 24 24" class="w-7 h-7 fill-none stroke-slate-950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></svg>
+      </div>
+      <h2 class="font-serif text-2xl font-semibold text-center">¿Cómo amaneciste hoy?</h2>
+      <p class="text-slate-400 text-sm text-center mt-2 leading-relaxed">Un gesto de un segundo para cuidar de ti y sumar a tu racha.</p>
+      <div id="checkin-opciones" class="grid grid-cols-5 gap-2 mt-6"></div>
+      <p class="text-[11px] text-slate-500 text-center mt-5">Se guarda solo en este dispositivo.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL ESCRIBIR CARTA ===================== -->
+<div id="modal-carta" class="fixed inset-0 z-[52] hidden">
+  <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md overlay-in" onclick="cerrarCarta()"></div>
+  <div class="relative min-h-full flex items-end sm:items-center justify-center p-4">
+    <div class="sheet-in relative w-full max-w-md bg-slate-900 border border-sky-500/30 rounded-3xl p-7 shadow-2xl">
+      <button onclick="cerrarCarta()" aria-label="Cerrar" class="absolute top-4 right-4 w-9 h-9 grid place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition">
+        <svg viewBox="0 0 24 24" class="w-5 h-5 stroke-slate-300 fill-none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-sky-600 grid place-items-center mx-auto mb-5">
+        <svg viewBox="0 0 24 24" class="w-7 h-7 fill-none stroke-slate-950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      </div>
+      <h2 class="font-serif text-2xl font-semibold text-center">Un mensaje para mañana</h2>
+      <p class="text-slate-400 text-sm text-center mt-2 leading-relaxed">Escribe algo que quieras que tu yo de mañana lea: un ánimo, un recordatorio o un deseo. Se guardará sellado hasta entonces.</p>
+      <textarea id="texto-carta" rows="4" maxlength="500" placeholder="Querido yo de mañana..."
+        class="mt-5 w-full bg-slate-950 border border-white/10 rounded-2xl px-4 py-3 text-base leading-relaxed focus:outline-none focus:ring-2 focus:ring-sky-500 resize-none"></textarea>
+      <button onclick="guardarCarta()" class="mt-4 w-full min-h-[52px] bg-sky-500 text-slate-950 font-bold py-3.5 rounded-2xl hover:bg-sky-400 transition">Sellar mi carta</button>
+      <p class="text-[11px] text-slate-500 text-center mt-3">Se guarda solo en este dispositivo y se abre mañana.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ACCESO -->
+<div id="modal-acceso" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md overlay-in"></div>
+  <div class="relative min-h-full flex items-end sm:items-center justify-center p-4">
+    <div class="sheet-in w-full max-w-md bg-slate-900 border border-white/10 rounded-3xl p-7 shadow-2xl">
+      <div class="w-14 h-14 rounded-2xl bg-emerald-500 grid place-items-center mx-auto mb-5">
+        <svg viewBox="0 0 24 24" class="w-7 h-7 fill-slate-950"><path d="M12 21s-6.7-4.35-9.2-8.28C1.06 10.06 1.97 6.5 5.2 5.7c1.98-.49 3.87.45 4.8 2.02.93-1.57 2.82-2.51 4.8-2.02 3.23.8 4.14 4.36 2.39 7.02C18.7 16.65 12 21 12 21z"/></svg>
+      </div>
+      <h2 class="font-serif text-2xl font-semibold text-center">Bienvenido al Botiquín</h2>
+      <p class="text-slate-400 text-sm text-center mt-2 leading-relaxed">No tienes que resolver toda tu vida hoy. Dinos cómo te llamas para acompañarte mejor.</p>
+      <label for="input-nombre" class="block text-xs font-medium text-slate-400 mt-6 mb-2">Tu nombre</label>
+      <input id="input-nombre" type="text" autocomplete="given-name" placeholder="Ej. Sofía"
+        class="w-full bg-slate-950 border border-white/10 rounded-2xl px-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+        onkeydown="if(event.key==='Enter' && !event.isComposing) confirmarAcceso()">
+      <div class="flex items-start gap-2.5 mt-4 text-[13px] text-slate-400">
+        <input id="check-privacidad" type="checkbox" class="mt-0.5 w-4 h-4 accent-emerald-500">
+        <label for="check-privacidad" class="leading-snug">Entiendo que este es un espacio de apoyo emocional y mis datos se guardan solo en <strong class="text-slate-300">este dispositivo</strong>.</label>
+      </div>
+      <button onclick="confirmarAcceso()" class="mt-6 w-full min-h-[52px] bg-emerald-500 text-slate-950 font-bold py-3.5 rounded-2xl hover:bg-emerald-400 transition">Comenzar mi camino</button>
+      <button onclick="accesoInvitado()" class="mt-2 w-full text-sm text-slate-500 hover:text-slate-300 py-2 transition">Continuar como invitado</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PREMIUM -->
+<div id="modal-premium" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md overlay-in" onclick="cerrarPremium()"></div>
+  <div class="relative min-h-full flex items-end sm:items-center justify-center p-4">
+    <div class="sheet-in w-full max-w-md bg-slate-900 border border-emerald-500/30 rounded-3xl p-7 shadow-2xl glow">
+      <button onclick="cerrarPremium()" aria-label="Cerrar" class="absolute top-4 right-4 w-9 h-9 grid place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition">
+        <svg viewBox="0 0 24 24" class="w-5 h-5 stroke-slate-300 fill-none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 grid place-items-center mx-auto mb-5">
+        <svg viewBox="0 0 24 24" class="w-7 h-7 fill-slate-950"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.8 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg>
+      </div>
+      <h2 class="font-serif text-2xl font-semibold text-center">Botiquín Premium</h2>
+      <p class="text-slate-400 text-sm text-center mt-2 leading-relaxed">Has usado tus reflexiones gratuitas. Activa Premium para acompañamiento ilimitado.</p>
+      <ul class="mt-6 space-y-3">
+        <li class="flex items-center gap-3 text-sm"><span class="w-6 h-6 rounded-full bg-emerald-500/15 grid place-items-center shrink-0"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-emerald-400 fill-none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Reflexiones ilimitadas</li>
+        <li class="flex items-center gap-3 text-sm"><span class="w-6 h-6 rounded-full bg-emerald-500/15 grid place-items-center shrink-0"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-emerald-400 fill-none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Diario y progreso completos</li>
+        <li class="flex items-center gap-3 text-sm"><span class="w-6 h-6 rounded-full bg-emerald-500/15 grid place-items-center shrink-0"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-emerald-400 fill-none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Respiración guiada sin límites</li>
+      </ul>
+      <button onclick="activarPremium()" class="mt-7 w-full min-h-[52px] bg-emerald-500 text-slate-950 font-bold py-3.5 rounded-2xl hover:bg-emerald-400 transition">Desbloquear Premium</button>
+      <button onclick="cerrarPremium()" class="mt-2 w-full text-sm text-slate-500 hover:text-slate-300 py-2 transition">Ahora no</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL HISTORIAL + PROGRESO -->
+<div id="modal-historial" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md overlay-in" onclick="cerrarHistorial()"></div>
+  <div class="relative min-h-full flex items-end sm:items-center justify-center p-4">
+    <div class="sheet-in w-full max-w-md bg-slate-900 border border-white/10 rounded-3xl p-6 shadow-2xl max-h-[82vh] flex flex-col">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-serif text-xl font-semibold">Mi camino emocional</h2>
+        <button onclick="cerrarHistorial()" aria-label="Cerrar" class="w-9 h-9 grid place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 stroke-slate-300 fill-none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div id="grafico-emociones" class="mb-4"></div>
+      <div id="lista-historial" class="overflow-y-auto space-y-2.5 -mr-2 pr-2"></div>
+      <button onclick="borrarHistorial()" class="mt-4 w-full text-sm text-rose-300/80 hover:text-rose-300 py-2 transition">Borrar historial</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FAVORITOS -->
+<div id="modal-favoritos" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md overlay-in" onclick="cerrarFavoritos()"></div>
+  <div class="relative min-h-full flex items-end sm:items-center justify-center p-4">
+    <div class="sheet-in w-full max-w-md bg-slate-900 border border-white/10 rounded-3xl p-6 shadow-2xl max-h-[82vh] flex flex-col">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-serif text-xl font-semibold">Reflexiones guardadas</h2>
+        <button onclick="cerrarFavoritos()" aria-label="Cerrar" class="w-9 h-9 grid place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 stroke-slate-300 fill-none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div id="lista-favoritos" class="overflow-y-auto space-y-3 -mr-2 pr-2"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DIARIO -->
+<div id="modal-diario" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md overlay-in" onclick="cerrarDiario()"></div>
+  <div class="relative min-h-full flex items-end sm:items-center justify-center p-4">
+    <div class="sheet-in w-full max-w-md bg-slate-900 border border-white/10 rounded-3xl p-6 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-serif text-xl font-semibold">Escribe lo que sientes</h2>
+        <button onclick="cerrarDiario()" aria-label="Cerrar" class="w-9 h-9 grid place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 stroke-slate-300 fill-none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <p class="text-sm text-slate-400 mb-3 leading-relaxed">Un espacio privado. Escribir lo que sientes ayuda a ordenar la mente.</p>
+      <textarea id="texto-diario" rows="5" placeholder="Hoy me siento..."
+        class="w-full bg-slate-950 border border-white/10 rounded-2xl px-4 py-3 text-base leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"></textarea>
+      <button onclick="guardarDiario()" class="mt-4 w-full min-h-[48px] bg-emerald-500 text-slate-950 font-bold py-3 rounded-2xl hover:bg-emerald-400 transition">Guardar entrada</button>
+      <div id="lista-diario" class="mt-5 space-y-2.5 max-h-[30vh] overflow-y-auto -mr-2 pr-2"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL RESPIRACIÓN -->
+<div id="modal-respiracion" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-slate-950/95 backdrop-blur-md overlay-in"></div>
+  <div class="relative min-h-full flex flex-col items-center justify-center p-6 text-center">
+    <button onclick="cerrarRespiracion()" aria-label="Cerrar" class="absolute top-5 right-5 w-10 h-10 grid place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition">
+      <svg viewBox="0 0 24 24" class="w-5 h-5 stroke-slate-300 fill-none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="relative w-64 h-64 grid place-items-center">
+      <div class="breathe-ring absolute inset-0 rounded-full bg-emerald-500/20"></div>
+      <div class="breathe w-40 h-40 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 grid place-items-center shadow-2xl">
+        <span id="texto-respiracion" class="text-slate-950 font-semibold text-lg">Inhala</span>
+      </div>
+    </div>
+    <p class="text-slate-400 text-sm mt-8 max-w-xs leading-relaxed">Sigue el círculo. Inhala mientras crece, exhala mientras baja.</p>
+    <p id="contador-respiracion" class="text-emerald-300 font-semibold mt-3 tabular"></p>
+  </div>
+</div>
+
+<script>
+/* ============ DATOS DE EMOCIONES ============ */
+const emociones = [
+  { id:"ansiedad",    nombre:"Ansiedad",          desc:"Mi mente no se detiene",         emoji:"🌀", color:"#3b82f6" },
+  { id:"tristeza",    nombre:"Tristeza",          desc:"Necesito consuelo",              emoji:"😢", color:"#0ea5e9" },
+  { id:"enojo",       nombre:"Enojo",             desc:"Quiero recuperar mi calma",      emoji:"🔥", color:"#ef4444" },
+  { id:"soledad",     nombre:"Soledad",           desc:"Necesito sentir compañía",       emoji:"🌙", color:"#8b5cf6" },
+  { id:"agotamiento", nombre:"Agotamiento",       desc:"Ya no puedo más",                emoji:"🪫", color:"#10b981" },
+  { id:"desanimo",    nombre:"Desánimo",          desc:"Necesito volver a levantarme",   emoji:"🍂", color:"#f59e0b" },
+  { id:"miedo",       nombre:"Miedo",             desc:"No sé qué pasará mañana",        emoji:"😨", color:"#6366f1" },
+  { id:"sobrecarga",  nombre:"Sobrecarga mental", desc:"Demasiadas cosas en mi mente",   emoji:"🧠", color:"#06b6d4" },
+  { id:"frustracion", nombre:"Frustración",       desc:"Siento que nada avanza",         emoji:"😔", color:"#f97316" },
+  { id:"dolor",       nombre:"Dolor emocional",   desc:"Algo en mí necesita sanar",      emoji:"💔", color:"#f43f5e" },
+  { id:"desesperanza",nombre:"Desesperanza",      desc:"Necesito encontrar luz",         emoji:"🌧️",color:"#64748b" },
+  { id:"motivacion",  nombre:"Falta de impulso",  desc:"Necesito volver a empezar",      emoji:"🌱", color:"#84cc16" },
+  { id:"gratitud",    nombre:"Gratitud",          desc:"Quiero valorar lo bueno",        emoji:"🌻", color:"#eab308" },
+  { id:"calma",       nombre:"Buscar calma",      desc:"Quiero encontrar paz",           emoji:"🕊️",color:"#14b8a6" },
+];
+
+/* ============ FRASES DEL DÍA ============ */
+const frasesDia = [
+  "No tienes que ver toda la escalera; solo da el primer paso.",
+  "La calma es un superpoder silencioso.",
+  "Lo que sientes es válido, pero no es para siempre.",
+  "Hoy basta con cuidar de ti un poco mejor que ayer.",
+  "El descanso también es una forma de avanzar.",
+  "Eres más fuerte de lo que las tormentas te hicieron creer.",
+  "Un pensamiento no es un hecho. Déjalo pasar como una nube.",
+  "Cada pequeño paso también es progreso.",
+  "Está bien no estar bien; no está bien quedarse solo con eso.",
+  "Tu historia todavía tiene capítulos hermosos por escribir.",
+  "Respira. Este momento también pasará.",
+  "El coraje no es la ausencia de miedo, sino avanzar con él.",
+];
+
+/* ============ RECETAS (reflexiones ampliadas) ============ */
+const recetas = {
+  ansiedad:[
+    { titulo:"Cuando tu mente corre demasiado", mensaje:"No todo pensamiento merece una respuesta. A veces la mente crea tormentas donde solo hay una nube. Hoy no tienes que resolver toda tu vida, solo este momento.", accion:"Respira profundo 5 veces y pregúntate: ¿qué puedo controlar ahora?", mantra:"Estoy a salvo en este momento." },
+    { titulo:"El silencio también es medicina", mensaje:"Tu valor no depende de tener todo bajo control. Hay batallas que se ganan descansando y confiando.", accion:"Apaga las notificaciones 10 minutos y regálate tranquilidad.", mantra:"Puedo soltar lo que no depende de mí." },
+    { titulo:"Un pensamiento no es una realidad", mensaje:"La ansiedad intenta convencerte de futuros que aún no existen. Vuelve al presente: aquí tienes poder.", accion:"Nombra 5 cosas que puedes ver, 4 que puedes tocar y 3 que puedes oír.", mantra:"Vuelvo al presente, donde estoy bien." },
+    { titulo:"Tu cuerpo puede calmar tu mente", mensaje:"Cuando la mente se acelera, el cuerpo puede guiarla de regreso a la calma con un ritmo más lento.", accion:"Exhala más lento que como inhalas durante un minuto.", mantra:"Mi calma vive en mi respiración." },
+  ],
+  tristeza:[
+    { titulo:"Tus lágrimas también hablan", mensaje:"La tristeza no es debilidad. A veces el corazón necesita detenerse para sanar lo que ha vivido.", accion:"Escribe una cosa por la que todavía puedes agradecer hoy.", mantra:"Sentir también es sanar." },
+    { titulo:"Después de la noche llega la mañana", mensaje:"Los momentos difíciles no escriben toda tu historia. Son una página de un libro mucho más grande.", accion:"Busca una pequeña cosa que te dé esperanza hoy.", mantra:"Esta etapa no es mi final." },
+    { titulo:"Permítete sentir", mensaje:"No tienes que fingir estar bien todo el tiempo. Reconocer lo que sientes es una forma de cuidarte.", accion:"Dedica unos minutos a hablar contigo con paciencia.", mantra:"Me trato con la ternura que merezco." },
+  ],
+  enojo:[
+    { titulo:"No entregues tu paz al enojo", mensaje:"Una reacción de segundos puede crear heridas que tardan años en sanar. Tu fuerza está en elegir cómo responder.", accion:"Antes de responder, espera 10 segundos y respira.", mantra:"Yo elijo mi respuesta." },
+    { titulo:"La calma también es poder", mensaje:"Controlar tus emociones no es ignorarlas; es que ellas no controlen tu destino.", accion:"Aléjate unos minutos antes de una decisión importante.", mantra:"Mi paz es más fuerte que mi impulso." },
+    { titulo:"Tu paz vale más que una discusión", mensaje:"No todas las batallas merecen tu energía. A veces ganar es conservar la tranquilidad.", accion:"Pregúntate: ¿esto importará dentro de un año?", mantra:"Suelto lo que roba mi calma." },
+  ],
+  soledad:[
+    { titulo:"Nunca estás completamente solo", mensaje:"Hay temporadas donde el silencio pesa, pero pueden convertirse en espacios para encontrarte contigo mismo.", accion:"Envía un mensaje a alguien que aprecias.", mantra:"Merezco compañía y conexión." },
+    { titulo:"Tu presencia tiene valor", mensaje:"Aunque hoy sientas distancia, tu vida sigue teniendo propósito. Tu historia tiene capítulos por escribir.", accion:"Haz algo pequeño que cuide de ti hoy.", mantra:"Mi presencia importa." },
+    { titulo:"Aprende a acompañarte", mensaje:"La soledad no siempre significa abandono. A veces es una oportunidad para escuchar tu propia voz.", accion:"Dedica unos minutos a hacer algo que disfrutes.", mantra:"Soy buena compañía para mí." },
+  ],
+  agotamiento:[
+    { titulo:"Tu cansancio también merece descanso", mensaje:"No naciste para cargar el mundo sobre tus hombros. La verdadera fuerza está en detenerse y recuperar energía.", accion:"Toma unos minutos de silencio para que tu mente descanse.", mantra:"Descansar es cuidarme." },
+    { titulo:"No tienes que ser fuerte todo el tiempo", mensaje:"Incluso los árboles necesitan estaciones donde parecen detenerse. Tú también.", accion:"Haz una cosa pequeña hoy solo para cuidar de ti.", mantra:"Puedo bajar el ritmo sin culpa." },
+    { titulo:"Descansar también es avanzar", mensaje:"El descanso no es perder el tiempo. Es preparar tu cuerpo y tu mente para continuar.", accion:"Regálate una pausa sin sentir culpa.", mantra:"En la pausa recupero fuerza." },
+  ],
+  desanimo:[
+    { titulo:"Este momento no define tu historia", mensaje:"Un día difícil no significa una vida perdida. A veces las etapas oscuras preparan cambios que aún no ves.", accion:"Escribe una pequeña victoria que hayas logrado.", mantra:"Sigo de pie, y eso ya es valiente." },
+    { titulo:"Vuelve a empezar una vez más", mensaje:"Caer no borra tu camino recorrido. Cada intento demuestra que aún hay esperanza en ti.", accion:"Da un pequeño paso hoy, aunque sea solo uno.", mantra:"Puedo empezar de nuevo." },
+    { titulo:"Una pequeña luz cambia el camino", mensaje:"No necesitas todas las respuestas hoy. Avanzar comienza con una decisión sencilla.", accion:"Elige una pequeña meta para las próximas horas.", mantra:"Una chispa basta para empezar." },
+  ],
+  miedo:[
+    { titulo:"El miedo no siempre es señal de peligro", mensaje:"A veces el miedo aparece porque entras en una etapa nueva. No significa que no puedas avanzar.", accion:"Pregúntate: ¿qué pequeño paso puedo dar aunque tenga miedo?", mantra:"Avanzo aunque tenga miedo." },
+    { titulo:"No dejes que el futuro robe tu presente", mensaje:"La mente imagina muchos escenarios, pero hoy solo necesitas enfrentar el momento que tienes delante.", accion:"Concéntrate solamente en la próxima decisión.", mantra:"Solo necesito el paso de hoy." },
+  ],
+  sobrecarga:[
+    { titulo:"Tu mente necesita espacio", mensaje:"Cuando cargas demasiadas cosas a la vez, hasta lo sencillo parece imposible. No todo debe resolverse ahora.", accion:"Escribe tus pendientes y elige solo uno para comenzar.", mantra:"Una cosa a la vez." },
+    { titulo:"Detente para volver con más fuerza", mensaje:"Una pausa no es una derrota. Es una forma inteligente de recuperar claridad.", accion:"Toma cinco minutos sin pantallas.", mantra:"Mi mente merece espacio." },
+  ],
+  frustracion:[
+    { titulo:"No confundas retraso con fracaso", mensaje:"Que algo no salga como esperabas no significa que hayas perdido. El camino a veces necesita ajustes.", accion:"Busca una cosa que sí puedas mejorar hoy.", mantra:"El retraso no es el final." },
+    { titulo:"Avanzar lento también es avanzar", mensaje:"Cada esfuerzo cuenta. Los grandes cambios casi siempre empiezan con pasos pequeños.", accion:"Haz una acción sencilla que te acerque a tu objetivo.", mantra:"Mi ritmo también es válido." },
+  ],
+  dolor:[
+    { titulo:"Tu corazón también necesita sanar", mensaje:"Hay heridas que no se ven pero pesan por dentro. Reconocer tu dolor es el primer paso para recuperarte.", accion:"Escribe qué es aquello que más necesitas soltar.", mantra:"Me permito sanar a mi tiempo." },
+    { titulo:"No tienes que cargar solo con todo", mensaje:"Algunas cargas se aligeran cuando alguien nos acompaña. Pedir apoyo también es valentía.", accion:"Comparte con una persona de confianza cómo te sientes.", mantra:"Pedir ayuda es de valientes." },
+  ],
+  desesperanza:[
+    { titulo:"Incluso la noche más larga termina", mensaje:"Cuando todo parece oscuro es difícil imaginar un cambio. Pero ningún momento permanece igual para siempre.", accion:"Concéntrate solo en superar este día, un paso a la vez.", mantra:"Esto también pasará." },
+    { titulo:"Todavía existe una razón para continuar", mensaje:"Tu historia no termina en este capítulo difícil. Aún quedan momentos que pueden sorprenderte.", accion:"Recuerda una dificultad que ya superaste en el pasado.", mantra:"Ya he superado tormentas antes." },
+  ],
+  motivacion:[
+    { titulo:"Vuelve a comenzar", mensaje:"No necesitas que todo sea perfecto para avanzar. Los grandes cambios nacen de decisiones pequeñas repetidas.", accion:"Elige una pequeña meta y da el primer paso hoy.", mantra:"Empiezo con lo que tengo hoy." },
+    { titulo:"El futuro se construye con acciones pequeñas", mensaje:"La motivación no siempre llega antes de actuar. Muchas veces llega después de comenzar.", accion:"Haz durante 5 minutos aquello que has estado posponiendo.", mantra:"La acción enciende mi ánimo." },
+  ],
+  gratitud:[
+    { titulo:"Lo bueno también merece atención", mensaje:"La mente recuerda con facilidad lo que duele. Entrenar la gratitud es enseñarle a notar también lo que sana.", accion:"Escribe tres cosas buenas de hoy, por pequeñas que sean.", mantra:"Hay bien en mi vida, y lo veo." },
+    { titulo:"Agradecer transforma la mirada", mensaje:"No cambia lo que tienes, cambia cómo lo vives. La gratitud convierte lo suficiente en abundancia.", accion:"Agradece a alguien que haya hecho tu día mejor.", mantra:"Tengo más de lo que a veces recuerdo." },
+  ],
+  calma:[
+    { titulo:"La paz se practica, no se espera", mensaje:"La calma no llega sola; se cultiva en pequeños gestos de cuidado a lo largo del día.", accion:"Baja los hombros, suelta la mandíbula y respira hondo tres veces.", mantra:"Elijo la calma, aquí y ahora." },
+    { titulo:"Vuelve a tu centro", mensaje:"Cuando el mundo se acelera, tú puedes elegir un ritmo distinto. Tu paz es un lugar al que siempre puedes volver.", accion:"Cierra los ojos 30 segundos y siente tu respiración.", mantra:"Mi centro está en calma." },
+  ],
+};
+
+/* ============ ESTADO ============ */
+const LIMITE_GRATIS = 10;
+let emocionActual = "", reflexionActual = null, idioma = "es";
+const store = {
+  get:(k,def)=>{ try { return JSON.parse(localStorage.getItem(k)) ?? def; } catch { return def; } },
+  set:(k,v)=> localStorage.setItem(k, JSON.stringify(v)),
+};
+let usuario   = store.get("botiquin_usuario", null);
+let premium   = store.get("botiquin_premium", false);
+let consultas = store.get("botiquin_consultas", 0);
+
+/* =====================================================================
+   ============ TARJETA DE APOYO / AGRADECIMIENTO (Stripe) ============
+   ===================================================================== */
+
+/* 👉 AJUSTES RÁPIDOS — cámbialos a tu gusto */
+const APOYO_STRIPE_LINK   = "https://buy.stripe.com/bJe28s9Q1fOa5zY3707Vm0h";   //
+const APOYO_PRIMER_MIN    = 3;    // minutos antes de la primera aparición
+const APOYO_INTERVALO_MIN = 8;    // minutos entre apariciones siguientes
+const APOYO_MONTO_LINKS   = {     // (opcional) un link distinto por monto; si está vacío usa APOYO_STRIPE_LINK
+  3:  "",
+  5:  "",
+  10: "",
+};
+
+/* Los 3 enfoques que pediste: mejor experiencia · crecimiento · agradecimiento */
+const apoyoMensajes = [
+  {
+    eyebrow:"Una mejor experiencia",
+    titulo:"Ayúdanos a cuidar mejor de ti",
+    mensaje:"Tu aportación nos permite crear más reflexiones, respiraciones y un espacio cada vez más cálido para acompañarte.",
+    cta:"Quiero aportar",
+  },
+  {
+    eyebrow:"Sé parte de esto",
+    titulo:"Crezcamos juntos, paso a paso",
+    mensaje:"Este Botiquín crece gracias a personas como tú. Con tu apoyo llegamos a más corazones que hoy necesitan un abrazo.",
+    cta:"Sumarme al proyecto",
+  },
+  {
+    eyebrow:"Con gratitud",
+    titulo:"Gracias por estar aquí",
+    mensaje:"Si el Botiquín te ha dado un respiro, puedes devolver ese cariño con una pequeña aportación. Cada gesto suma.",
+    cta:"Dejar mi granito",
+  },
+];
+
+let apoyoIndex   = store.get("apoyo_index", 0);      // rota los mensajes
+let apoyoMonto   = 5;                                 // monto seleccionado por defecto
+let apoyoTimer   = null;
+let apoyoActivada = false;                            // evita doble apertura
+
+function hoyClave(){ return new Date().toDateString(); }
+
+/* ¿Se puede mostrar hoy? (respeta "Hoy no, gracias") */
+function apoyoPermitidaHoy(){
+  return store.get("apoyo_silenciado_dia", "") !== hoyClave();
+}
+
+/* Programa la primera aparición y luego el ciclo */
+function programarApoyo(){
+  clearTimeout(apoyoTimer);
+  if(APOYO_PRIMER_MIN <= 0) return;
+  apoyoTimer = setTimeout(function ciclo(){
+    if(apoyoPermitidaHoy() && document.visibilityState === "visible" && !hayModalAbierto()){
+      abrirApoyo("auto");
+    }
+    // reprograma la siguiente aparición
+    apoyoTimer = setTimeout(ciclo, APOYO_INTERVALO_MIN * 60 * 1000);
+  }, APOYO_PRIMER_MIN * 60 * 1000);
+}
+
+/* Evita encimar la tarjeta sobre otro modal abierto */
+function hayModalAbierto(){
+  return ["modal-acceso","modal-premium","modal-historial","modal-favoritos","modal-diario","modal-respiracion","modal-apoyo","modal-checkin","modal-carta"]
+    .some(id=>{ const el=document.getElementById(id); return el && !el.classList.contains("hidden"); });
+}
+
+function abrirApoyo(origen){
+  // Cuando es automática, no interrumpir si hay otro modal
+  if(origen === "auto" && hayModalAbierto()) return;
+
+  const data = apoyoMensajes[apoyoIndex % apoyoMensajes.length];
+  document.getElementById("apoyo-eyebrow").textContent = data.eyebrow;
+  document.getElementById("apoyo-titulo").textContent  = data.titulo;
+  document.getElementById("apoyo-mensaje").textContent = data.mensaje;
+  document.getElementById("apoyo-cta").textContent     = data.cta;
+
+  // rota para la próxima vez
+  apoyoIndex = (apoyoIndex + 1) % apoyoMensajes.length;
+  store.set("apoyo_index", apoyoIndex);
+
+  // resetea selección de monto al valor sugerido ($5)
+  apoyoMonto = 5;
+  document.querySelectorAll(".apoyo-monto").forEach(b=>{
+    const activo = b.textContent.trim() === "$5";
+    b.classList.toggle("border-emerald-400/60", activo);
+    b.classList.toggle("bg-emerald-500/15", activo);
+    b.classList.toggle("text-emerald-200", activo);
+    b.classList.toggle("border-white/10", !activo);
+    b.classList.toggle("bg-white/5", !activo);
+  });
+
+  const caja = document.getElementById("apoyo-caja");
+  caja.classList.remove("apoyo-out"); void caja.offsetWidth; caja.classList.add("apoyo-sheet");
+  abrirModal("modal-apoyo");
+}
+
+function seleccionarMonto(btn, monto){
+  apoyoMonto = monto;
+  document.querySelectorAll(".apoyo-monto").forEach(b=>{
+    b.classList.remove("border-emerald-400/60","bg-emerald-500/15","text-emerald-200");
+    b.classList.add("border-white/10","bg-white/5");
+  });
+  btn.classList.remove("border-white/10","bg-white/5");
+  btn.classList.add("border-emerald-400/60","bg-emerald-500/15","text-emerald-200");
+}
+
+function aportar(){
+  const link = (APOYO_MONTO_LINKS[apoyoMonto] || APOYO_STRIPE_LINK || "").trim();
+  if(!link){
+    toast("Pronto podrás aportar 💚 (falta el link de Stripe)");
+    return;
+  }
+  // Abre Stripe en pestaña nueva si estamos dentro de un iframe; si no, en la misma
+  try {
+    if(window.self !== window.top) window.open(link, "_blank", "noopener");
+    else window.location.href = link;
+  } catch(e){
+    window.open(link, "_blank", "noopener");
+  }
+  cerrarApoyo();
+  toast("¡Gracias de corazón! 💚");
+}
+
+function apoyoHoyNo(){
+  store.set("apoyo_silenciado_dia", hoyClave());
+  cerrarApoyo();
+  toast("Perfecto, no te lo mostraremos hoy.");
+}
+
+function cerrarApoyo(){
+  const caja = document.getElementById("apoyo-caja");
+  caja.classList.remove("apoyo-sheet");
+  caja.classList.add("apoyo-out");
+  setTimeout(()=> cerrarModal("modal-apoyo"), 300);
+}
+
+/* Pausa/reanuda el ciclo según visibilidad de la pestaña */
+document.addEventListener("visibilitychange", ()=>{
+  if(document.visibilityState === "visible") programarApoyo();
+  else clearTimeout(apoyoTimer);
+});
+
+/* ============ FRASE DEL DÍA ============ */
+function cargarFraseDia(){
+  let pool = frasesDia.slice();
+  if(store.get("botiquin_recompensas", []).includes("frases-lum")) pool = pool.concat(frasesEspeciales);
+  const dia = Math.floor(Date.now()/86400000);
+  document.getElementById("frase-dia").textContent = '"' + pool[dia % pool.length] + '"';
+}
+function compartirFrase(){
+  const texto = document.getElementById("frase-dia").textContent + "\n\n— Botiquín Emocional";
+  if(navigator.share) navigator.share({ text:texto }).catch(()=>{});
+  else navigator.clipboard.writeText(texto).then(()=>toast("Frase copiada"));
+}
+
+/* ============ RENDER TARJETAS ============ */
+function hexToRgba(hex,a){ const n=parseInt(hex.slice(1),16); return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`; }
+function renderEmociones(){
+  const grid = document.getElementById("grid-emociones");
+  grid.innerHTML = "";
+  emociones.forEach((e,i)=>{
+    const btn = document.createElement("button");
+    btn.className = "card pop text-left rounded-3xl p-5 border shadow-lg";
+    btn.style.background = `linear-gradient(160deg, ${hexToRgba(e.color,0.18)}, rgba(15,23,42,0.6))`;
+    btn.style.borderColor = hexToRgba(e.color,0.35);
+    btn.style.animationDelay = (i*35)+"ms";
+    btn.setAttribute("aria-label", e.nombre);
+    btn.onclick = () => mostrarEmocion(e.id);
+    btn.innerHTML = `<div class="text-3xl">${e.emoji}</div>
+      <h3 class="font-semibold text-[15px] mt-3 leading-tight">${e.nombre}</h3>
+      <p class="text-xs text-slate-300/80 mt-1.5 leading-snug">${e.desc}</p>`;
+    grid.appendChild(btn);
+  });
+}
+
+/* ============ MOSTRAR EMOCIÓN ============ */
+function mostrarEmocion(tipo){
+  if(!premium && consultas >= LIMITE_GRATIS){ abrirPremium(); return; }
+  if(!premium){ consultas++; store.set("botiquin_consultas", consultas); }
+  emocionActual = tipo;
+  guardarEnHistorial(tipo);
+  const meta = emociones.find(e=>e.id===tipo);
+  const lista = recetas[tipo]; if(!lista) return;
+  const receta = lista[Math.floor(Math.random()*lista.length)];
+  reflexionActual = { ...receta, emocion: tipo };
+
+  const resultado = document.getElementById("resultado");
+  resultado.classList.remove("hidden");
+  const tarjeta = document.getElementById("tarjeta-reflexion");
+  tarjeta.classList.remove("fade"); void tarjeta.offsetWidth; tarjeta.classList.add("fade");
+
+  document.getElementById("acento-barra").style.background = meta.color;
+  document.getElementById("emoji-emocion").textContent = meta.emoji;
+  document.getElementById("etiqueta-emocion").textContent = meta.nombre;
+  document.getElementById("titulo").textContent = receta.titulo;
+  document.getElementById("mensaje").textContent = receta.mensaje;
+  document.getElementById("accion").textContent = receta.accion;
+  document.getElementById("mantra").textContent = '"' + (receta.mantra || "Estoy exactamente donde necesito empezar.") + '"';
+
+  actualizarContador(); actualizarStats();
+  resultado.scrollIntoView({ behavior:"smooth", block:"start" });
+}
+function nuevaReceta(){ if(emocionActual) mostrarEmocion(emocionActual); }
+
+/* ============ HISTORIAL + PROGRESO ============ */
+function guardarEnHistorial(tipo){
+  let h = store.get("historial_emocional", []);
+  const ahora = new Date();
+  h.unshift({ emocion:tipo, ts:ahora.getTime(), fecha:ahora.toLocaleDateString("es-ES"), hora:ahora.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}) });
+  if(h.length>60) h.pop();
+  store.set("historial_emocional", h);
+  actualizarStats();
+}
+function calcularRacha(h){
+  if(!h.length) return 0;
+  const dias = [...new Set(h.map(x=> new Date(x.ts||Date.now()).toDateString()))];
+  let racha = 0; let cursor = new Date();
+  for(;;){
+    const key = cursor.toDateString();
+    if(dias.includes(key)){ racha++; cursor.setDate(cursor.getDate()-1); }
+    else if(racha===0 && key===new Date().toDateString()){ cursor.setDate(cursor.getDate()-1); }
+    else break;
+  }
+  return racha;
+}
+function actualizarStats(){
+  const h = store.get("historial_emocional", []);
+  const favs = store.get("favoritos_botiquin", []);
+  document.getElementById("stat-total").textContent = h.length;
+  document.getElementById("stat-favs").textContent = favs.length;
+  document.getElementById("stat-racha").textContent = calcularRacha(h);
+}
+function abrirHistorial(){
+  const h = store.get("historial_emocional", []);
+  const graf = document.getElementById("grafico-emociones");
+  const cont = document.getElementById("lista-historial");
+  // gráfico: conteo por emoción
+  const conteo = {};
+  h.forEach(x=> conteo[x.emocion]=(conteo[x.emocion]||0)+1);
+  const entradas = Object.entries(conteo).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  if(entradas.length){
+    const max = Math.max(...entradas.map(e=>e[1]));
+    graf.innerHTML = `<p class="text-[11px] uppercase tracking-widest text-slate-500 font-semibold mb-2">Lo más frecuente</p>` +
+      entradas.map(([id,n])=>{
+        const meta = emociones.find(e=>e.id===id)||{emoji:"•",nombre:id,color:"#10b981"};
+        return `<div class="flex items-center gap-2 mb-1.5">
+          <span class="w-6 text-center">${meta.emoji}</span>
+          <div class="flex-1 h-2.5 rounded-full bg-white/5 overflow-hidden">
+            <div class="h-full rounded-full" style="width:${(n/max*100)}%;background:${meta.color}"></div>
+          </div>
+          <span class="text-xs text-slate-400 tabular w-5 text-right">${n}</span>
+        </div>`;
+      }).join("");
+  } else { graf.innerHTML = ""; }
+
+  if(h.length===0){
+    cont.innerHTML = `<p class="text-center text-slate-500 py-8 text-sm">Todavía no tienes registros. Tu camino empieza hoy.</p>`;
+  } else {
+    cont.innerHTML = h.slice(0,20).map(item=>{
+      const meta = emociones.find(e=>e.id===item.emocion)||{emoji:"•",nombre:item.emocion};
+      return `<div class="flex items-center gap-3 bg-white/5 border border-white/5 rounded-2xl p-3">
+        <span class="text-2xl">${meta.emoji}</span>
+        <div class="flex-1 min-w-0"><p class="font-medium text-sm">${meta.nombre}</p>
+        <p class="text-[11px] text-slate-500">${item.fecha} · ${item.hora}</p></div></div>`;
+    }).join("");
+  }
+  abrirModal("modal-historial");
+}
+function cerrarHistorial(){ cerrarModal("modal-historial"); }
+function borrarHistorial(){ store.set("historial_emocional", []); actualizarStats(); abrirHistorial(); toast("Historial borrado"); }
+
+/* ============ FAVORITOS ============ */
+function guardarFavorita(){
+  if(!reflexionActual) return;
+  let favs = store.get("favoritos_botiquin", []);
+  if(favs.some(f=>f.titulo===reflexionActual.titulo)){ toast("Ya está en tus guardados"); return; }
+  favs.unshift(reflexionActual); store.set("favoritos_botiquin", favs);
+  if(window.event && event.target){ const b = event.target.closest("button"); if(b){ b.classList.add("favorito"); setTimeout(()=>b.classList.remove("favorito"),450); } }
+  actualizarStats(); toast("Reflexión guardada");
+}
+function abrirFavoritos(){
+  const favs = store.get("favoritos_botiquin", []);
+  const cont = document.getElementById("lista-favoritos");
+  if(favs.length===0){ cont.innerHTML = `<p class="text-center text-slate-500 py-8 text-sm">Aún no has guardado reflexiones.</p>`; }
+  else {
+    cont.innerHTML = favs.map((f,idx)=>{
+      const meta = emociones.find(e=>e.id===f.emocion)||{emoji:"•"};
+      return `<div class="bg-white/5 border border-white/5 rounded-2xl p-4">
+        <div class="flex items-start justify-between gap-2">
+          <p class="font-serif font-semibold text-[15px] leading-snug">${meta.emoji} ${f.titulo}</p>
+          <button onclick="eliminarFavorito(${idx})" aria-label="Eliminar" class="shrink-0 text-slate-500 hover:text-rose-300 transition">
+            <svg viewBox="0 0 24 24" class="w-4 h-4 stroke-current fill-none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+        <p class="text-[13px] text-slate-400 mt-2 leading-relaxed">${f.mensaje}</p></div>`;
+    }).join("");
+  }
+  abrirModal("modal-favoritos");
+}
+function eliminarFavorito(idx){ let favs = store.get("favoritos_botiquin", []); favs.splice(idx,1); store.set("favoritos_botiquin", favs); actualizarStats(); abrirFavoritos(); }
+function cerrarFavoritos(){ cerrarModal("modal-favoritos"); }
+
+/* ============ DIARIO ============ */
+function abrirDiario(){ renderDiario(); abrirModal("modal-diario"); }
+function cerrarDiario(){ cerrarModal("modal-diario"); }
+function guardarDiario(){
+  const t = document.getElementById("texto-diario").value.trim();
+  if(!t){ toast("Escribe algo para guardar"); return; }
+  let d = store.get("diario_botiquin", []);
+  const ahora = new Date();
+  d.unshift({ texto:t, fecha:ahora.toLocaleDateString("es-ES"), hora:ahora.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}) });
+  if(d.length>50) d.pop();
+  store.set("diario_botiquin", d);
+  document.getElementById("texto-diario").value = "";
+  renderDiario(); toast("Entrada guardada");
+}
+function renderDiario(){
+  const d = store.get("diario_botiquin", []);
+  const cont = document.getElementById("lista-diario");
+  cont.innerHTML = d.length ? d.map((x,idx)=>`
+    <div class="bg-white/5 border border-white/5 rounded-2xl p-3">
+      <div class="flex items-start justify-between gap-2">
+        <p class="text-[11px] text-slate-500">${x.fecha} · ${x.hora}</p>
+        <button onclick="eliminarDiario(${idx})" aria-label="Eliminar" class="text-slate-500 hover:text-rose-300 transition">
+          <svg viewBox="0 0 24 24" class="w-4 h-4 stroke-current fill-none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <p class="text-sm text-slate-300 mt-1.5 leading-relaxed whitespace-pre-wrap">${x.texto.replace(/</g,"&lt;")}</p>
+    </div>`).join("") : `<p class="text-center text-slate-500 py-4 text-sm">Tus entradas aparecerán aquí.</p>`;
+}
+function eliminarDiario(idx){ let d = store.get("diario_botiquin", []); d.splice(idx,1); store.set("diario_botiquin", d); renderDiario(); }
+
+/* ============ COMPARTIR ============ */
+function compartirReflexion(){
+  if(!reflexionActual) return;
+  const texto = `${reflexionActual.titulo}\n\n${reflexionActual.mensaje}\n\nPequeña acción: ${reflexionActual.accion}\n\n— Botiquín Emocional`;
+  if(navigator.share) navigator.share({ title:"Botiquín Emocional", text:texto }).catch(()=>{});
+  else navigator.clipboard.writeText(texto).then(()=>toast("Copiado para compartir"));
+}
+
+/* ============ ACCESO ============ */
+function iniciarAcceso(){ if(usuario && usuario.nombre) aplicarSaludo(); else abrirModal("modal-acceso"); }
+function confirmarAcceso(){
+  const nombre = document.getElementById("input-nombre").value.trim();
+  const ok = document.getElementById("check-privacidad").checked;
+  if(!nombre){ toast("Escribe tu nombre para continuar"); return; }
+  if(!ok){ toast("Confirma el aviso para continuar"); return; }
+  usuario = { nombre }; store.set("botiquin_usuario", usuario);
+  cerrarModal("modal-acceso"); aplicarSaludo(); toast(`Bienvenido, ${nombre}`);
+}
+function accesoInvitado(){ usuario = { nombre:"Invitado" }; store.set("botiquin_usuario", usuario); cerrarModal("modal-acceso"); aplicarSaludo(); }
+function aplicarSaludo(){
+  const h = new Date().getHours();
+  const franja = h<12 ? "Buenos días" : h<19 ? "Buenas tardes" : "Buenas noches";
+  const nombre = usuario?.nombre && usuario.nombre!=="Invitado" ? `, ${usuario.nombre}` : "";
+  document.getElementById("saludo-usuario").textContent = `${franja}${nombre}`;
+}
+
+/* ============ PREMIUM ============ */
+function abrirPremium(){ abrirModal("modal-premium"); }
+function cerrarPremium(){ cerrarModal("modal-premium"); }
+function activarPremium(){ premium = true; store.set("botiquin_premium", true); cerrarPremium(); actualizarContador(); toast("Premium activado"); }
+function actualizarContador(){
+  const caja = document.getElementById("contador-uso");
+  const plan = document.getElementById("estado-plan");
+  if(premium){ caja.textContent = "Premium · ilimitado"; if(plan) plan.textContent = "Plan Premium activo"; }
+  else { const r = Math.max(0, LIMITE_GRATIS - consultas); caja.textContent = `${r} reflexiones gratis`; if(plan) plan.textContent = "Primeros auxilios para el alma"; }
+}
+
+/* ============ RESPIRACIÓN ============ */
+let respiracionTimer = null, respiracionSeg = 0;
+function abrirRespiracion(){
+  abrirModal("modal-respiracion"); respiracionSeg = 60;
+  const texto = document.getElementById("texto-respiracion");
+  const cont = document.getElementById("contador-respiracion");
+  const fases = ["Inhala","Sostén","Exhala","Sostén"]; let fase = 0, tick = 0;
+  texto.textContent = fases[0]; cont.textContent = `${respiracionSeg}s`;
+  clearInterval(respiracionTimer);
+  respiracionTimer = setInterval(()=>{
+    tick++;
+    if(tick % 2 === 0){ fase = (fase+1) % fases.length; texto.textContent = fases[fase]; }
+    respiracionSeg--; cont.textContent = `${respiracionSeg}s`;
+    if(respiracionSeg<=0){ cerrarRespiracion(); toast("Bien hecho. Un minuto para ti."); }
+  }, 1000);
+}
+function cerrarRespiracion(){ clearInterval(respiracionTimer); cerrarModal("modal-respiracion"); }
+
+/* ============ IDIOMA (5 lenguas) ============ */
+const traducciones = {
+  es: { titulo:"Botiquín Emocional", sub:"Primeros auxilios para el alma en momentos difíciles.", zona:"¿Cómo te sientes hoy?", lema:"Hecho con cariño para acompañarte." },
+  en: { titulo:"Emotional First Aid", sub:"Emotional support for difficult moments.", zona:"How do you feel today?", lema:"Made with love to accompany you." },
+  pt: { titulo:"Kit Emocional", sub:"Primeiros socorros para a alma em momentos difíceis.", zona:"Como você se sente hoje?", lema:"Feito com carinho para acompanhar você." },
+  fr: { titulo:"Trousse Émotionnelle", sub:"Premiers secours pour l'âme dans les moments difficiles.", zona:"Comment te sens-tu aujourd'hui ?", lema:"Fait avec amour pour t'accompagner." },
+  it: { titulo:"Kit Emotivo", sub:"Primo soccorso per l'anima nei momenti difficili.", zona:"Come ti senti oggi?", lema:"Fatto con amore per accompagnarti." },
+};
+function cambiarIdioma(val){
+  idioma = val;
+  const tr = traducciones[val] || traducciones.es;
+  const t = document.getElementById("titulo-app");
+  const s = document.getElementById("subtitulo-app");
+  const zt = document.getElementById("zona-titulo");
+  const lema = document.getElementById("footer-lema");
+  if(t) t.textContent = tr.titulo;
+  if(s) s.textContent = tr.sub;
+  if(zt) zt.textContent = tr.zona;
+  if(lema) lema.textContent = tr.lema;
+  store.set("botiquin_idioma", val);
+}
+
+/* =====================================================================
+   ============ MÚSICA AMBIENTAL CALMADA (Web Audio) ============
+   Genera un "pad" suave en vivo, sin archivos externos ni internet.
+   ===================================================================== */
+let audioCtx = null, musicaNodos = null, musicaEncendida = false;
+const MUSICA_VOL = 0.06; // volumen general (0 a 1). Súbelo/bájalo a tu gusto.
+
+function crearMusica(){
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const master = audioCtx.createGain();
+  master.gain.value = 0;
+  master.connect(audioCtx.destination);
+
+  // Filtro para suavizar (quita agudos, deja un sonido cálido)
+  const filtro = audioCtx.createBiquadFilter();
+  filtro.type = "lowpass";
+  filtro.frequency.value = 900;
+  filtro.connect(master);
+
+  // Acorde tranquilo (La menor add9): notas suaves y armónicas
+  const frecuencias = [220.00, 261.63, 329.63, 440.00];
+  const osciladores = frecuencias.map((f, i)=>{
+    const osc = audioCtx.createOscillator();
+    osc.type = "sine";
+    osc.frequency.value = f;
+    const g = audioCtx.createGain();
+    g.gain.value = 0.25 / (i+1); // notas graves un poco más presentes
+    osc.connect(g); g.connect(filtro);
+
+    // LFO lento para que "respire" y no suene estático
+    const lfo = audioCtx.createOscillator();
+    lfo.type = "sine";
+    lfo.frequency.value = 0.05 + i*0.02;
+    const lfoGain = audioCtx.createGain();
+    lfoGain.gain.value = 0.08;
+    lfo.connect(lfoGain); lfoGain.connect(g.gain);
+
+    osc.start(); lfo.start();
+    return { osc, lfo };
+  });
+
+  musicaNodos = { master };
+}
+
+function toggleMusica(){
+  if(!audioCtx) crearMusica();
+  if(audioCtx.state === "suspended") audioCtx.resume();
+
+  musicaEncendida = !musicaEncendida;
+  const ahora = audioCtx.currentTime;
+  musicaNodos.master.gain.cancelScheduledValues(ahora);
+  musicaNodos.master.gain.setValueAtTime(musicaNodos.master.gain.value, ahora);
+  // Fundido suave de entrada/salida (3 segundos)
+  musicaNodos.master.gain.linearRampToValueAtTime(musicaEncendida ? MUSICA_VOL : 0, ahora + 3);
+
+  document.getElementById("icono-musica-off").classList.toggle("hidden", musicaEncendida);
+  document.getElementById("icono-musica-on").classList.toggle("hidden", !musicaEncendida);
+  document.getElementById("btn-musica").setAttribute("aria-pressed", musicaEncendida ? "true" : "false");
+  store.set("botiquin_musica", musicaEncendida);
+  toast(musicaEncendida ? "Música suave activada" : "Música en pausa");
+}
+
+/* =====================================================================
+   ====== CHECK-IN DIARIO + CALENDARIO DE ÁNIMO + RECOMPENSAS ======
+   Gancho diario: registra tu ánimo, construye tu racha y desbloquea
+   fondos y frases especiales. Tono motivador, sin culpa.
+   ===================================================================== */
+
+/* Ánimos del check-in (escala rápida, distinta de las emociones) */
+const animos = [
+  { id:"radiante", label:"Radiante", emoji:"☀️",  color:"#eab308" },
+  { id:"bien",     label:"Bien",     emoji:"🙂",  color:"#10b981" },
+  { id:"neutral",  label:"Neutral",  emoji:"😐",  color:"#38bdf8" },
+  { id:"bajo",     label:"Bajita",   emoji:"🌥️", color:"#6366f1" },
+  { id:"dificil",  label:"Difícil",  emoji:"🌧️", color:"#f43f5e" },
+];
+
+/* Fondos desbloqueables (auroras). hito = días de racha para conseguirlo */
+const fondos = [
+  { id:"esmeralda", nombre:"Esmeralda", hito:0,
+    grad:"radial-gradient(40% 50% at 20% 20%, rgba(16,185,129,.22), transparent 70%), radial-gradient(45% 55% at 80% 10%, rgba(56,189,248,.16), transparent 70%), radial-gradient(40% 50% at 60% 50%, rgba(20,184,166,.14), transparent 70%)" },
+  { id:"noche", nombre:"Noche serena", hito:3,
+    grad:"radial-gradient(40% 50% at 20% 20%, rgba(56,189,248,.20), transparent 70%), radial-gradient(45% 55% at 80% 10%, rgba(99,102,241,.16), transparent 70%), radial-gradient(40% 50% at 60% 50%, rgba(20,184,166,.12), transparent 70%)" },
+  { id:"amanecer", nombre:"Amanecer", hito:7,
+    grad:"radial-gradient(40% 50% at 20% 20%, rgba(245,158,11,.20), transparent 70%), radial-gradient(45% 55% at 80% 10%, rgba(251,146,60,.16), transparent 70%), radial-gradient(40% 50% at 60% 50%, rgba(244,63,94,.12), transparent 70%)" },
+  { id:"oceano", nombre:"Océano", hito:14,
+    grad:"radial-gradient(40% 50% at 20% 20%, rgba(56,189,248,.20), transparent 70%), radial-gradient(45% 55% at 80% 10%, rgba(6,182,212,.16), transparent 70%), radial-gradient(40% 50% at 60% 50%, rgba(20,184,166,.14), transparent 70%)" },
+  { id:"bosque", nombre:"Bosque", hito:30,
+    grad:"radial-gradient(40% 50% at 20% 20%, rgba(16,185,129,.22), transparent 70%), radial-gradient(45% 55% at 80% 10%, rgba(132,204,22,.16), transparent 70%), radial-gradient(40% 50% at 60% 50%, rgba(20,184,166,.14), transparent 70%)" },
+];
+
+/* Frases especiales (se desbloquean a los 7 días) */
+const frasesEspeciales = [
+  "Volver cada día a ti mismo también es una forma de amor.",
+  "La constancia amable transforma más que el esfuerzo brusco.",
+  "Cada día que te eliges, tu raíz se hace más fuerte.",
+  "No mides tu progreso en días perfectos, sino en días presentes.",
+  "Lo que riegas a diario, florece.",
+];
+
+const hitos = [3, 7, 14, 30];
+let calMes = new Date().getMonth(), calAnio = new Date().getFullYear();
+
+function fechaKey(d){ return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`; }
+function getCheckins(){ return store.get("botiquin_checkins", {}); }
+function checkinHoyHecho(){ return !!getCheckins()[fechaKey(new Date())]; }
+
+/* Racha de check-ins consecutivos (mantiene la de hoy aunque aún no marque) */
+function rachaCheckin(){
+  const c = getCheckins();
+  let r = 0, cursor = new Date();
+  if(!c[fechaKey(cursor)]) cursor.setDate(cursor.getDate()-1);
+  for(;;){
+    if(c[fechaKey(cursor)]){ r++; cursor.setDate(cursor.getDate()-1); }
+    else break;
+  }
+  return r;
+}
+
+/* Abrir / cerrar el check-in */
+function abrirCheckin(){
+  if(checkinHoyHecho()){ toast("Ya registraste tu ánimo hoy"); return; }
+  const cont = document.getElementById("checkin-opciones");
+  cont.innerHTML = animos.map(
